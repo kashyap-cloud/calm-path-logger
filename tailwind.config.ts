@@ -57,33 +57,83 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // OCD Mantra specific colors
+        tracker: {
+          moment: "hsl(var(--tracker-moment))",
+          "moment-light": "hsl(var(--tracker-moment-light))",
+          insights: "hsl(var(--tracker-insights))",
+          "insights-light": "hsl(var(--tracker-insights-light))",
+          interference: "hsl(var(--tracker-interference))",
+          "interference-light": "hsl(var(--tracker-interference-light))",
+        },
+        response: {
+          acted: "hsl(var(--response-acted))",
+          delayed: "hsl(var(--response-delayed))",
+          resisted: "hsl(var(--response-resisted))",
+        },
+        slider: {
+          low: "hsl(var(--slider-low))",
+          mid: "hsl(var(--slider-mid))",
+          high: "hsl(var(--slider-high))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        xl: "calc(var(--radius) + 4px)",
+        "2xl": "calc(var(--radius) + 8px)",
+        "3xl": "calc(var(--radius) + 12px)",
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-out": {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "100%": { opacity: "0", transform: "translateY(10px)" },
+        },
+        "scale-in": {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "slide-down": {
+          "0%": { transform: "translateY(-20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.3s ease-out",
+        "fade-out": "fade-out 0.3s ease-out",
+        "scale-in": "scale-in 0.2s ease-out",
+        "slide-up": "slide-up 0.4s ease-out",
+        "slide-down": "slide-down 0.3s ease-out",
+        shimmer: "shimmer 2s linear infinite",
+      },
+      boxShadow: {
+        glow: "0 0 20px -5px hsl(var(--primary) / 0.3)",
+        "glow-lg": "0 0 40px -10px hsl(var(--primary) / 0.4)",
+        soft: "0 4px 20px -2px hsl(var(--foreground) / 0.08)",
+        "soft-lg": "0 8px 30px -4px hsl(var(--foreground) / 0.1)",
       },
     },
   },
