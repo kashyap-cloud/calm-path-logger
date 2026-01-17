@@ -180,7 +180,14 @@ export const useTrackerData = () => {
   }, [interferenceEntries]);
   
   // Get weekly insight for OCD entries
-  const getWeeklyInsight = useCallback((week: number): { summary: string; motivation: string; dominantPattern: string } | null => {
+  const getWeeklyInsight = useCallback((week: number): { 
+    summary: string; 
+    dominantPattern: string;
+    actedPercent: number;
+    delayedPercent: number;
+    resistedPercent: number;
+    allActed: boolean;
+  } | null => {
     const entries = getEntriesByWeek(week);
     if (entries.length === 0) return null;
     
@@ -189,29 +196,29 @@ export const useTrackerData = () => {
     const resisted = entries.filter(e => e.response === "resisted").length;
     const total = entries.length;
     
+    const actedPercent = Math.round((acted / total) * 100);
+    const delayedPercent = Math.round((delayed / total) * 100);
+    const resistedPercent = Math.round((resisted / total) * 100);
+    const allActed = acted === total;
+    
     let dominantPattern = "mixed";
     let summary = "";
-    let motivation = "";
     
     if (acted > delayed && acted > resisted) {
       dominantPattern = "act-dominated";
       summary = "Your responses were mostly immediate reactions this week.";
-      motivation = "Each moment is a new opportunity. You're building awareness! 💪";
     } else if (delayed > acted && delayed > resisted) {
       dominantPattern = "delay-dominated";
       summary = "You showed moments of pause before responding this week.";
-      motivation = "That pause matters more than you know. Keep going! ✨";
     } else if (resisted > acted && resisted > delayed) {
       dominantPattern = "resist-dominated";
       summary = "You didn't respond to every urge the same way.";
-      motivation = "Your strength in those moments is remarkable! 🌟";
     } else {
       dominantPattern = "mixed";
       summary = "You showed a mix of responses this week.";
-      motivation = "Variety in responses shows flexibility. That's progress! 🎯";
     }
     
-    return { summary, motivation, dominantPattern };
+    return { summary, dominantPattern, actedPercent, delayedPercent, resistedPercent, allActed };
   }, [getEntriesByWeek]);
   
   // Get available weeks for selection
