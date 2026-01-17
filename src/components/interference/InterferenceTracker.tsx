@@ -102,8 +102,22 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
 
         {currentDomain && (
           <ScreenTransition key={step}>
-            <div className="space-y-8">
-              <div className="text-center">
+            <div className="space-y-6">
+              {/* Progress Bar */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>Progress</span>
+                  <span>{DOMAINS.findIndex(d => d.step === step) + 1} of {DOMAINS.length}</span>
+                </div>
+                <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full gradient-teal rounded-full transition-all duration-500 ease-out"
+                    style={{ width: `${((DOMAINS.findIndex(d => d.step === step) + 1) / DOMAINS.length) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              <div className="text-center pt-2">
                 <span className="text-6xl block mb-4">{currentDomain.emoji}</span>
                 <h2 className="text-xl font-semibold">{currentDomain.label}</h2>
                 <p className="text-sm text-muted-foreground mt-2">How much did OCD interfere?</p>
