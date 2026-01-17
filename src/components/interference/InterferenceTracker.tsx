@@ -141,8 +141,8 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
               <div className="w-24 h-24 rounded-full gradient-teal flex items-center justify-center mb-6 animate-bounce-in shadow-glow-lg">
                 <Check className="w-12 h-12 text-white" strokeWidth={3} />
               </div>
-              <h2 className="text-2xl font-bold mb-2">Thanks for your input! 🙏</h2>
-              <p className="text-muted-foreground text-center">Your daily check-in is saved</p>
+              <h2 className="text-2xl font-bold mb-2">Entry Saved! ✨</h2>
+              <p className="text-muted-foreground text-center">Check weekly for insights 📊</p>
               <button onClick={onClose} className="mt-6 px-6 py-3 bg-white shadow-soft rounded-xl font-medium">Done</button>
             </div>
           </ScreenTransition>

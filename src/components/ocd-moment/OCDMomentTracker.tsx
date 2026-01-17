@@ -127,7 +127,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                     Log an OCD Moment
                   </h2>
                   <p className="text-muted-foreground text-sm">
-                    Every step counts. Your awareness is your strength. 💪
+                    Track your moments mindfully 🧘
                   </p>
                 </div>
               </GradientCard>
@@ -338,10 +338,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
               </h2>
               
               <p className="text-center text-muted-foreground animate-fade-slide-up" style={{ animationDelay: "100ms" }}>
-                Don't forget to add more.
-              </p>
-              <p className="text-center text-primary font-medium mt-1 animate-fade-slide-up" style={{ animationDelay: "200ms" }}>
-                Stay motivated! 💪
+                Check weekly for insights 📊
               </p>
             </div>
           </ScreenTransition>
