@@ -3,7 +3,14 @@ import ScreenTransition from "../trackers/ScreenTransition";
 import GradientCard from "../trackers/GradientCard";
 
 interface WeeklyInsightCardProps {
-  getWeeklyInsight: (week: number) => { summary: string; motivation: string; dominantPattern: string } | null;
+  getWeeklyInsight: (week: number) => { 
+    summary: string; 
+    dominantPattern: string;
+    actedPercent: number;
+    delayedPercent: number;
+    resistedPercent: number;
+    allActed: boolean;
+  } | null;
   getAvailableWeeks: () => number[];
   currentWeek: number;
 }
@@ -70,11 +77,6 @@ const WeeklyInsightCard: React.FC<WeeklyInsightCardProps> = ({
                 <p className="text-foreground text-sm leading-relaxed">
                   {insight.summary}
                 </p>
-              </div>
-
-              <div className="flex items-center gap-2 text-primary">
-                <span className="text-lg">💫</span>
-                <p className="text-sm font-medium">{insight.motivation}</p>
               </div>
             </div>
           </GradientCard>

@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import BackButton from "../trackers/BackButton";
 import ScreenTransition from "../trackers/ScreenTransition";
 import GradientCard from "../trackers/GradientCard";
-import useTrackerData from "@/hooks/useTrackerData";
+import useTrackerData, { LOCATION_CONFIG, RESPONSE_CONFIG } from "@/hooks/useTrackerData";
+import { Calendar, Sparkles } from "lucide-react";
 
 interface ResponseInsightsTrackerProps {
   onClose: () => void;
 }
+
+// Mock: In real app, this would come from user auth/subscription status
+const isPaidUser = false;
 
 const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClose }) => {
   const { getWeeklyInsight, getAvailableWeeks, currentWeek, getEntriesByWeek } = useTrackerData();
@@ -15,9 +19,10 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
   
   const insight = getWeeklyInsight(selectedWeek);
   const entries = getEntriesByWeek(selectedWeek);
-  const [showExample, setShowExample] = useState(false);
+  const [showEntries, setShowEntries] = useState(false);
   
-  const exampleEntry = entries.length > 0 ? entries[0] : null;
+  // Get up to 10 entries with a mix based on response distribution
+  const displayEntries = entries.slice(0, 10);
 
   const getWeekLabel = (week: number): string => {
     if (week === currentWeek) return "This Week";
@@ -33,6 +38,15 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
       return "Your response pattern shifted from previous weeks.";
     }
     return "Your response pattern remained consistent.";
+  };
+
+  const getResponseColor = (response: string) => {
+    switch (response) {
+      case "acted": return "bg-response-acted text-white";
+      case "delayed": return "bg-response-delayed text-foreground";
+      case "resisted": return "bg-response-resisted text-white";
+      default: return "bg-muted";
+    }
   };
 
   return (
@@ -53,7 +67,7 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
               {availableWeeks.map((week) => (
                 <button
                   key={week}
-                  onClick={() => { setSelectedWeek(week); setShowExample(false); }}
+                  onClick={() => { setSelectedWeek(week); setShowEntries(false); }}
                   className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                     selectedWeek === week
                       ? "gradient-amber text-white shadow-glow"
@@ -84,32 +98,135 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                     </div>
                   )}
 
-                  <div className="flex items-center gap-2 text-accent">
-                    <span>🌟</span>
-                    <p className="text-sm font-medium">{insight.motivation}</p>
+                  {/* Response Percentages */}
+                  <div className="space-y-3 pt-2">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Response Breakdown</p>
+                    
+                    {/* Acted */}
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-foreground font-medium">✓ Acted</span>
+                        <span className="text-foreground font-semibold">{insight.actedPercent}%</span>
+                      </div>
+                      <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-response-acted rounded-full transition-all duration-500"
+                          style={{ width: `${insight.actedPercent}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Delayed */}
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-foreground font-medium">⏳ Delayed</span>
+                        <span className="text-foreground font-semibold">{insight.delayedPercent}%</span>
+                      </div>
+                      <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-response-delayed rounded-full transition-all duration-500"
+                          style={{ width: `${insight.delayedPercent}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Resisted */}
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-foreground font-medium">🚫 Resisted</span>
+                        <span className="text-foreground font-semibold">{insight.resistedPercent}%</span>
+                      </div>
+                      <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-response-resisted rounded-full transition-all duration-500"
+                          style={{ width: `${insight.resistedPercent}%` }}
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  {/* See Example Button */}
-                  {exampleEntry && !showExample && (
+                  {/* Session Promotion Card */}
+                  {insight.allActed && (
+                    <div className="bg-gradient-to-r from-primary/20 via-accent/20 to-primary/10 rounded-xl p-4 mt-4 border border-primary/20">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                          <Sparkles className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          {isPaidUser ? (
+                            <>
+                              <p className="font-semibold text-foreground text-sm mb-1">
+                                Ready to strengthen your response?
+                              </p>
+                              <p className="text-xs text-muted-foreground mb-3">
+                                A session with your therapist can help build on your awareness.
+                              </p>
+                              <button className="w-full py-2.5 gradient-purple text-white font-medium rounded-xl text-sm transition-all hover:shadow-lg">
+                                <Calendar className="w-4 h-4 inline mr-2" />
+                                Book a Session
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <p className="font-semibold text-foreground text-sm mb-1">
+                                Want personalized support?
+                              </p>
+                              <p className="text-xs text-muted-foreground mb-3">
+                                Work with a therapist to develop strategies for managing urges.
+                              </p>
+                              <button className="w-full py-2.5 gradient-purple text-white font-medium rounded-xl text-sm transition-all hover:shadow-lg">
+                                <Sparkles className="w-4 h-4 inline mr-2" />
+                                Explore Session Plans
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* View Past Entries Button */}
+                  {displayEntries.length > 0 && !showEntries && (
                     <button
-                      onClick={() => setShowExample(true)}
+                      onClick={() => setShowEntries(true)}
                       className="w-full py-3 bg-white/80 text-accent font-medium rounded-xl transition-all hover:bg-white"
                     >
-                      See an example
+                      View past logged entries
                     </button>
                   )}
 
-                  {/* Example Card */}
-                  {showExample && exampleEntry && (
-                    <div className="bg-white rounded-xl p-4 animate-scale-in">
-                      <p className="text-xs text-muted-foreground uppercase mb-2">Example Moment</p>
-                      <p className="text-foreground">
-                        <span className="font-medium">
-                          {exampleEntry.location === "home" ? "At home" : 
-                           exampleEntry.location === "work" ? "At work" : "In social settings"}
-                        </span>: You {exampleEntry.response === "acted" ? "acted on" : 
-                                      exampleEntry.response === "delayed" ? "delayed" : "resisted"} the urge
-                      </p>
+                  {/* Past Entries List */}
+                  {showEntries && displayEntries.length > 0 && (
+                    <div className="space-y-2 animate-scale-in">
+                      <div className="flex justify-between items-center">
+                        <p className="text-xs text-muted-foreground uppercase font-medium">Past Entries</p>
+                        <button 
+                          onClick={() => setShowEntries(false)}
+                          className="text-xs text-accent font-medium"
+                        >
+                          Hide
+                        </button>
+                      </div>
+                      <div className="space-y-2 max-h-64 overflow-y-auto custom-scrollbar">
+                        {displayEntries.map((entry, index) => (
+                          <div 
+                            key={entry.id} 
+                            className="bg-white rounded-xl p-3 flex items-center justify-between shadow-soft"
+                            style={{ animationDelay: `${index * 50}ms` }}
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="text-lg">{LOCATION_CONFIG[entry.location].emoji}</span>
+                              <div>
+                                <p className="text-sm font-medium text-foreground">{entry.compulsion}</p>
+                                <p className="text-xs text-muted-foreground">{LOCATION_CONFIG[entry.location].label}</p>
+                              </div>
+                            </div>
+                            <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getResponseColor(entry.response)}`}>
+                              {RESPONSE_CONFIG[entry.response].label}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>

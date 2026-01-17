@@ -74,20 +74,8 @@ const Index = () => {
               </div>
             </ScreenTransition>
 
-            {/* Motivational Card */}
-            <ScreenTransition delay={300}>
-              <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 rounded-2xl p-5 text-center">
-                <p className="text-lg font-medium text-foreground mb-1">
-                  "Every moment of awareness is progress" ✨
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  You're doing great by being here
-                </p>
-              </div>
-            </ScreenTransition>
-
             {/* Quick Tips */}
-            <ScreenTransition delay={400}>
+            <ScreenTransition delay={300}>
               <div className="mt-8 space-y-3">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Quick Tips</p>
                 <div className="flex gap-3 overflow-x-auto pb-2">
