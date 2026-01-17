@@ -79,7 +79,7 @@ const Index = () => {
               <div className="mt-8 space-y-3">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Quick Tips</p>
                 <div className="flex gap-3 overflow-x-auto pb-2">
-                  {["Log moments as they happen", "Check insights weekly", "Be kind to yourself"].map((tip, i) => (
+                  {["Log moments as they happen", "Check insights weekly"].map((tip, i) => (
                     <div key={i} className="flex-shrink-0 bg-white rounded-xl px-4 py-3 shadow-soft">
                       <p className="text-sm text-foreground whitespace-nowrap">💡 {tip}</p>
                     </div>
