@@ -241,9 +241,6 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
               </GradientCard>
             )}
 
-            <p className="text-xs text-center text-muted-foreground">
-              Insights are observational, not evaluative. 🌱
-            </p>
           </div>
         </ScreenTransition>
       </div>
