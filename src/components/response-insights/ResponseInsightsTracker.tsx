@@ -175,8 +175,8 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                                 Work with a therapist to develop strategies for managing urges.
                               </p>
                               <button className="w-full py-2.5 gradient-purple text-white font-medium rounded-xl text-sm transition-all hover:shadow-lg">
-                                <Sparkles className="w-4 h-4 inline mr-2" />
-                                Explore Session Plans
+                                <Calendar className="w-4 h-4 inline mr-2" />
+                                Book an appointment with the ERP therapist
                               </button>
                             </>
                           )}
