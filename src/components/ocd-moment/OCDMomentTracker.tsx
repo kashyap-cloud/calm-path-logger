@@ -23,6 +23,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [selectedCompulsion, setSelectedCompulsion] = useState<string>("");
   const [customCompulsion, setCustomCompulsion] = useState("");
+  const [customLocationName, setCustomLocationName] = useState("");
   const [showCustomInput, setShowCustomInput] = useState(false);
   
   const { 
@@ -45,6 +46,10 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
 
   const handleLocationSelect = (location: Location) => {
     setSelectedLocation(location);
+    // For "other" location, show custom input immediately
+    if (location === "other") {
+      setShowCustomInput(true);
+    }
     setStep("compulsion");
   };
 
@@ -127,7 +132,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                     Log an OCD Moment
                   </h2>
                   <p className="text-muted-foreground text-sm">
-                    Track your moments mindfully 🧘
+                    Notice what showed up and how you responded.
                   </p>
                 </div>
               </GradientCard>
@@ -190,8 +195,24 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 Don't hesitate to share what was on your mind 🌟
               </p>
 
-              {/* Previous entries for this location */}
-              {previousCompulsions.length > 0 && (
+              {/* Custom location input for "other" */}
+              {selectedLocation === "other" && (
+                <div className="space-y-3">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    Where were you?
+                  </p>
+                  <input
+                    type="text"
+                    value={customLocationName}
+                    onChange={(e) => setCustomLocationName(e.target.value)}
+                    placeholder="Enter your location..."
+                    className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  />
+                </div>
+              )}
+
+              {/* Previous entries for this location - only show if not "other" */}
+              {selectedLocation !== "other" && previousCompulsions.length > 0 && (
                 <div className="space-y-3">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                     Previously logged at {LOCATION_CONFIG[selectedLocation].label}
@@ -222,40 +243,39 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 </div>
               )}
 
-              {/* Predefined options */}
-              <div className="space-y-3">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                  Or select from common patterns
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {predefinedOptions.slice(0, 4).map((compulsion) => (
-                    <button
-                      key={compulsion}
-                      onClick={() => handleCompulsionSelect(compulsion)}
-                      className="px-4 py-2 bg-primary/10 text-primary text-sm rounded-full transition-all hover:bg-primary/20 active:scale-95"
-                    >
-                      {compulsion}
-                    </button>
-                  ))}
+              {/* Predefined options - only show if not "other" location */}
+              {selectedLocation !== "other" && (
+                <div className="space-y-3">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    Or select from common patterns
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {predefinedOptions.slice(0, 4).map((compulsion) => (
+                      <button
+                        key={compulsion}
+                        onClick={() => handleCompulsionSelect(compulsion)}
+                        className="px-4 py-2 bg-primary/10 text-primary text-sm rounded-full transition-all hover:bg-primary/20 active:scale-95"
+                      >
+                        {compulsion}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Custom input */}
               <div className="space-y-3">
-                {!showCustomInput ? (
-                  <button
-                    onClick={() => setShowCustomInput(true)}
-                    className="w-full py-3 border-2 border-dashed border-primary/30 text-primary text-sm rounded-2xl transition-all hover:border-primary/50 hover:bg-primary/5"
-                  >
-                    + Add something else
-                  </button>
-                ) : (
-                  <div className="space-y-3 animate-scale-in">
+                {selectedLocation === "other" ? (
+                  // For "other" location, always show the input
+                  <div className="space-y-3">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                      What urge or thought showed up?
+                    </p>
                     <input
                       type="text"
                       value={customCompulsion}
                       onChange={(e) => setCustomCompulsion(e.target.value)}
-                      placeholder="Describe what was compelling you..."
+                      placeholder="Describe what was on your mind..."
                       className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
                       autoFocus
                     />
@@ -267,6 +287,34 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                       Continue
                     </button>
                   </div>
+                ) : (
+                  // For other locations, show toggle button
+                  !showCustomInput ? (
+                    <button
+                      onClick={() => setShowCustomInput(true)}
+                      className="w-full py-3 border-2 border-dashed border-primary/30 text-primary text-sm rounded-2xl transition-all hover:border-primary/50 hover:bg-primary/5"
+                    >
+                      + Add something else
+                    </button>
+                  ) : (
+                    <div className="space-y-3 animate-scale-in">
+                      <input
+                        type="text"
+                        value={customCompulsion}
+                        onChange={(e) => setCustomCompulsion(e.target.value)}
+                        placeholder="Describe what was on your mind..."
+                        className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        autoFocus
+                      />
+                      <button
+                        onClick={handleCustomCompulsionAdd}
+                        disabled={!customCompulsion.trim()}
+                        className="w-full py-3 gradient-purple text-white font-medium rounded-xl disabled:opacity-50 transition-all active:scale-[0.98]"
+                      >
+                        Continue
+                      </button>
+                    </div>
+                  )
                 )}
               </div>
             </div>
