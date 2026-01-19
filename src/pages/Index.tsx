@@ -36,7 +36,7 @@ const Index = () => {
             <ScreenTransition>
               <div className="text-center text-white">
                 <h1 className="text-2xl font-bold mb-1">OCD Mantra</h1>
-                <p className="text-white/80 text-sm">Your companion for mindful moments</p>
+                <p className="text-white/80 text-sm">Supporting awareness of thoughts, urges, and responses</p>
               </div>
             </ScreenTransition>
           </div>

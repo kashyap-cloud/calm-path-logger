@@ -98,50 +98,32 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                     </div>
                   )}
 
-                  {/* Response Percentages */}
+                  {/* Response Patterns - Qualitative */}
                   <div className="space-y-3 pt-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Response Patterns Observed</p>
                     
                     {/* Acted */}
-                    <div className="space-y-1">
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-foreground font-medium">● Acting on the urge</span>
-                        <span className="text-foreground font-semibold">{insight.actedPercent}%</span>
-                      </div>
-                      <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-response-acted rounded-full transition-all duration-500"
-                          style={{ width: `${insight.actedPercent}%` }}
-                        />
-                      </div>
+                    <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
+                      <span className="text-foreground font-medium text-sm">● Acting on the urge</span>
+                      <span className="text-foreground font-semibold text-sm bg-response-acted/20 px-3 py-1 rounded-full">
+                        {insight.actedPercent >= 50 ? "More often" : insight.actedPercent >= 20 ? "Sometimes" : "Less often"}
+                      </span>
                     </div>
 
                     {/* Delayed */}
-                    <div className="space-y-1">
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-foreground font-medium">◐ Waiting</span>
-                        <span className="text-foreground font-semibold">{insight.delayedPercent}%</span>
-                      </div>
-                      <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-response-delayed rounded-full transition-all duration-500"
-                          style={{ width: `${insight.delayedPercent}%` }}
-                        />
-                      </div>
+                    <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
+                      <span className="text-foreground font-medium text-sm">◐ Waiting</span>
+                      <span className="text-foreground font-semibold text-sm bg-response-delayed/20 px-3 py-1 rounded-full">
+                        {insight.delayedPercent >= 50 ? "More often" : insight.delayedPercent >= 20 ? "Sometimes" : "Less often"}
+                      </span>
                     </div>
 
                     {/* Resisted */}
-                    <div className="space-y-1">
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-foreground font-medium">○ Noticed without acting</span>
-                        <span className="text-foreground font-semibold">{insight.resistedPercent}%</span>
-                      </div>
-                      <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-response-resisted rounded-full transition-all duration-500"
-                          style={{ width: `${insight.resistedPercent}%` }}
-                        />
-                      </div>
+                    <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
+                      <span className="text-foreground font-medium text-sm">○ Noticed without acting</span>
+                      <span className="text-foreground font-semibold text-sm bg-response-resisted/20 px-3 py-1 rounded-full">
+                        {insight.resistedPercent >= 50 ? "More often" : insight.resistedPercent >= 20 ? "Sometimes" : "Less often"}
+                      </span>
                     </div>
                   </div>
 
