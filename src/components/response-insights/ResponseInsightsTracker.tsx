@@ -100,12 +100,12 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
 
                   {/* Response Percentages */}
                   <div className="space-y-3 pt-2">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Response Breakdown</p>
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Response Patterns Observed</p>
                     
                     {/* Acted */}
                     <div className="space-y-1">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-foreground font-medium">✓ Acted</span>
+                        <span className="text-foreground font-medium">● Acting on the urge</span>
                         <span className="text-foreground font-semibold">{insight.actedPercent}%</span>
                       </div>
                       <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
@@ -119,7 +119,7 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                     {/* Delayed */}
                     <div className="space-y-1">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-foreground font-medium">⏳ Delayed</span>
+                        <span className="text-foreground font-medium">◐ Waiting</span>
                         <span className="text-foreground font-semibold">{insight.delayedPercent}%</span>
                       </div>
                       <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">
@@ -133,7 +133,7 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                     {/* Resisted */}
                     <div className="space-y-1">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-foreground font-medium">🚫 Resisted</span>
+                        <span className="text-foreground font-medium">○ Noticed without acting</span>
                         <span className="text-foreground font-semibold">{insight.resistedPercent}%</span>
                       </div>
                       <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden">

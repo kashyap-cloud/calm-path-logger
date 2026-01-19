@@ -39,11 +39,11 @@ export const LOCATION_CONFIG: Record<Location, { label: string; emoji: string }>
   other: { label: "Other", emoji: "📍" },
 };
 
-// Response config
+// Response config - neutral icons (circle variants) to avoid implying right/wrong
 export const RESPONSE_CONFIG: Record<ResponseType, { label: string; emoji: string; color: string }> = {
-  acted: { label: "Acted", emoji: "✓", color: "bg-response-acted" },
-  delayed: { label: "Delayed", emoji: "⏳", color: "bg-response-delayed" },
-  resisted: { label: "Didn't Act", emoji: "🚫", color: "bg-response-resisted" },
+  acted: { label: "I noticed myself acting on the urge", emoji: "●", color: "bg-response-acted" },
+  delayed: { label: "I noticed myself waiting", emoji: "◐", color: "bg-response-delayed" },
+  resisted: { label: "I noticed the urge without acting", emoji: "○", color: "bg-response-resisted" },
 };
 
 // Get current week number

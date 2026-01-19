@@ -107,7 +107,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
         <p className="text-white/80 text-sm">
           {step === "welcome" && "Track your moments, understand your patterns"}
           {step === "location" && "Where were you?"}
-          {step === "compulsion" && "What was compelling you?"}
+          {step === "compulsion" && "What urge or thought showed up?"}
           {step === "response" && "How did you respond?"}
           {step === "confirmation" && "Great job!"}
           {step === "weekly" && "Your Weekly Insights"}
