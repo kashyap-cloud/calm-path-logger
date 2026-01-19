@@ -102,29 +102,25 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                   <div className="space-y-3 pt-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Response Patterns Observed</p>
                     
-                    {/* Acted */}
-                    <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
-                      <span className="text-foreground font-medium text-sm">● Acting on the urge</span>
-                      <span className="text-foreground font-semibold text-sm bg-response-acted/20 px-3 py-1 rounded-full">
-                        {insight.actedPercent >= 50 ? "More often" : insight.actedPercent >= 20 ? "Sometimes" : "Less often"}
-                      </span>
-                    </div>
-
-                    {/* Delayed */}
-                    <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
-                      <span className="text-foreground font-medium text-sm">◐ Waiting</span>
-                      <span className="text-foreground font-semibold text-sm bg-response-delayed/20 px-3 py-1 rounded-full">
-                        {insight.delayedPercent >= 50 ? "More often" : insight.delayedPercent >= 20 ? "Sometimes" : "Less often"}
-                      </span>
-                    </div>
-
-                    {/* Resisted */}
-                    <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
-                      <span className="text-foreground font-medium text-sm">○ Noticed without acting</span>
-                      <span className="text-foreground font-semibold text-sm bg-response-resisted/20 px-3 py-1 rounded-full">
-                        {insight.resistedPercent >= 50 ? "More often" : insight.resistedPercent >= 20 ? "Sometimes" : "Less often"}
-                      </span>
-                    </div>
+                    {(() => {
+                      // Rank responses to ensure different labels
+                      const responses = [
+                        { key: "acted", label: "● Acting on the urge", percent: insight.actedPercent, bgClass: "bg-response-acted/20" },
+                        { key: "delayed", label: "◐ Waiting", percent: insight.delayedPercent, bgClass: "bg-response-delayed/20" },
+                        { key: "resisted", label: "○ Noticed without acting", percent: insight.resistedPercent, bgClass: "bg-response-resisted/20" },
+                      ].sort((a, b) => b.percent - a.percent);
+                      
+                      const qualitativeLabels = ["More often", "Sometimes", "Less often"];
+                      
+                      return responses.map((response, index) => (
+                        <div key={response.key} className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
+                          <span className="text-foreground font-medium text-sm">{response.label}</span>
+                          <span className={`text-foreground font-semibold text-sm ${response.bgClass} px-3 py-1 rounded-full`}>
+                            {qualitativeLabels[index]}
+                          </span>
+                        </div>
+                      ));
+                    })()}
                   </div>
 
                   {/* Session Promotion Card */}
