@@ -66,6 +66,8 @@ const generateMockOCDData = (): OCDEntry[] => {
     { id: "2", location: "home", compulsion: "Checking locks", response: "delayed", timestamp: new Date(), week: currentWeek },
     { id: "3", location: "work", compulsion: "Email checking", response: "resisted", timestamp: new Date(), week: currentWeek },
     { id: "4", location: "social", compulsion: "Conversation replay", response: "acted", timestamp: new Date(), week: currentWeek },
+    { id: "13", location: "other", compulsion: "Counting steps", response: "delayed", timestamp: new Date(), week: currentWeek },
+    { id: "14", location: "other", compulsion: "Mental rituals", response: "acted", timestamp: new Date(), week: currentWeek },
   );
   
   // Last week entries
