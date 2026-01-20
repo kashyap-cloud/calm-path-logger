@@ -195,24 +195,8 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 Don't hesitate to share what was on your mind 🌟
               </p>
 
-              {/* Custom location input for "other" */}
-              {selectedLocation === "other" && (
-                <div className="space-y-3">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    Where were you?
-                  </p>
-                  <input
-                    type="text"
-                    value={customLocationName}
-                    onChange={(e) => setCustomLocationName(e.target.value)}
-                    placeholder="Enter your location..."
-                    className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                  />
-                </div>
-              )}
-
-              {/* Previous entries for this location - only show if not "other" */}
-              {selectedLocation !== "other" && previousCompulsions.length > 0 && (
+              {/* Previous entries for this location */}
+              {previousCompulsions.length > 0 && (
                 <div className="space-y-3">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                     Previously logged {LOCATION_CONFIG[selectedLocation].label}
@@ -263,22 +247,35 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 </div>
               )}
 
-              {/* Custom input */}
+              {/* Custom input section */}
               <div className="space-y-3">
                 {selectedLocation === "other" ? (
-                  // For "other" location, always show the input
-                  <div className="space-y-3">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                      What urge or thought showed up?
-                    </p>
-                    <input
-                      type="text"
-                      value={customCompulsion}
-                      onChange={(e) => setCustomCompulsion(e.target.value)}
-                      placeholder="Describe what was on your mind..."
-                      className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                      autoFocus
-                    />
+                  // For "other" location, show custom location + compulsion inputs
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Or add your own
+                      </p>
+                      <input
+                        type="text"
+                        value={customLocationName}
+                        onChange={(e) => setCustomLocationName(e.target.value)}
+                        placeholder="Enter your location..."
+                        className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        What urge or thought showed up?
+                      </p>
+                      <input
+                        type="text"
+                        value={customCompulsion}
+                        onChange={(e) => setCustomCompulsion(e.target.value)}
+                        placeholder="Describe what was on your mind..."
+                        className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      />
+                    </div>
                     <button
                       onClick={handleCustomCompulsionAdd}
                       disabled={!customCompulsion.trim()}
