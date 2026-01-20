@@ -148,7 +148,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 onClick={() => setStep("weekly")}
                 className="w-full py-3 bg-white text-primary font-medium rounded-2xl shadow-soft transition-all hover:shadow-md active:scale-[0.98]"
               >
-                View Weekly Insights ✨
+                View Weekly Insights 📊
               </button>
             </div>
           </ScreenTransition>
@@ -215,7 +215,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
               {selectedLocation !== "other" && previousCompulsions.length > 0 && (
                 <div className="space-y-3">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    Previously logged at {LOCATION_CONFIG[selectedLocation].label}
+                    Previously logged {LOCATION_CONFIG[selectedLocation].label}
                   </p>
                   <div className="space-y-2">
                     {previousCompulsions.map((compulsion, index) => (
