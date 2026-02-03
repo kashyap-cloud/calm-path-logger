@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Check } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import BackButton from "../trackers/BackButton";
 import ScreenTransition from "../trackers/ScreenTransition";
 import GradientCard from "../trackers/GradientCard";
@@ -10,6 +10,7 @@ import useTrackerData, {
   RESPONSE_CONFIG,
   PREDEFINED_COMPULSIONS 
 } from "@/hooks/useTrackerData";
+import useOCDMomentSupabase from "@/hooks/useOCDMomentSupabase";
 import WeeklyInsightCard from "./WeeklyInsightCard";
 
 type Step = "welcome" | "location" | "compulsion" | "response" | "confirmation" | "weekly";
@@ -27,12 +28,18 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
   const [showCustomInput, setShowCustomInput] = useState(false);
   
   const { 
-    addOCDEntry, 
-    getCompulsionsByLocation,
     getWeeklyInsight,
     getAvailableWeeks,
     currentWeek 
   } = useTrackerData();
+
+  const {
+    isLoading,
+    isSubmitting,
+    previousUrges,
+    fetchUrgesByLocation,
+    submitOCDMoment,
+  } = useOCDMomentSupabase();
 
   // Auto-close confirmation after 2.5 seconds
   useEffect(() => {
@@ -49,6 +56,9 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
     // For "other" location, show custom input immediately
     if (location === "other") {
       setShowCustomInput(true);
+    } else {
+      // Fetch previous urges from Supabase for this location
+      fetchUrgesByLocation(LOCATION_CONFIG[location].label);
     }
     setStep("compulsion");
   };
@@ -65,10 +75,17 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
     }
   };
 
-  const handleResponseSelect = (response: ResponseType) => {
+  const handleResponseSelect = async (response: ResponseType) => {
     if (selectedLocation && selectedCompulsion) {
-      addOCDEntry(selectedLocation, selectedCompulsion, response);
-      setStep("confirmation");
+      // Determine the location string to save
+      const locationString = selectedLocation === "other" && customLocationName.trim()
+        ? customLocationName.trim()
+        : LOCATION_CONFIG[selectedLocation].label;
+      
+      const success = await submitOCDMoment(locationString, selectedCompulsion, response);
+      if (success) {
+        setStep("confirmation");
+      }
     }
   };
 
@@ -93,12 +110,9 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
     }
   };
 
-  const previousCompulsions = selectedLocation 
-    ? getCompulsionsByLocation(selectedLocation) 
-    : [];
-
+  // Use previousUrges from Supabase, fallback to predefined options
   const predefinedOptions = selectedLocation 
-    ? PREDEFINED_COMPULSIONS[selectedLocation].filter(c => !previousCompulsions.includes(c))
+    ? PREDEFINED_COMPULSIONS[selectedLocation].filter(c => !previousUrges.includes(c))
     : [];
 
   return (
@@ -195,17 +209,25 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 Don't hesitate to share what was on your mind 🌟
               </p>
 
-              {/* Previous entries for this location */}
-              {previousCompulsions.length > 0 && (
+              {/* Loading state */}
+              {isLoading && (
+                <div className="flex items-center justify-center py-4">
+                  <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                  <span className="ml-2 text-sm text-muted-foreground">Loading previous entries...</span>
+                </div>
+              )}
+
+              {/* Previous entries for this location from Supabase */}
+              {!isLoading && previousUrges.length > 0 && (
                 <div className="space-y-3">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                     Previously logged {LOCATION_CONFIG[selectedLocation].label}
                   </p>
                   <div className="space-y-2">
-                    {previousCompulsions.map((compulsion, index) => (
+                    {previousUrges.map((urge, index) => (
                       <GradientCard
-                        key={compulsion}
-                        onClick={() => handleCompulsionSelect(compulsion)}
+                        key={urge}
+                        onClick={() => handleCompulsionSelect(urge)}
                         className="bg-white shadow-soft hover:shadow-md py-3"
                       >
                         <div 
@@ -218,7 +240,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                             </span>
                           </div>
                           <span className="text-sm font-medium text-foreground">
-                            {compulsion}
+                            {urge}
                           </span>
                         </div>
                       </GradientCard>
@@ -336,36 +358,43 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 How did you respond to the urge?
               </p>
 
-              <div className="space-y-3">
-                {(Object.keys(RESPONSE_CONFIG) as ResponseType[]).map((response, index) => (
-                  <GradientCard
-                    key={response}
-                    onClick={() => handleResponseSelect(response)}
-                    className="bg-white shadow-soft hover:shadow-md"
-                  >
-                    <div 
-                      className="flex items-center gap-4 py-2 animate-fade-slide-up"
-                      style={{ animationDelay: `${index * 100}ms` }}
+              {isSubmitting ? (
+                <div className="flex flex-col items-center justify-center py-8">
+                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                  <span className="mt-2 text-sm text-muted-foreground">Saving your entry...</span>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {(Object.keys(RESPONSE_CONFIG) as ResponseType[]).map((response, index) => (
+                    <GradientCard
+                      key={response}
+                      onClick={() => handleResponseSelect(response)}
+                      className="bg-white shadow-soft hover:shadow-md"
                     >
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${RESPONSE_CONFIG[response].color}`}>
-                        <span className="text-white text-xl">
-                          {RESPONSE_CONFIG[response].emoji}
-                        </span>
+                      <div 
+                        className="flex items-center gap-4 py-2 animate-fade-slide-up"
+                        style={{ animationDelay: `${index * 100}ms` }}
+                      >
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${RESPONSE_CONFIG[response].color}`}>
+                          <span className="text-white text-xl">
+                            {RESPONSE_CONFIG[response].emoji}
+                          </span>
+                        </div>
+                        <div>
+                          <p className="font-medium text-foreground">
+                            {RESPONSE_CONFIG[response].label}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {response === "acted" && "I performed the compulsion"}
+                            {response === "delayed" && "I waited before responding"}
+                            {response === "resisted" && "I didn't perform the compulsion"}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          {RESPONSE_CONFIG[response].label}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {response === "acted" && "I performed the compulsion"}
-                          {response === "delayed" && "I waited before responding"}
-                          {response === "resisted" && "I didn't perform the compulsion"}
-                        </p>
-                      </div>
-                    </div>
-                  </GradientCard>
-                ))}
-              </div>
+                    </GradientCard>
+                  ))}
+                </div>
+              )}
             </div>
           </ScreenTransition>
         )}
