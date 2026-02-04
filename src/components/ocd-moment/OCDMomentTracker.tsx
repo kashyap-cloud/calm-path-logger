@@ -396,7 +396,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
               </h2>
               
               <p className="text-center text-muted-foreground animate-fade-slide-up" style={{ animationDelay: "100ms" }}>
-                Check weekly for insights 📊
+                Your moment has been logged successfully.
               </p>
             </div>
           </ScreenTransition>
