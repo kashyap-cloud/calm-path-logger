@@ -95,28 +95,6 @@ export const useOCDMomentSupabase = () => {
     }
   }, []);
 
-  // Fetch weekly data for insights (demo mode: no user filtering)
-  const fetchWeeklyData = useCallback(async (weekStart: Date, weekEnd: Date) => {
-    try {
-      const { data, error } = await supabase
-        .from("ocd_moments")
-        .select("*")
-        .gte("created_at", weekStart.toISOString())
-        .lte("created_at", weekEnd.toISOString())
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        console.error("Error fetching weekly data:", error);
-        return [];
-      }
-
-      return data || [];
-    } catch (error) {
-      console.error("Error fetching weekly data:", error);
-      return [];
-    }
-  }, []);
-
   // Check if user is authenticated (demo mode: always returns true)
   const checkAuth = useCallback(async (): Promise<boolean> => {
     return true;
@@ -128,7 +106,6 @@ export const useOCDMomentSupabase = () => {
     previousUrges,
     fetchUrgesByLocation,
     submitOCDMoment,
-    fetchWeeklyData,
     checkAuth,
   };
 };
