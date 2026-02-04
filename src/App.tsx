@@ -12,26 +12,8 @@ import MobileFrame from "@/components/trackers/MobileFrame";
 
 const queryClient = new QueryClient();
 
+// Demo mode: Auth gate bypassed - app opens directly to trackers
 const AuthenticatedApp = () => {
-  const { user, isLoading } = useAuth();
-
-  if (isLoading) {
-    return (
-      <MobileFrame>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center space-y-4">
-            <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />
-            <p className="text-sm text-muted-foreground">Loading...</p>
-          </div>
-        </div>
-      </MobileFrame>
-    );
-  }
-
-  if (!user) {
-    return <LoginScreen />;
-  }
-
   return (
     <BrowserRouter>
       <Routes>
