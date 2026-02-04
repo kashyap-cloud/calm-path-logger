@@ -3,7 +3,7 @@ import { Check, Loader2 } from "lucide-react";
 import BackButton from "../trackers/BackButton";
 import ScreenTransition from "../trackers/ScreenTransition";
 import GradientCard from "../trackers/GradientCard";
-import useTrackerData, { 
+import { 
   Location, 
   ResponseType, 
   LOCATION_CONFIG, 
@@ -11,9 +11,8 @@ import useTrackerData, {
   PREDEFINED_COMPULSIONS 
 } from "@/hooks/useTrackerData";
 import useOCDMomentSupabase from "@/hooks/useOCDMomentSupabase";
-import WeeklyInsightCard from "./WeeklyInsightCard";
 
-type Step = "welcome" | "location" | "compulsion" | "response" | "confirmation" | "weekly";
+type Step = "welcome" | "location" | "compulsion" | "response" | "confirmation";
 
 interface OCDMomentTrackerProps {
   onClose: () => void;
@@ -26,12 +25,6 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
   const [customCompulsion, setCustomCompulsion] = useState("");
   const [customLocationName, setCustomLocationName] = useState("");
   const [showCustomInput, setShowCustomInput] = useState(false);
-  
-  const { 
-    getWeeklyInsight,
-    getAvailableWeeks,
-    currentWeek 
-  } = useTrackerData();
 
   const {
     isLoading,
@@ -102,9 +95,6 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
         setStep("compulsion");
         setSelectedCompulsion("");
         break;
-      case "weekly":
-        setStep("welcome");
-        break;
       default:
         onClose();
     }
@@ -129,7 +119,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
           {step === "compulsion" && "What urge or thought showed up?"}
           {step === "response" && "How did you respond?"}
           {step === "confirmation" && "Great job!"}
-          {step === "weekly" && "Your Weekly Insights"}
+          
         </p>
       </div>
 
@@ -158,12 +148,6 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 Begin
               </button>
 
-              <button
-                onClick={() => setStep("weekly")}
-                className="w-full py-3 bg-white text-primary font-medium rounded-2xl shadow-soft transition-all hover:shadow-md active:scale-[0.98]"
-              >
-                View Weekly Insights 📊
-              </button>
             </div>
           </ScreenTransition>
         )}
@@ -416,15 +400,6 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
               </p>
             </div>
           </ScreenTransition>
-        )}
-
-        {/* Weekly Insights */}
-        {step === "weekly" && (
-          <WeeklyInsightCard 
-            getWeeklyInsight={getWeeklyInsight}
-            getAvailableWeeks={getAvailableWeeks}
-            currentWeek={currentWeek}
-          />
         )}
       </div>
     </div>
