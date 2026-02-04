@@ -12,43 +12,48 @@ const RESPONSE_TYPE_MAP: Record<ResponseType, string> = {
   resisted: "noticed_without_acting",
 };
 
-export interface OCDMoment {
+export interface OCDMomentEntry {
   id: string;
-  user_id: string;
+  user_id: string | null;
   location: string;
   urge: string;
   response_type: string;
   created_at: string;
 }
 
+// Reverse map for displaying response types in UI
+export const RESPONSE_TYPE_DISPLAY: Record<string, string> = {
+  acted: "acted",
+  waited: "delayed",
+  noticed_without_acting: "resisted",
+};
+
 export const useOCDMomentSupabase = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [previousUrges, setPreviousUrges] = useState<string[]>([]);
+  const [previousEntries, setPreviousEntries] = useState<OCDMomentEntry[]>([]);
 
-  // Fetch previous urges for a location (demo mode: no user filtering)
-  const fetchUrgesByLocation = useCallback(async (location: string) => {
+  // Fetch entries by location (exact match, ordered by created_at DESC)
+  const fetchEntriesByLocation = useCallback(async (location: string) => {
     setIsLoading(true);
     try {
       const { data, error } = await supabase
         .from("ocd_moments")
-        .select("urge")
+        .select("*")
         .eq("location", location)
         .order("created_at", { ascending: false })
-        .limit(5);
+        .limit(10);
 
       if (error) {
-        console.error("Error fetching urges:", error);
-        setPreviousUrges([]);
+        console.error("Error fetching entries:", error);
+        setPreviousEntries([]);
         return;
       }
 
-      // Get unique urges
-      const uniqueUrges = [...new Set(data?.map(item => item.urge) || [])];
-      setPreviousUrges(uniqueUrges);
+      setPreviousEntries(data || []);
     } catch (error) {
-      console.error("Error fetching urges:", error);
-      setPreviousUrges([]);
+      console.error("Error fetching entries:", error);
+      setPreviousEntries([]);
     } finally {
       setIsLoading(false);
     }
@@ -103,10 +108,11 @@ export const useOCDMomentSupabase = () => {
   return {
     isLoading,
     isSubmitting,
-    previousUrges,
-    fetchUrgesByLocation,
+    previousEntries,
+    fetchEntriesByLocation,
     submitOCDMoment,
     checkAuth,
+    RESPONSE_TYPE_DISPLAY,
   };
 };
 

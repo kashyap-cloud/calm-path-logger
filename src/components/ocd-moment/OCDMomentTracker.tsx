@@ -10,7 +10,8 @@ import {
   RESPONSE_CONFIG,
   PREDEFINED_COMPULSIONS 
 } from "@/hooks/useTrackerData";
-import useOCDMomentSupabase from "@/hooks/useOCDMomentSupabase";
+import useOCDMomentSupabase, { RESPONSE_TYPE_DISPLAY } from "@/hooks/useOCDMomentSupabase";
+import { Badge } from "@/components/ui/badge";
 
 type Step = "welcome" | "location" | "compulsion" | "response" | "confirmation";
 
@@ -29,8 +30,8 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
   const {
     isLoading,
     isSubmitting,
-    previousUrges,
-    fetchUrgesByLocation,
+    previousEntries,
+    fetchEntriesByLocation,
     submitOCDMoment,
   } = useOCDMomentSupabase();
 
@@ -46,12 +47,10 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
 
   const handleLocationSelect = (location: Location) => {
     setSelectedLocation(location);
-    // For "other" location, show custom input immediately
+    // Fetch entries for this exact location
+    fetchEntriesByLocation(LOCATION_CONFIG[location].label);
     if (location === "other") {
       setShowCustomInput(true);
-    } else {
-      // Fetch previous urges from Supabase for this location
-      fetchUrgesByLocation(LOCATION_CONFIG[location].label);
     }
     setStep("compulsion");
   };
@@ -70,10 +69,9 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
 
   const handleResponseSelect = async (response: ResponseType) => {
     if (selectedLocation && selectedCompulsion) {
-      // Determine the location string to save
-      const locationString = selectedLocation === "other" && customLocationName.trim()
-        ? customLocationName.trim()
-        : LOCATION_CONFIG[selectedLocation].label;
+      // Always use the standard location label for filtering consistency
+      // "Other" entries always save as "Other", custom text is for display only
+      const locationString = LOCATION_CONFIG[selectedLocation].label;
       
       const success = await submitOCDMoment(locationString, selectedCompulsion, response);
       if (success) {
@@ -100,10 +98,22 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
     }
   };
 
-  // Use previousUrges from Supabase, fallback to predefined options
-  const predefinedOptions = selectedLocation 
-    ? PREDEFINED_COMPULSIONS[selectedLocation].filter(c => !previousUrges.includes(c))
-    : [];
+  // Get response badge color based on type
+  const getResponseBadgeClass = (responseType: string) => {
+    switch (responseType) {
+      case "acted":
+        return "bg-red-100 text-red-700 border-red-200";
+      case "waited":
+        return "bg-yellow-100 text-yellow-700 border-yellow-200";
+      case "noticed_without_acting":
+        return "bg-green-100 text-green-700 border-green-200";
+      default:
+        return "bg-muted text-muted-foreground";
+    }
+  };
+
+  // Unique urges for quick selection (derived from entries)
+  const uniqueUrges = [...new Set(previousEntries.map(e => e.urge))].slice(0, 5);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-tracker-moment-light via-background to-background">
@@ -197,35 +207,43 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
               {isLoading && (
                 <div className="flex items-center justify-center py-4">
                   <Loader2 className="w-6 h-6 animate-spin text-primary" />
-                  <span className="ml-2 text-sm text-muted-foreground">Loading previous entries...</span>
+                  <span className="ml-2 text-sm text-muted-foreground">Loading entries...</span>
                 </div>
               )}
 
-              {/* Previous entries for this location from Supabase */}
-              {!isLoading && previousUrges.length > 0 && (
+              {/* Previous entries for this location with response_type */}
+              {!isLoading && previousEntries.length > 0 && (
                 <div className="space-y-3">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    Previously logged {LOCATION_CONFIG[selectedLocation].label}
+                    Recent entries at {LOCATION_CONFIG[selectedLocation].label}
                   </p>
                   <div className="space-y-2">
-                    {previousUrges.map((urge, index) => (
+                    {previousEntries.map((entry, index) => (
                       <GradientCard
-                        key={urge}
-                        onClick={() => handleCompulsionSelect(urge)}
+                        key={entry.id}
+                        onClick={() => handleCompulsionSelect(entry.urge)}
                         className="bg-white shadow-soft hover:shadow-md py-3"
                       >
                         <div 
-                          className="flex items-center gap-3 animate-fade-slide-up"
+                          className="flex items-center justify-between gap-3 animate-fade-slide-up"
                           style={{ animationDelay: `${index * 50}ms` }}
                         >
-                          <div className="w-10 h-10 rounded-full gradient-purple flex items-center justify-center">
-                            <span className="text-white text-sm">
-                              {LOCATION_CONFIG[selectedLocation].emoji}
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <div className="w-10 h-10 rounded-full gradient-purple flex items-center justify-center flex-shrink-0">
+                              <span className="text-white text-sm">
+                                {LOCATION_CONFIG[selectedLocation].emoji}
+                              </span>
+                            </div>
+                            <span className="text-sm font-medium text-foreground truncate">
+                              {entry.urge}
                             </span>
                           </div>
-                          <span className="text-sm font-medium text-foreground">
-                            {urge}
-                          </span>
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs capitalize flex-shrink-0 ${getResponseBadgeClass(entry.response_type)}`}
+                          >
+                            {RESPONSE_TYPE_DISPLAY[entry.response_type] || entry.response_type}
+                          </Badge>
                         </div>
                       </GradientCard>
                     ))}
@@ -240,15 +258,18 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                     Or select from common patterns
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {predefinedOptions.slice(0, 4).map((compulsion) => (
-                      <button
-                        key={compulsion}
-                        onClick={() => handleCompulsionSelect(compulsion)}
-                        className="px-4 py-2 bg-primary/10 text-primary text-sm rounded-full transition-all hover:bg-primary/20 active:scale-95"
-                      >
-                        {compulsion}
-                      </button>
-                    ))}
+                    {PREDEFINED_COMPULSIONS[selectedLocation]
+                      .filter(c => !uniqueUrges.includes(c))
+                      .slice(0, 4)
+                      .map((compulsion) => (
+                        <button
+                          key={compulsion}
+                          onClick={() => handleCompulsionSelect(compulsion)}
+                          className="px-4 py-2 bg-primary/10 text-primary text-sm rounded-full transition-all hover:bg-primary/20 active:scale-95"
+                        >
+                          {compulsion}
+                        </button>
+                      ))}
                   </div>
                 </div>
               )}
