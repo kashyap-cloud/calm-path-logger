@@ -26,21 +26,13 @@ export const useOCDMomentSupabase = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previousUrges, setPreviousUrges] = useState<string[]>([]);
 
-  // Fetch previous urges for a location
+  // Fetch previous urges for a location (demo mode: no user filtering)
   const fetchUrgesByLocation = useCallback(async (location: string) => {
     setIsLoading(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        setPreviousUrges([]);
-        return;
-      }
-
       const { data, error } = await supabase
         .from("ocd_moments")
         .select("urge")
-        .eq("user_id", user.id)
         .eq("location", location)
         .order("created_at", { ascending: false })
         .limit(5);
@@ -62,7 +54,7 @@ export const useOCDMomentSupabase = () => {
     }
   }, []);
 
-  // Submit a new OCD moment entry
+  // Submit a new OCD moment entry (demo mode: no user_id)
   const submitOCDMoment = useCallback(async (
     location: string,
     urge: string,
@@ -70,21 +62,9 @@ export const useOCDMomentSupabase = () => {
   ): Promise<boolean> => {
     setIsSubmitting(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        toast({
-          title: "Authentication required",
-          description: "Please log in to save your entry.",
-          variant: "destructive",
-        });
-        return false;
-      }
-
       const { error } = await supabase
         .from("ocd_moments")
         .insert({
-          user_id: user.id,
           location: location,
           urge: urge,
           response_type: RESPONSE_TYPE_MAP[responseType],
@@ -115,17 +95,12 @@ export const useOCDMomentSupabase = () => {
     }
   }, []);
 
-  // Fetch weekly data for insights
+  // Fetch weekly data for insights (demo mode: no user filtering)
   const fetchWeeklyData = useCallback(async (weekStart: Date, weekEnd: Date) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) return [];
-
       const { data, error } = await supabase
         .from("ocd_moments")
         .select("*")
-        .eq("user_id", user.id)
         .gte("created_at", weekStart.toISOString())
         .lte("created_at", weekEnd.toISOString())
         .order("created_at", { ascending: false });
@@ -142,10 +117,9 @@ export const useOCDMomentSupabase = () => {
     }
   }, []);
 
-  // Check if user is authenticated
+  // Check if user is authenticated (demo mode: always returns true)
   const checkAuth = useCallback(async (): Promise<boolean> => {
-    const { data: { user } } = await supabase.auth.getUser();
-    return !!user;
+    return true;
   }, []);
 
   return {
