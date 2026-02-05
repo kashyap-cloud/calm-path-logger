@@ -72,8 +72,13 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
       // Always use the standard location label for filtering consistency
       // "Other" entries always save as "Other", custom text is for display only
       const locationString = LOCATION_CONFIG[selectedLocation].label;
+     
+     // Pass custom location name only for "Other" entries
+     const customLocationValue = selectedLocation === "other" && customLocationName.trim() 
+       ? customLocationName.trim() 
+       : null;
       
-      const success = await submitOCDMoment(locationString, selectedCompulsion, response);
+     const success = await submitOCDMoment(locationString, selectedCompulsion, response, customLocationValue);
       if (success) {
         setStep("confirmation");
       }
