@@ -11,9 +11,10 @@ import {
   PREDEFINED_COMPULSIONS 
 } from "@/hooks/useTrackerData";
 import useOCDMomentSupabase, { RESPONSE_TYPE_DISPLAY } from "@/hooks/useOCDMomentSupabase";
-import { Badge } from "@/components/ui/badge";
+import EntryCard from "./EntryCard";
+import AllEntriesView from "./AllEntriesView";
 
-type Step = "welcome" | "location" | "compulsion" | "response" | "confirmation";
+type Step = "welcome" | "location" | "compulsion" | "response" | "confirmation" | "all-entries";
 
 interface OCDMomentTrackerProps {
   onClose: () => void;
@@ -30,9 +31,13 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
   const {
     isLoading,
     isSubmitting,
+    isDeleting,
     previousEntries,
-    fetchEntriesByLocation,
+    allEntries,
+    fetchRecentEntries,
+    fetchAllEntries,
     submitOCDMoment,
+    deleteOCDMoment,
   } = useOCDMomentSupabase();
 
   // Auto-close confirmation after 2.5 seconds
@@ -48,7 +53,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
   const handleLocationSelect = (location: Location) => {
     setSelectedLocation(location);
     // Fetch entries for this exact location
-    fetchEntriesByLocation(LOCATION_CONFIG[location].label);
+    fetchRecentEntries(LOCATION_CONFIG[location].label);
     if (location === "other") {
       setShowCustomInput(true);
     }
@@ -85,6 +90,24 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
     }
   };
 
+  const handleShowAllEntries = () => {
+    if (selectedLocation) {
+      setStep("all-entries");
+    }
+  };
+
+  const handleBackFromAllEntries = () => {
+    setStep("compulsion");
+    // Refresh recent entries
+    if (selectedLocation) {
+      fetchRecentEntries(LOCATION_CONFIG[selectedLocation].label);
+    }
+  };
+
+  const handleDeleteEntry = async (entryId: string) => {
+    await deleteOCDMoment(entryId);
+  };
+
   const goBack = () => {
     switch (step) {
       case "location":
@@ -98,27 +121,31 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
         setStep("compulsion");
         setSelectedCompulsion("");
         break;
+      case "all-entries":
+        setStep("compulsion");
+        break;
       default:
         onClose();
     }
   };
 
-  // Get response badge color based on type
-  const getResponseBadgeClass = (responseType: string) => {
-    switch (responseType) {
-      case "acted":
-        return "bg-red-100 text-red-700 border-red-200";
-      case "waited":
-        return "bg-yellow-100 text-yellow-700 border-yellow-200";
-      case "noticed_without_acting":
-        return "bg-green-100 text-green-700 border-green-200";
-      default:
-        return "bg-muted text-muted-foreground";
-    }
-  };
-
   // Unique urges for quick selection (derived from entries)
   const uniqueUrges = [...new Set(previousEntries.map(e => e.urge))].slice(0, 5);
+
+  // Show all entries view
+  if (step === "all-entries" && selectedLocation) {
+    return (
+      <AllEntriesView
+        location={selectedLocation}
+        entries={allEntries}
+        isLoading={isLoading}
+        isDeleting={isDeleting}
+        onBack={handleBackFromAllEntries}
+        onDelete={handleDeleteEntry}
+        onFetchAll={fetchAllEntries}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-tracker-moment-light via-background to-background">
@@ -222,37 +249,25 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                     Recent entries at {LOCATION_CONFIG[selectedLocation].label}
                   </p>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {previousEntries.map((entry, index) => (
-                      <GradientCard
+                      <EntryCard
                         key={entry.id}
-                        onClick={() => handleCompulsionSelect(entry.urge)}
-                        className="bg-white shadow-soft hover:shadow-md py-3"
-                      >
-                        <div 
-                          className="flex items-center justify-between gap-3 animate-fade-slide-up"
-                          style={{ animationDelay: `${index * 50}ms` }}
-                        >
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <div className="w-10 h-10 rounded-full gradient-purple flex items-center justify-center flex-shrink-0">
-                              <span className="text-white text-sm">
-                                {LOCATION_CONFIG[selectedLocation].emoji}
-                              </span>
-                            </div>
-                            <span className="text-sm font-medium text-foreground truncate">
-                              {entry.urge}
-                            </span>
-                          </div>
-                          <Badge 
-                            variant="outline" 
-                            className={`text-xs capitalize flex-shrink-0 ${getResponseBadgeClass(entry.response_type)}`}
-                          >
-                            {RESPONSE_TYPE_DISPLAY[entry.response_type] || entry.response_type}
-                          </Badge>
-                        </div>
-                      </GradientCard>
+                        entry={entry}
+                        selectedLocation={selectedLocation}
+                        onSelect={handleCompulsionSelect}
+                        animationDelay={index * 50}
+                      />
                     ))}
                   </div>
+                  
+                  {/* Show all button */}
+                  <button
+                    onClick={handleShowAllEntries}
+                    className="w-full text-center text-sm text-primary/70 hover:text-primary py-2 transition-colors"
+                  >
+                    Show all entries →
+                  </button>
                 </div>
               )}
 

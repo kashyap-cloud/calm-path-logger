@@ -19,6 +19,7 @@ export interface OCDMomentEntry {
   urge: string;
   response_type: string;
   created_at: string;
+  custom_location: string | null;
 }
 
 // Reverse map for displaying response types in UI
@@ -31,33 +32,56 @@ export const RESPONSE_TYPE_DISPLAY: Record<string, string> = {
 export const useOCDMomentSupabase = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [previousEntries, setPreviousEntries] = useState<OCDMomentEntry[]>([]);
+  const [allEntries, setAllEntries] = useState<OCDMomentEntry[]>([]);
 
-  // Fetch entries by location (exact match, ordered by created_at DESC)
-  const fetchEntriesByLocation = useCallback(async (location: string) => {
+  // Fetch entries by location (exact match, ordered by created_at DESC, with optional limit)
+  const fetchEntriesByLocation = useCallback(async (location: string, limit?: number) => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("ocd_moments")
         .select("*")
         .eq("location", location)
-        .order("created_at", { ascending: false })
-        .limit(10);
+        .order("created_at", { ascending: false });
+
+      if (limit) {
+        query = query.limit(limit);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         console.error("Error fetching entries:", error);
         setPreviousEntries([]);
+        setAllEntries([]);
         return;
       }
 
-      setPreviousEntries(data || []);
+      if (limit) {
+        setPreviousEntries(data || []);
+      } else {
+        setAllEntries(data || []);
+      }
     } catch (error) {
       console.error("Error fetching entries:", error);
       setPreviousEntries([]);
+      setAllEntries([]);
     } finally {
       setIsLoading(false);
     }
   }, []);
+
+  // Fetch recent entries (limited to 10)
+  const fetchRecentEntries = useCallback(async (location: string) => {
+    return fetchEntriesByLocation(location, 10);
+  }, [fetchEntriesByLocation]);
+
+  // Fetch all entries for a location
+  const fetchAllEntries = useCallback(async (location: string) => {
+    return fetchEntriesByLocation(location);
+  }, [fetchEntriesByLocation]);
 
   // Submit a new OCD moment entry (demo mode: no user_id)
   const submitOCDMoment = useCallback(async (
@@ -102,6 +126,48 @@ export const useOCDMomentSupabase = () => {
     }
   }, []);
 
+  // Delete an OCD moment entry by ID
+  const deleteOCDMoment = useCallback(async (entryId: string): Promise<boolean> => {
+    setIsDeleting(true);
+    try {
+      const { error } = await supabase
+        .from("ocd_moments")
+        .delete()
+        .eq("id", entryId);
+
+      if (error) {
+        console.error("Error deleting OCD moment:", error);
+        toast({
+          title: "Error deleting entry",
+          description: error.message,
+          variant: "destructive",
+        });
+        return false;
+      }
+
+      // Remove from local state
+      setPreviousEntries(prev => prev.filter(e => e.id !== entryId));
+      setAllEntries(prev => prev.filter(e => e.id !== entryId));
+
+      toast({
+        title: "Entry removed",
+        description: "Your entry has been deleted.",
+      });
+
+      return true;
+    } catch (error) {
+      console.error("Error deleting OCD moment:", error);
+      toast({
+        title: "Error deleting entry",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+      return false;
+    } finally {
+      setIsDeleting(false);
+    }
+  }, []);
+
   // Check if user is authenticated (demo mode: always returns true)
   const checkAuth = useCallback(async (): Promise<boolean> => {
     return true;
@@ -110,9 +176,13 @@ export const useOCDMomentSupabase = () => {
   return {
     isLoading,
     isSubmitting,
+    isDeleting,
     previousEntries,
-    fetchEntriesByLocation,
+    allEntries,
+    fetchRecentEntries,
+    fetchAllEntries,
     submitOCDMoment,
+    deleteOCDMoment,
     checkAuth,
     RESPONSE_TYPE_DISPLAY,
   };
