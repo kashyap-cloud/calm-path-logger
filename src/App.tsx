@@ -2,38 +2,42 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+ import { BrowserRouter, Routes, Route } from "react-router-dom";
+ import { TokenAuthProvider } from "@/contexts/TokenAuthContext";
+ import AuthGate from "@/components/auth/AuthGate";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import LoginScreen from "@/components/auth/LoginScreen";
-import { Loader2 } from "lucide-react";
-import MobileFrame from "@/components/trackers/MobileFrame";
+ import TokenRedirect from "./pages/TokenRedirect";
 
 const queryClient = new QueryClient();
 
-// Demo mode: Auth gate bypassed - app opens directly to trackers
-const AuthenticatedApp = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
+     <BrowserRouter>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AuthenticatedApp />
+         <Routes>
+           {/* Token redirect page - accessible without auth */}
+           <Route path="/token" element={<TokenRedirect />} />
+           
+           {/* All other routes require token auth */}
+           <Route
+             path="/*"
+             element={
+               <TokenAuthProvider>
+                 <AuthGate>
+                   <Routes>
+                     <Route path="/" element={<Index />} />
+                     <Route path="*" element={<NotFound />} />
+                   </Routes>
+                 </AuthGate>
+               </TokenAuthProvider>
+             }
+           />
+         </Routes>
       </TooltipProvider>
-    </AuthProvider>
+     </BrowserRouter>
   </QueryClientProvider>
 );
 
