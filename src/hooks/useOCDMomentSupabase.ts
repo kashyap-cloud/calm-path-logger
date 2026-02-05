@@ -63,7 +63,8 @@ export const useOCDMomentSupabase = () => {
   const submitOCDMoment = useCallback(async (
     location: string,
     urge: string,
-    responseType: ResponseType
+   responseType: ResponseType,
+   customLocation?: string | null
   ): Promise<boolean> => {
     setIsSubmitting(true);
     try {
@@ -74,6 +75,7 @@ export const useOCDMomentSupabase = () => {
           urge: urge,
           response_type: RESPONSE_TYPE_MAP[responseType],
           created_at: new Date().toISOString(),
+         custom_location: customLocation || null,
         });
 
       if (error) {
