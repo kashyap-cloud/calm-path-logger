@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+ import { useTokenAuth } from "@/contexts/TokenAuthContext";
 
 export type Location = "home" | "work" | "social" | "other";
 export type ResponseType = "acted" | "delayed" | "resisted";
@@ -35,15 +36,23 @@ export const useOCDMomentSupabase = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [previousEntries, setPreviousEntries] = useState<OCDMomentEntry[]>([]);
   const [allEntries, setAllEntries] = useState<OCDMomentEntry[]>([]);
+   const { userId } = useTokenAuth();
 
   // Fetch entries by location (exact match, ordered by created_at DESC, with optional limit)
   const fetchEntriesByLocation = useCallback(async (location: string, limit?: number) => {
+     if (!userId) {
+       setPreviousEntries([]);
+       setAllEntries([]);
+       return;
+     }
+ 
     setIsLoading(true);
     try {
       let query = supabase
         .from("ocd_moments")
         .select("*")
         .eq("location", location)
+         .eq("user_id", userId)
         .order("created_at", { ascending: false });
 
       if (limit) {
@@ -71,7 +80,7 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+   }, [userId]);
 
   // Fetch recent entries (limited to 10)
   const fetchRecentEntries = useCallback(async (location: string) => {
@@ -83,18 +92,28 @@ export const useOCDMomentSupabase = () => {
     return fetchEntriesByLocation(location);
   }, [fetchEntriesByLocation]);
 
-  // Submit a new OCD moment entry (demo mode: no user_id)
+   // Submit a new OCD moment entry
   const submitOCDMoment = useCallback(async (
     location: string,
     urge: string,
    responseType: ResponseType,
    customLocation?: string | null
   ): Promise<boolean> => {
+     if (!userId) {
+       toast({
+         title: "Authentication required",
+         description: "Please sign in to save entries.",
+         variant: "destructive",
+       });
+       return false;
+     }
+ 
     setIsSubmitting(true);
     try {
       const { error } = await supabase
         .from("ocd_moments")
         .insert({
+           user_id: userId,
           location: location,
           urge: urge,
           response_type: RESPONSE_TYPE_MAP[responseType],
@@ -124,16 +143,21 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsSubmitting(false);
     }
-  }, []);
+   }, [userId]);
 
   // Delete an OCD moment entry by ID
   const deleteOCDMoment = useCallback(async (entryId: string): Promise<boolean> => {
+     if (!userId) {
+       return false;
+     }
+ 
     setIsDeleting(true);
     try {
       const { error } = await supabase
         .from("ocd_moments")
         .delete()
-        .eq("id", entryId);
+         .eq("id", entryId)
+         .eq("user_id", userId);
 
       if (error) {
         console.error("Error deleting OCD moment:", error);
@@ -166,12 +190,12 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsDeleting(false);
     }
-  }, []);
+   }, [userId]);
 
-  // Check if user is authenticated (demo mode: always returns true)
+   // Check if user is authenticated
   const checkAuth = useCallback(async (): Promise<boolean> => {
-    return true;
-  }, []);
+     return !!userId;
+   }, [userId]);
 
   return {
     isLoading,
