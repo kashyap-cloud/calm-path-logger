@@ -18,14 +18,14 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, onTabChange }) =
   ];
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-border pb-6 pt-3 px-4">
-      <div className="flex justify-around items-center">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border pb-safe pt-3 px-4 z-50">
+      <div className="max-w-3xl mx-auto flex justify-around items-center pb-4">
         {navItems.map((item) => (
           <div
             key={item.id}
             onClick={item.clickable ? () => onTabChange(item.id) : undefined}
             className={cn(
-              "flex flex-col items-center gap-1 transition-all duration-200",
+              "flex flex-col items-center gap-1 transition-all duration-200 p-2",
               item.clickable && "cursor-pointer",
               activeTab === item.id 
                 ? "text-primary scale-105" 
@@ -34,7 +34,7 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, onTabChange }) =
             )}
           >
             {item.icon}
-            <span className="text-[10px] font-medium">{item.label}</span>
+            <span className="text-[10px] sm:text-xs font-medium">{item.label}</span>
           </div>
         ))}
       </div>

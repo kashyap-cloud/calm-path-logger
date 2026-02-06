@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MobileFrame from "@/components/trackers/MobileFrame";
+import ResponsiveContainer from "@/components/layout/ResponsiveContainer";
 import TrackerButton from "@/components/trackers/TrackerButton";
 import ScreenTransition from "@/components/trackers/ScreenTransition";
 import OCDMomentTracker from "@/components/ocd-moment/OCDMomentTracker";
@@ -47,23 +47,23 @@ const Index = () => {
       case "home":
       default:
         return (
-          <div className="min-h-screen pb-20">
+          <div className="min-h-screen pb-24 sm:pb-28">
             {/* Hero Header */}
-            <div className="gradient-hero pt-12 pb-8 px-5 rounded-b-[2rem]">
+            <div className="gradient-hero pt-12 sm:pt-16 pb-8 sm:pb-10 px-5 sm:px-8 rounded-b-[2rem]">
               <ScreenTransition>
                 <div className="text-center text-white">
-                  <h1 className="text-2xl font-bold mb-1">OCD Mantra</h1>
-                  <p className="text-white/80 text-sm">Supporting awareness of thoughts, urges, and responses</p>
+                  <h1 className="text-2xl sm:text-3xl font-bold mb-1">OCD Mantra</h1>
+                  <p className="text-white/80 text-sm sm:text-base">Supporting awareness of thoughts, urges, and responses</p>
                 </div>
               </ScreenTransition>
             </div>
 
             {/* Main Content */}
-            <div className="px-5 py-8">
+            <div className="px-5 sm:px-8 py-8">
               <ScreenTransition delay={100}>
                 <div className="mb-8">
-                  <h2 className="text-lg font-semibold text-foreground mb-1">Trackers</h2>
-                  <p className="text-sm text-muted-foreground">Tap to log or view insights</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-1">Trackers</h2>
+                  <p className="text-sm sm:text-base text-muted-foreground">Tap to log or view insights</p>
                 </div>
               </ScreenTransition>
 
@@ -116,7 +116,7 @@ const Index = () => {
   };
 
   return (
-    <MobileFrame>
+    <ResponsiveContainer>
       <div className="relative min-h-screen">
         {renderTabContent()}
         
@@ -125,7 +125,7 @@ const Index = () => {
           <BottomNavBar activeTab={activeTab} onTabChange={handleTabChange} />
         )}
       </div>
-    </MobileFrame>
+    </ResponsiveContainer>
   );
 };
 
