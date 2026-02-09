@@ -30,13 +30,16 @@ export const RESPONSE_TYPE_DISPLAY: Record<string, string> = {
   noticed_without_acting: "resisted",
 };
 
+const DEMO_USER_ID = "demo-user";
+
 export const useOCDMomentSupabase = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [previousEntries, setPreviousEntries] = useState<OCDMomentEntry[]>([]);
   const [allEntries, setAllEntries] = useState<OCDMomentEntry[]>([]);
-   const { userId } = useTokenAuth();
+  const { userId } = useTokenAuth();
+  const isDemoMode = userId === DEMO_USER_ID;
 
   // Fetch entries by location (exact match, ordered by created_at DESC, with optional limit)
   const fetchEntriesByLocation = useCallback(async (location: string, limit?: number) => {
@@ -51,9 +54,13 @@ export const useOCDMomentSupabase = () => {
       let query = supabase
         .from("ocd_moments")
         .select("*")
-        .eq("location", location)
-         .eq("user_id", userId)
-        .order("created_at", { ascending: false });
+        .eq("location", location);
+
+      if (!isDemoMode && userId) {
+        query = query.eq("user_id", userId);
+      }
+
+      query = query.order("created_at", { ascending: false });
 
       if (limit) {
         query = query.limit(limit);
@@ -80,7 +87,7 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsLoading(false);
     }
-   }, [userId]);
+   }, [userId, isDemoMode]);
 
   // Fetch recent entries (limited to 10)
   const fetchRecentEntries = useCallback(async (location: string) => {
@@ -110,16 +117,21 @@ export const useOCDMomentSupabase = () => {
  
     setIsSubmitting(true);
     try {
+      const insertPayload: Record<string, unknown> = {
+        location: location,
+        urge: urge,
+        response_type: RESPONSE_TYPE_MAP[responseType],
+        created_at: new Date().toISOString(),
+        custom_location: customLocation || null,
+      };
+
+      if (!isDemoMode && userId) {
+        insertPayload.user_id = userId;
+      }
+
       const { error } = await supabase
         .from("ocd_moments")
-        .insert({
-           user_id: userId,
-          location: location,
-          urge: urge,
-          response_type: RESPONSE_TYPE_MAP[responseType],
-          created_at: new Date().toISOString(),
-         custom_location: customLocation || null,
-        });
+        .insert(insertPayload);
 
       if (error) {
         console.error("Error saving OCD moment:", error);
@@ -143,7 +155,7 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsSubmitting(false);
     }
-   }, [userId]);
+   }, [userId, isDemoMode]);
 
   // Delete an OCD moment entry by ID
   const deleteOCDMoment = useCallback(async (entryId: string): Promise<boolean> => {
@@ -153,11 +165,16 @@ export const useOCDMomentSupabase = () => {
  
     setIsDeleting(true);
     try {
-      const { error } = await supabase
+      let query = supabase
         .from("ocd_moments")
         .delete()
-         .eq("id", entryId)
-         .eq("user_id", userId);
+        .eq("id", entryId);
+
+      if (!isDemoMode && userId) {
+        query = query.eq("user_id", userId);
+      }
+
+      const { error } = await query;
 
       if (error) {
         console.error("Error deleting OCD moment:", error);
@@ -190,7 +207,7 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsDeleting(false);
     }
-   }, [userId]);
+   }, [userId, isDemoMode]);
 
    // Check if user is authenticated
   const checkAuth = useCallback(async (): Promise<boolean> => {
