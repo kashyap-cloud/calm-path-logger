@@ -10,9 +10,13 @@
  
  const TokenAuthContext = createContext<TokenAuthContextType | undefined>(undefined);
  
- const TOKEN_REDIRECT_URL = "/token";
- const USER_INFO_API = "https://api.mantracare.com/user/user-info";
- const SESSION_KEY = "mantra_user_id";
+const TOKEN_REDIRECT_URL = "/token";
+const USER_INFO_API = "https://api.mantracare.com/user/user-info";
+const SESSION_KEY = "mantra_user_id";
+
+// TEMPORARY: Set to false once backend tokens are live
+const DEMO_MODE = true;
+const DEMO_USER_ID = "demo-user";
  
  export const TokenAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
    const [userId, setUserId] = useState<string | null>(null);
@@ -86,49 +90,51 @@
      hardRedirect();
    }, [hardRedirect]);
  
-   useEffect(() => {
-     const initAuth = async () => {
-       // Check for existing session first
-       const storedUserId = sessionStorage.getItem(SESSION_KEY);
-       
-       if (storedUserId) {
-         setUserId(storedUserId);
-         setIsLoading(false);
-         return;
-       }
- 
-       // Check URL for token
-       const urlParams = new URLSearchParams(window.location.search);
-       const token = urlParams.get("token");
- 
-       if (!token) {
-         // No token and no session - redirect
-         hardRedirect();
-         return;
-       }
- 
-       // Validate token with API
-       const validatedUserId = await validateToken(token);
- 
-       if (!validatedUserId) {
-         // Invalid token - redirect
-         hardRedirect();
-         return;
-       }
- 
-       // Success: store in sessionStorage and clean URL
-       sessionStorage.setItem(SESSION_KEY, validatedUserId);
-       setUserId(validatedUserId);
-       cleanUrl();
- 
-       // Ensure user exists in database
-       await ensureUserExists(validatedUserId);
- 
-       setIsLoading(false);
-     };
- 
-     initAuth();
-   }, [validateToken, hardRedirect, cleanUrl, ensureUserExists]);
+    useEffect(() => {
+      const initAuth = async () => {
+        // TEMPORARY: Demo mode bypasses token handshake
+        if (DEMO_MODE) {
+          const storedUserId = sessionStorage.getItem(SESSION_KEY) || DEMO_USER_ID;
+          sessionStorage.setItem(SESSION_KEY, storedUserId);
+          setUserId(storedUserId);
+          setIsLoading(false);
+          return;
+        }
+
+        // Check for existing session first
+        const storedUserId = sessionStorage.getItem(SESSION_KEY);
+        
+        if (storedUserId) {
+          setUserId(storedUserId);
+          setIsLoading(false);
+          return;
+        }
+
+        // Check URL for token
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get("token");
+
+        if (!token) {
+          hardRedirect();
+          return;
+        }
+
+        const validatedUserId = await validateToken(token);
+
+        if (!validatedUserId) {
+          hardRedirect();
+          return;
+        }
+
+        sessionStorage.setItem(SESSION_KEY, validatedUserId);
+        setUserId(validatedUserId);
+        cleanUrl();
+        await ensureUserExists(validatedUserId);
+        setIsLoading(false);
+      };
+
+      initAuth();
+    }, [validateToken, hardRedirect, cleanUrl, ensureUserExists]);
  
    return (
      <TokenAuthContext.Provider value={{ userId, isAuthenticated: !!userId, isLoading, signOut }}>
