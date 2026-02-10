@@ -95,9 +95,9 @@ const Index = () => {
               <ScreenTransition delay={300}>
                 <div className="mt-8 space-y-3">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Quick Tips</p>
-                  <div className="flex gap-3 overflow-x-auto pb-2">
+                  <div className="flex justify-center gap-3 pb-2">
                     {["Log moments as they happen", "Check insights weekly"].map((tip, i) => (
-                      <div key={i} className="flex-shrink-0 bg-white rounded-xl px-4 py-3 shadow-soft">
+                      <div key={i} className="bg-white rounded-xl px-4 py-3 shadow-soft">
                         <p className="text-sm text-foreground whitespace-nowrap">💡 {tip}</p>
                       </div>
                     ))}
