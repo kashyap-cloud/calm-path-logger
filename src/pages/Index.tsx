@@ -5,7 +5,7 @@ import ScreenTransition from "@/components/trackers/ScreenTransition";
 import OCDMomentTracker from "@/components/ocd-moment/OCDMomentTracker";
 import ResponseInsightsTracker from "@/components/response-insights/ResponseInsightsTracker";
 import InterferenceTracker from "@/components/interference/InterferenceTracker";
-import BottomNavBar from "@/components/navigation/BottomNavBar";
+
 import CommunityFeed from "@/components/community/CommunityFeed";
 import TherapistPlaceholder from "@/components/placeholders/TherapistPlaceholder";
 import ProfilePlaceholder from "@/components/placeholders/ProfilePlaceholder";
@@ -93,7 +93,7 @@ const Index = () => {
 
               {/* Quick Tips */}
               <ScreenTransition delay={300}>
-                <div className="mt-8 space-y-3">
+                <div className="mt-8 space-y-3 text-center">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Quick Tips</p>
                   <div className="flex justify-center gap-3 pb-2">
                     {["Log moments as they happen", "Check insights weekly"].map((tip, i) => (
@@ -119,11 +119,6 @@ const Index = () => {
     <ResponsiveContainer>
       <div className="relative min-h-screen">
         {renderTabContent()}
-        
-        {/* Only show bottom nav when not in a tracker */}
-        {!activeTracker && (
-          <BottomNavBar activeTab={activeTab} onTabChange={handleTabChange} />
-        )}
       </div>
     </ResponsiveContainer>
   );
