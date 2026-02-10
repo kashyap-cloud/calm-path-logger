@@ -87,7 +87,15 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                 <Loader2 className="w-6 h-6 animate-spin text-primary" />
                 <span className="ml-2 text-sm text-muted-foreground">Loading insights...</span>
               </div>
-            ) : insight ? (
+            ) : insight?.tier === "empty" || !insight ? (
+              <GradientCard className="bg-white shadow-soft">
+                <div className="py-8 text-center">
+                  <span className="text-4xl mb-4 block">📋</span>
+                  <p className="text-foreground font-medium">No moments logged this week yet</p>
+                  <p className="text-sm text-muted-foreground mt-1">Log a moment to start seeing insights</p>
+                </div>
+              </GradientCard>
+            ) : (
               <GradientCard className="bg-gradient-to-br from-white via-tracker-insights-light to-white shadow-soft-lg">
                 <div className="py-4 space-y-4">
                   {/* Summary */}
@@ -97,60 +105,52 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-foreground">{insight.summary}</p>
+                      {insight.secondaryText && (
+                        <p className="text-xs text-muted-foreground mt-1">{insight.secondaryText}</p>
+                      )}
                     </div>
                   </div>
 
-                  {/* Response Patterns - Qualitative */}
+                  {/* Response Patterns */}
                   <div className="space-y-3 pt-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Response Patterns Observed</p>
 
                     {(() => {
                       const responses = [
-                        { key: "acted", label: `${RESPONSE_LABELS.acted.symbol} ${RESPONSE_LABELS.acted.label}`, percent: insight.actedPercent, bgClass: "bg-response-acted/20" },
-                        { key: "waited", label: `${RESPONSE_LABELS.waited.symbol} ${RESPONSE_LABELS.waited.label}`, percent: insight.delayedPercent, bgClass: "bg-response-delayed/20" },
-                        { key: "noticed_without_acting", label: `${RESPONSE_LABELS.noticed_without_acting.symbol} ${RESPONSE_LABELS.noticed_without_acting.label}`, percent: insight.resistedPercent, bgClass: "bg-response-resisted/20" },
-                      ].sort((a, b) => b.percent - a.percent);
+                        { key: "acted", label: `${RESPONSE_LABELS.acted.symbol} ${RESPONSE_LABELS.acted.label}`, count: insight.actedCount, bgClass: "bg-response-acted/20" },
+                        { key: "waited", label: `${RESPONSE_LABELS.waited.symbol} ${RESPONSE_LABELS.waited.label}`, count: insight.delayedCount, bgClass: "bg-response-delayed/20" },
+                        { key: "noticed_without_acting", label: `${RESPONSE_LABELS.noticed_without_acting.symbol} ${RESPONSE_LABELS.noticed_without_acting.label}`, count: insight.resistedCount, bgClass: "bg-response-resisted/20" },
+                      ].filter((r) => r.count > 0).sort((a, b) => b.count - a.count);
 
                       const qualitativeLabels = ["More often", "Sometimes", "Less often"];
 
                       return responses.map((response, index) => (
                         <div key={response.key} className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-xl">
                           <span className="text-foreground font-medium text-sm">{response.label}</span>
-                          <span className={`text-foreground font-semibold text-sm ${response.bgClass} px-3 py-1 rounded-full`}>
-                            {qualitativeLabels[index]}
-                          </span>
+                          {insight.showFrequencyLabels && (
+                            <span className={`text-foreground font-semibold text-sm ${response.bgClass} px-3 py-1 rounded-full`}>
+                              {qualitativeLabels[index]}
+                            </span>
+                          )}
                         </div>
                       ));
                     })()}
                   </div>
 
                   {/* Session Promotion Card */}
-                  {insight.allActed && (
+                  {insight.allActed && insight.tier === "full" && (
                     <div className="bg-gradient-to-r from-primary/20 via-accent/20 to-primary/10 rounded-xl p-4 mt-4 border border-primary/20">
                       <div className="flex items-start gap-3">
                         <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                           <Sparkles className="w-5 h-5 text-primary" />
                         </div>
                         <div className="flex-1">
-                          {isPaidUser ? (
-                            <>
-                              <p className="font-semibold text-foreground text-sm mb-1">Ready to strengthen your response?</p>
-                              <p className="text-xs text-muted-foreground mb-3">A session with your therapist can help build on your awareness.</p>
-                              <button className="w-full py-2.5 gradient-purple text-white font-medium rounded-xl text-sm transition-all hover:shadow-lg">
-                                <Calendar className="w-4 h-4 inline mr-2" />
-                                Book a Session
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              <p className="font-semibold text-foreground text-sm mb-1">Want personalized support?</p>
-                              <p className="text-xs text-muted-foreground mb-3">Work with a therapist to develop strategies for managing urges.</p>
-                              <button className="w-full py-2.5 gradient-purple text-white font-medium rounded-xl text-sm transition-all hover:shadow-lg">
-                                <Calendar className="w-4 h-4 inline mr-2" />
-                                Book an appointment with the ERP therapist
-                              </button>
-                            </>
-                          )}
+                          <p className="font-semibold text-foreground text-sm mb-1">Want personalized support?</p>
+                          <p className="text-xs text-muted-foreground mb-3">Work with a therapist to develop strategies for managing urges.</p>
+                          <button className="w-full py-2.5 gradient-purple text-white font-medium rounded-xl text-sm transition-all hover:shadow-lg">
+                            <Calendar className="w-4 h-4 inline mr-2" />
+                            Book an appointment with the ERP therapist
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -199,14 +199,6 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                       </div>
                     </div>
                   )}
-                </div>
-              </GradientCard>
-            ) : (
-              <GradientCard className="bg-white shadow-soft">
-                <div className="py-8 text-center">
-                  <span className="text-4xl mb-4 block">📋</span>
-                  <p className="text-foreground font-medium">No moments noted</p>
-                  <p className="text-sm text-muted-foreground mt-1">Log moments to see insights</p>
                 </div>
               </GradientCard>
             )}
