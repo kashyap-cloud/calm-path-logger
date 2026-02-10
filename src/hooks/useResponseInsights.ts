@@ -1,7 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useTokenAuth } from "@/contexts/TokenAuthContext";
-import { OCDMomentEntry, RESPONSE_TYPE_DISPLAY } from "@/hooks/useOCDMomentSupabase";
+import { OCDMomentEntry } from "@/hooks/useOCDMomentSupabase";
 
 
 
@@ -111,31 +110,36 @@ const generateInsight = (
 };
 
 export const useResponseInsights = () => {
-  const { userId } = useTokenAuth();
-
-  const weekWindows = getWeekWindows();
+  const weekWindows = useMemo(() => getWeekWindows(), []);
   const [selectedWeek, setSelectedWeek] = useState<WeekWindow>("this_week");
   const [entries, setEntries] = useState<OCDMomentEntry[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [insight, setInsight] = useState<WeekInsight | null>(null);
 
-  const selectedWindow = weekWindows.find((w) => w.key === selectedWeek)!;
+  const selectedWindow = useMemo(
+    () => weekWindows.find((w) => w.key === selectedWeek)!,
+    [weekWindows, selectedWeek]
+  );
 
-  const fetchEntriesForWeek = useCallback(
-    async (window: WeekOption) => {
+  useEffect(() => {
+    let cancelled = false;
+    const fetchData = async () => {
       setIsLoading(true);
       try {
         const { data, error } = await supabase
           .from("ocd_moments")
           .select("*")
-          .gte("created_at", window.startDate.toISOString())
-          .lte("created_at", window.endDate.toISOString())
+          .gte("created_at", selectedWindow.startDate.toISOString())
+          .lte("created_at", selectedWindow.endDate.toISOString())
           .order("created_at", { ascending: false });
 
+        if (cancelled) return;
+
         if (error) {
-          console.error("Error fetching insights entries:", error);
+          console.log("Error fetching insights entries:", error);
           setEntries([]);
           setInsight(null);
+          setIsLoading(false);
           return;
         }
 
@@ -147,20 +151,22 @@ export const useResponseInsights = () => {
         const resisted = fetched.filter((e) => e.response_type === "noticed_without_acting").length;
 
         setInsight(generateInsight(acted, delayed, resisted, fetched.length));
-      } catch (error) {
-        console.error("Error fetching insights:", error);
-        setEntries([]);
-        setInsight(null);
+      } catch (err) {
+        console.log("Error fetching insights:", err);
+        if (!cancelled) {
+          setEntries([]);
+          setInsight(null);
+        }
       } finally {
-        setIsLoading(false);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       }
-    },
-    []
-  );
+    };
 
-  useEffect(() => {
-    fetchEntriesForWeek(selectedWindow);
-  }, [selectedWeek, fetchEntriesForWeek, selectedWindow]);
+    fetchData();
+    return () => { cancelled = true; };
+  }, [selectedWindow]);
 
   return {
     weekWindows,
