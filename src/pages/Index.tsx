@@ -18,6 +18,14 @@ const Index = () => {
   const [activeTracker, setActiveTracker] = useState<ActiveTracker>(null);
   const [activeTab, setActiveTab] = useState<NavTab>("home");
 
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tracker = params.get("tracker");
+    if (tracker === "moment" || tracker === "insights" || tracker === "interference") {
+      setActiveTracker(tracker as ActiveTracker);
+    }
+  }, []);
+
   const renderActiveTracker = () => {
     switch (activeTracker) {
       case "moment":
@@ -52,7 +60,7 @@ const Index = () => {
             <div className="gradient-hero pt-12 sm:pt-16 pb-8 sm:pb-10 px-5 sm:px-8 rounded-b-[2rem]">
               <ScreenTransition>
                 <div className="text-center text-white">
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-1">OCD Mantra</h1>
+                  <h1 className="text-2xl sm:text-3xl font-bold mb-1">OCD Trackers</h1>
                   <p className="text-white/80 text-sm sm:text-base">Supporting awareness of thoughts, urges, and responses</p>
                 </div>
               </ScreenTransition>

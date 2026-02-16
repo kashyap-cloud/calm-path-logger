@@ -17,7 +17,7 @@ interface Post {
   id: string;
   heading: string;
   content: string;
-  source: "OCDMantra" | "User";
+  source: "OCDTrackers" | "User";
   supportCount: number;
   relateCount: number;
   timeAgo: string;
@@ -37,7 +37,7 @@ const initialPosts: Post[] = [
     id: "2",
     heading: "Reminder",
     content: "Remember: You are not your thoughts. OCD tries to make you believe otherwise, but thoughts are just mental events, not truths.",
-    source: "OCDMantra",
+    source: "OCDTrackers",
     supportCount: 89,
     relateCount: 56,
     timeAgo: "4h ago",
@@ -64,7 +64,7 @@ const initialPosts: Post[] = [
     id: "5",
     heading: "Daily Motivation",
     content: "Progress isn't linear. Some days the urges feel stronger. That's okay. What matters is how you respond, not how you feel.",
-    source: "OCDMantra",
+    source: "OCDTrackers",
     supportCount: 112,
     relateCount: 78,
     timeAgo: "1d ago",
@@ -95,8 +95,8 @@ const CommunityFeed: React.FC = () => {
       ...userReactions,
       [postId]: { ...current, supported: !current.supported },
     });
-    setPosts(posts.map(p => 
-      p.id === postId 
+    setPosts(posts.map(p =>
+      p.id === postId
         ? { ...p, supportCount: current.supported ? p.supportCount - 1 : p.supportCount + 1 }
         : p
     ));
@@ -108,8 +108,8 @@ const CommunityFeed: React.FC = () => {
       ...userReactions,
       [postId]: { ...current, related: !current.related },
     });
-    setPosts(posts.map(p => 
-      p.id === postId 
+    setPosts(posts.map(p =>
+      p.id === postId
         ? { ...p, relateCount: current.related ? p.relateCount - 1 : p.relateCount + 1 }
         : p
     ));
@@ -117,7 +117,7 @@ const CommunityFeed: React.FC = () => {
 
   const handleSubmitPost = () => {
     if (!newPost.trim() || !newHeading.trim()) return;
-    
+
     const post: Post = {
       id: Date.now().toString(),
       heading: newHeading,
@@ -127,7 +127,7 @@ const CommunityFeed: React.FC = () => {
       relateCount: 0,
       timeAgo: "Just now",
     };
-    
+
     setPosts([post, ...posts]);
     setNewPost("");
     setNewHeading("");
@@ -141,9 +141,9 @@ const CommunityFeed: React.FC = () => {
 
   const handleSaveEdit = () => {
     if (!editHeading.trim() || !editContent.trim() || !editingPostId) return;
-    
-    setPosts(posts.map(p => 
-      p.id === editingPostId 
+
+    setPosts(posts.map(p =>
+      p.id === editingPostId
         ? { ...p, heading: editHeading, content: editContent }
         : p
     ));
@@ -199,8 +199,8 @@ const CommunityFeed: React.FC = () => {
                 size="sm"
                 className={cn(
                   "rounded-full px-4 border-0 transition-all",
-                  canShare 
-                    ? "gradient-purple text-white" 
+                  canShare
+                    ? "gradient-purple text-white"
                     : "bg-muted text-muted-foreground cursor-not-allowed"
                 )}
               >
@@ -218,7 +218,7 @@ const CommunityFeed: React.FC = () => {
               const reactions = userReactions[post.id] || { supported: false, related: false };
               const isEditing = editingPostId === post.id;
               const isUserPost = post.source === "User";
-              
+
               return (
                 <ScreenTransition key={post.id} delay={150 + index * 50}>
                   <div className="bg-white rounded-2xl p-4 shadow-soft border border-border/30">
@@ -227,12 +227,12 @@ const CommunityFeed: React.FC = () => {
                       <span
                         className={cn(
                           "text-[10px] font-semibold px-2.5 py-1 rounded-full",
-                          post.source === "OCDMantra"
+                          post.source === "OCDTrackers"
                             ? "bg-primary/10 text-primary"
                             : "bg-secondary/10 text-secondary"
                         )}
                       >
-                        {post.source === "OCDMantra" ? "🌟 OCDMantra" : "👤 User"}
+                        {post.source === "OCDTrackers" ? "🌟 OCDTrackers" : "👤 User"}
                       </span>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] text-muted-foreground">{post.timeAgo}</span>
@@ -248,8 +248,8 @@ const CommunityFeed: React.FC = () => {
                                 <Pencil className="w-3.5 h-3.5 mr-2" />
                                 Edit
                               </DropdownMenuItem>
-                              <DropdownMenuItem 
-                                onClick={() => handleDeletePost(post.id)} 
+                              <DropdownMenuItem
+                                onClick={() => handleDeletePost(post.id)}
                                 className="cursor-pointer text-destructive focus:text-destructive"
                               >
                                 <Trash2 className="w-3.5 h-3.5 mr-2" />

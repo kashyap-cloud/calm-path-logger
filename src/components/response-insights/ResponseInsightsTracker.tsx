@@ -70,11 +70,10 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                 <button
                   key={week.key}
                   onClick={() => handleWeekChange(week.key)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedWeek === week.key
+                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${selectedWeek === week.key
                       ? "gradient-amber text-white shadow-glow"
                       : "bg-white text-foreground shadow-soft"
-                  }`}
+                    }`}
                 >
                   {week.label}
                 </button>
@@ -89,22 +88,38 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
               </div>
             ) : insight?.tier === "empty" || !insight ? (
               <GradientCard className="bg-white shadow-soft">
-                <div className="py-8 text-center">
-                  <span className="text-4xl mb-4 block">📋</span>
-                  <p className="text-foreground font-medium">No moments logged this week yet</p>
-                  <p className="text-sm text-muted-foreground mt-1">Log a moment to start seeing insights</p>
+                <div className="py-10 text-center space-y-4">
+                  <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
+                    <Calendar className="w-8 h-8 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <p className="text-foreground font-semibold">No Data for this Period</p>
+                    <p className="text-sm text-muted-foreground mt-1 max-w-[240px] mx-auto">
+                      Entries from the "OCD Moment" tracker will appear here to provide insights.
+                    </p>
+                  </div>
+                  <div className="pt-2">
+                    <p className="text-xs bg-amber-50 text-amber-700 px-4 py-2 rounded-lg inline-block border border-amber-100">
+                      ⚠️ Disclaimer: Insights require at least 1 entry to show summary, and 4 entries for pattern analysis.
+                    </p>
+                  </div>
                 </div>
               </GradientCard>
             ) : (
               <GradientCard className="bg-gradient-to-br from-white via-tracker-insights-light to-white shadow-soft-lg">
                 <div className="py-4 space-y-4">
                   {/* Summary */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-14 h-14 rounded-full gradient-amber flex items-center justify-center shadow-lg">
+                  <div className="flex items-start gap-3">
+                    <div className="w-14 h-14 rounded-full gradient-amber flex items-center justify-center shadow-lg flex-shrink-0">
                       <span className="text-2xl">💡</span>
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-foreground">{insight.summary}</p>
+                      <p className="font-semibold text-foreground leading-tight">{insight.summary}</p>
+                      {insight.tier === "few" && (
+                        <p className="text-xs text-amber-700 bg-amber-50 px-2 py-1 rounded mt-2 border border-amber-100/50">
+                          Note: Add {4 - entries.length} more entries for full pattern analysis.
+                        </p>
+                      )}
                       {insight.secondaryText && (
                         <p className="text-xs text-muted-foreground mt-1">{insight.secondaryText}</p>
                       )}

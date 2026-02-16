@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* OCD Mantra - Modern Gradient Design System */
+/* OCD Trackers - Modern Gradient Design System */
 
 @layer base {
   :root {
@@ -36,7 +36,7 @@
 
     --radius: 1rem;
 
-    /* Custom OCD Mantra gradient colors */
+    /* Custom OCD Trackers gradient colors */
     --gradient-purple-start: 252 85% 60%;
     --gradient-purple-end: 280 80% 55%;
     --gradient-blue-start: 210 90% 55%;
@@ -127,6 +127,7 @@
 }
 
 @layer utilities {
+
   /* Gradient utilities */
   .gradient-purple {
     background: linear-gradient(135deg, hsl(var(--gradient-purple-start)), hsl(var(--gradient-purple-end)));
@@ -227,6 +228,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -238,6 +240,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -249,6 +252,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -260,22 +264,28 @@
     opacity: 0;
     transform: scale(0.3);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.05);
   }
+
   70% {
     transform: scale(0.9);
   }
+
   100% {
     transform: scale(1);
   }
 }
 
 @keyframes pulseSoft {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
   }
@@ -285,6 +295,7 @@
   0% {
     stroke-dashoffset: 100;
   }
+
   100% {
     stroke-dashoffset: 0;
   }

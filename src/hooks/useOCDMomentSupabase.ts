@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
- import { useTokenAuth } from "@/contexts/TokenAuthContext";
+import { useTokenAuth } from "@/contexts/TokenAuthContext";
 
 export type Location = "home" | "work" | "social" | "other";
 export type ResponseType = "acted" | "delayed" | "resisted";
@@ -43,12 +43,12 @@ export const useOCDMomentSupabase = () => {
 
   // Fetch entries by location (exact match, ordered by created_at DESC, with optional limit)
   const fetchEntriesByLocation = useCallback(async (location: string, limit?: number) => {
-     if (!userId) {
-       setPreviousEntries([]);
-       setAllEntries([]);
-       return;
-     }
- 
+    if (!userId) {
+      setPreviousEntries([]);
+      setAllEntries([]);
+      return;
+    }
+
     setIsLoading(true);
     try {
       let query = supabase
@@ -56,7 +56,7 @@ export const useOCDMomentSupabase = () => {
         .select("*")
         .eq("location", location);
 
-      if (!isDemoMode && userId) {
+      if (userId) {
         query = query.eq("user_id", userId);
       }
 
@@ -87,7 +87,7 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsLoading(false);
     }
-   }, [userId, isDemoMode]);
+  }, [userId, isDemoMode]);
 
   // Fetch recent entries (limited to 10)
   const fetchRecentEntries = useCallback(async (location: string) => {
@@ -99,22 +99,22 @@ export const useOCDMomentSupabase = () => {
     return fetchEntriesByLocation(location);
   }, [fetchEntriesByLocation]);
 
-   // Submit a new OCD moment entry
+  // Submit a new OCD moment entry
   const submitOCDMoment = useCallback(async (
     location: string,
     urge: string,
-   responseType: ResponseType,
-   customLocation?: string | null
+    responseType: ResponseType,
+    customLocation?: string | null
   ): Promise<boolean> => {
-     if (!userId) {
-       toast({
-         title: "Authentication required",
-         description: "Please sign in to save entries.",
-         variant: "destructive",
-       });
-       return false;
-     }
- 
+    if (!userId) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to save entries.",
+        variant: "destructive",
+      });
+      return false;
+    }
+
     setIsSubmitting(true);
     try {
       const insertPayload: Record<string, unknown> = {
@@ -125,7 +125,7 @@ export const useOCDMomentSupabase = () => {
         custom_location: customLocation || null,
       };
 
-      if (!isDemoMode && userId) {
+      if (userId) {
         insertPayload.user_id = userId;
       }
 
@@ -155,14 +155,14 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsSubmitting(false);
     }
-   }, [userId, isDemoMode]);
+  }, [userId, isDemoMode]);
 
   // Delete an OCD moment entry by ID
   const deleteOCDMoment = useCallback(async (entryId: string): Promise<boolean> => {
-     if (!userId) {
-       return false;
-     }
- 
+    if (!userId) {
+      return false;
+    }
+
     setIsDeleting(true);
     try {
       let query = supabase
@@ -170,7 +170,7 @@ export const useOCDMomentSupabase = () => {
         .delete()
         .eq("id", entryId);
 
-      if (!isDemoMode && userId) {
+      if (userId) {
         query = query.eq("user_id", userId);
       }
 
@@ -207,12 +207,12 @@ export const useOCDMomentSupabase = () => {
     } finally {
       setIsDeleting(false);
     }
-   }, [userId, isDemoMode]);
+  }, [userId, isDemoMode]);
 
-   // Check if user is authenticated
+  // Check if user is authenticated
   const checkAuth = useCallback(async (): Promise<boolean> => {
-     return !!userId;
-   }, [userId]);
+    return !!userId;
+  }, [userId]);
 
   return {
     isLoading,

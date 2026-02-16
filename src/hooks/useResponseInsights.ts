@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { OCDMomentEntry } from "@/hooks/useOCDMomentSupabase";
+import { useTokenAuth } from "@/contexts/TokenAuthContext";
 
 
 
@@ -115,6 +116,7 @@ export const useResponseInsights = () => {
   const [entries, setEntries] = useState<OCDMomentEntry[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [insight, setInsight] = useState<WeekInsight | null>(null);
+  const { userId } = useTokenAuth();
 
   const selectedWindow = useMemo(
     () => weekWindows.find((w) => w.key === selectedWeek)!,
@@ -124,11 +126,18 @@ export const useResponseInsights = () => {
   useEffect(() => {
     let cancelled = false;
     const fetchData = async () => {
+      if (!userId) {
+        setEntries([]);
+        setInsight(null);
+        return;
+      }
+
       setIsLoading(true);
       try {
         const { data, error } = await supabase
           .from("ocd_moments")
           .select("*")
+          .eq("user_id", userId)
           .gte("created_at", selectedWindow.startDate.toISOString())
           .lte("created_at", selectedWindow.endDate.toISOString())
           .order("created_at", { ascending: false });
@@ -166,7 +175,7 @@ export const useResponseInsights = () => {
 
     fetchData();
     return () => { cancelled = true; };
-  }, [selectedWindow]);
+  }, [selectedWindow, userId]);
 
   return {
     weekWindows,

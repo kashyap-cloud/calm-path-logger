@@ -36,7 +36,14 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
     weeklySummary,
     isLoadingWeekly,
     refetchWeekly,
+    weekWindows,
+    selectedWeek,
+    setSelectedWeek,
   } = useInterferenceSupabase();
+
+  const handleWeekChange = (key: any) => {
+    setSelectedWeek(key);
+  };
 
   const handleSliderChange = (key: string, value: number[]) => {
     setValues((prev) => ({ ...prev, [key]: value[0] }));
@@ -200,6 +207,22 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
         {step === "weekly" && (
           <ScreenTransition>
             <div className="space-y-5">
+              {/* Week Selector */}
+              <div className="flex gap-2 overflow-x-auto pb-2">
+                {weekWindows.map((week) => (
+                  <button
+                    key={week.key}
+                    onClick={() => handleWeekChange(week.key as any)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${selectedWeek === week.key
+                      ? "gradient-teal text-white shadow-glow"
+                      : "bg-white text-foreground shadow-soft"
+                      }`}
+                  >
+                    {week.label}
+                  </button>
+                ))}
+              </div>
+
               {isLoadingWeekly ? (
                 <div className="flex flex-col items-center py-12">
                   <Loader2 className="w-8 h-8 animate-spin text-secondary mb-3" />

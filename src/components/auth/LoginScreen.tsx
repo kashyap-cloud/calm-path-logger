@@ -13,7 +13,7 @@ const LoginScreen: React.FC = () => {
 
   const handleSendMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email.trim()) {
       toast({
         title: "Email required",
@@ -24,7 +24,7 @@ const LoginScreen: React.FC = () => {
     }
 
     setIsLoading(true);
-    
+
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim(),
       options: {
@@ -59,7 +59,7 @@ const LoginScreen: React.FC = () => {
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 flex items-center justify-center">
               <Heart className="w-8 h-8" />
             </div>
-            <h1 className="text-2xl font-bold mb-2">OCD Mantra</h1>
+            <h1 className="text-2xl font-bold mb-2">OCD Trackers</h1>
             <p className="text-white/80 text-sm">
               A gentle space for awareness and reflection
             </p>
@@ -77,7 +77,7 @@ const LoginScreen: React.FC = () => {
                 Check your email
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">
-                We've sent a sign-in link to <strong>{email}</strong>. 
+                We've sent a sign-in link to <strong>{email}</strong>.
                 Click the link to continue.
               </p>
               <p className="text-xs text-muted-foreground pt-4">
@@ -97,7 +97,7 @@ const LoginScreen: React.FC = () => {
                   Welcome
                 </h2>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  Enter your email and we'll send you a link to sign in. 
+                  Enter your email and we'll send you a link to sign in.
                   No password needed.
                 </p>
               </div>
@@ -132,7 +132,7 @@ const LoginScreen: React.FC = () => {
               </form>
 
               <p className="text-xs text-center text-muted-foreground pt-4 leading-relaxed">
-                By continuing, you agree to use this app mindfully 
+                By continuing, you agree to use this app mindfully
                 as a supportive tool, not a replacement for professional care.
               </p>
             </div>
