@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Journal de bord du TOC",
+    "subtitle": "Suivi et analyses",
+    "history": "Histoire",
+    "insights": "Consultez les analyses hebdomadaires"
+  },
+  "form": {
+    "location_label": "Où es-tu?",
+    "custom_location_placeholder": "Saisissez un emplacement personnalisé...",
+    "urge_label": "Quelle envie ou pensée ?",
+    "urge_placeholder": "Décrivez ce qui vous préoccupe...",
+    "recent_for": "Récent pour {{location}}",
+    "response_label": "Comment avez-vous réagi ?",
+    "submit": "Enregistrer l&#39;entrée",
+    "submitting": "Enregistrement du moment...",
+    "success": "Entrée enregistrée !",
+    "success_subtitle": "Votre moment a été enregistré avec succès."
+  },
+  "responses": {
+    "acted": "céder à l&#39;envie",
+    "waited": "En attendant",
+    "noticed": "Remarqué sans agir",
+    "desc_acted": "Je me suis surprise à céder à cette envie.",
+    "desc_waited": "Je me suis surprise à attendre",
+    "desc_noticed": "J&#39;ai ressenti cette envie sans agir."
+  },
+  "history": {
+    "title": "Histoire",
+    "empty": "Aucune entrée dans l&#39;historique pour le moment.",
+    "all_entries": "Toutes les entrées"
+  },
+  "footer": {
+    "tip": "Un enregistrement régulier permet d&#39;identifier vos tendances de progression."
+  }
+}

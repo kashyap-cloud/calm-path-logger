@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "Alltag",
+    "subtitle": "Track &amp; Insights",
+    "history": "Geschichte",
+    "insights": "Wöchentliche Einblicke ansehen"
+  },
+  "form": {
+    "title": "Tägliche Wirkungsanalyse",
+    "description": "Beobachten Sie, wie sich die Zwangsstörung auf Ihr tägliches Leben in verschiedenen Bereichen auswirkt.",
+    "submit": "Tägliche Einträge speichern",
+    "submitting": "Check-in speichern...",
+    "success": "Einchecken gespeichert!",
+    "success_subtitle": "Ihre täglichen Auswirkungen wurden erfasst."
+  },
+  "domains": {
+    "workStudy": "Arbeit &amp; Studium",
+    "relationships": "Beziehungen &amp; Soziales",
+    "sleepRoutine": "Schlaf &amp; Routine",
+    "selfCare": "Selbstpflege",
+    "none": "Keiner",
+    "high": "Hoch"
+  },
+  "insights": {
+    "title": "Wöchentliche Einblicke",
+    "analysis": "Wöchentliche Wirkungsanalyse",
+    "metrics": "Gesundheitskennzahlen",
+    "empty": "Für diesen Zeitraum liegen noch keine Check-ins vor.",
+    "progress": "Du machst Fortschritte!",
+    "tip": "Die konsequente Erfassung Ihrer täglichen Störungen hilft Ihnen und Ihrem Therapeuten, das Gesamtbild zu verstehen."
+  },
+  "footer": {
+    "tip": "Tägliche Check-ins helfen Ihnen, Ihren Genesungsprozess bewusst wahrzunehmen."
+  }
+}

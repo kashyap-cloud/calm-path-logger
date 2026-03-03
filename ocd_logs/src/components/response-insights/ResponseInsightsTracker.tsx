@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import BackButton from "../trackers/BackButton";
 import ScreenTransition from "../trackers/ScreenTransition";
 import GradientCard from "../trackers/GradientCard";
 import useResponseInsights, { WeekWindow } from "@/hooks/useResponseInsights";
-import useOCDMomentLocal, { RESPONSE_TYPE_DISPLAY } from "@/hooks/useOCDMomentLocal";
+import useOCDMomentDB, { RESPONSE_TYPE_DISPLAY } from "@/hooks/useOCDMomentDB";
 import { Calendar, Sparkles, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -14,11 +15,11 @@ interface ResponseInsightsTrackerProps {
 const isPaidUser = false;
 
 // Map DB response_type to UI display
-const RESPONSE_LABELS: Record<string, { symbol: string; label: string }> = {
-  acted: { symbol: "⚡", label: "Acting on the urge" },
-  waited: { symbol: "⏳", label: "Waiting" },
-  noticed_without_acting: { symbol: "🛡️", label: "Noticed without acting" },
-};
+const getResponseLabels = (t: any): Record<string, { symbol: string; label: string }> => ({
+  acted: { symbol: "⚡", label: t('responses.acted') },
+  waited: { symbol: "⏳", label: t('responses.waited') },
+  noticed_without_acting: { symbol: "🛡️", label: t('responses.noticed') },
+});
 
 const RESPONSE_BADGE_COLORS: Record<string, string> = {
   acted: "bg-response-acted text-white",
@@ -27,7 +28,9 @@ const RESPONSE_BADGE_COLORS: Record<string, string> = {
 };
 
 const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClose }) => {
-  const { allEntries } = useOCDMomentLocal();
+  const { t } = useTranslation();
+  const RESPONSE_LABELS = getResponseLabels(t);
+  const { allEntries } = useOCDMomentDB();
   const { weekWindows, selectedWeek, setSelectedWeek, entries, insight, isLoading } = useResponseInsights(allEntries);
   const [showEntries, setShowEntries] = useState(false);
 
@@ -57,9 +60,9 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
       <div className="gradient-amber pt-10 pb-6 px-5 rounded-b-3xl">
         <div className="flex items-center gap-3 mb-4">
           <BackButton onClick={onClose} />
-          <h1 className="text-lg font-semibold text-white">Response Insights</h1>
+          <h1 className="text-lg font-semibold text-white">{t('insights.title')}</h1>
         </div>
-        <p className="text-white/80 text-sm">Reflections on your logged responses</p>
+        <p className="text-white/80 text-sm">{t('insights.subtitle')}</p>
       </div>
 
       <div className="px-5 py-6">
@@ -85,7 +88,7 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
             {isLoading ? (
               <div className="flex items-center justify-center py-12">
                 <Loader2 className="w-6 h-6 animate-spin text-primary" />
-                <span className="ml-2 text-sm text-muted-foreground">Loading insights...</span>
+                <span className="ml-2 text-sm text-muted-foreground">{t('insights.loading')}</span>
               </div>
             ) : insight?.tier === "empty" || !insight ? (
               <GradientCard className="bg-white shadow-soft">
@@ -94,14 +97,14 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                     <Calendar className="w-8 h-8 text-muted-foreground" />
                   </div>
                   <div>
-                    <p className="text-foreground font-semibold">No Data for this Period</p>
+                    <p className="text-foreground font-semibold">{t('insights.no_data')}</p>
                     <p className="text-sm text-muted-foreground mt-1 max-w-[240px] mx-auto">
-                      Entries from the "OCD Moment" tracker will appear here to provide insights.
+                      {t('insights.no_data_desc')}
                     </p>
                   </div>
                   <div className="pt-2">
                     <p className="text-xs bg-amber-50 text-amber-700 px-4 py-2 rounded-lg inline-block border border-amber-100">
-                      ⚠️ Disclaimer: Insights require at least 1 entry to show summary, and 4 entries for pattern analysis.
+                      {t('insights.disclaimer')}
                     </p>
                   </div>
                 </div>
@@ -118,7 +121,7 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                       <p className="font-semibold text-foreground leading-tight">{insight.summary}</p>
                       {insight.tier === "few" && (
                         <p className="text-xs text-amber-700 bg-amber-50 px-2 py-1 rounded mt-2 border border-amber-100/50">
-                          Note: Add {4 - entries.length} more entries for full pattern analysis.
+                          {t('insights.need_more', { count: 4 - entries.length })}
                         </p>
                       )}
                       {insight.secondaryText && (
@@ -129,7 +132,7 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
 
                   {/* Response Patterns */}
                   <div className="space-y-3 pt-2">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Response Patterns Observed</p>
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('insights.patterns_title')}</p>
 
                     {(() => {
                       const responses = [
@@ -161,11 +164,11 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                           <Sparkles className="w-5 h-5 text-primary" />
                         </div>
                         <div className="flex-1">
-                          <p className="font-semibold text-foreground text-sm mb-1">Want personalized support?</p>
-                          <p className="text-xs text-muted-foreground mb-3">Work with a therapist to develop strategies for managing urges.</p>
+                          <p className="font-semibold text-foreground text-sm mb-1">{t('insights.promo_title')}</p>
+                          <p className="text-xs text-muted-foreground mb-3">{t('insights.promo_desc')}</p>
                           <button className="w-full py-2.5 gradient-purple text-white font-medium rounded-xl text-sm transition-all hover:shadow-lg">
                             <Calendar className="w-4 h-4 inline mr-2" />
-                            Book an appointment with the ERP therapist
+                            {t('insights.promo_button')}
                           </button>
                         </div>
                       </div>
@@ -178,7 +181,7 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                       onClick={() => setShowEntries(true)}
                       className="w-full py-3 bg-white/80 text-accent font-medium rounded-xl transition-all hover:bg-white"
                     >
-                      View past logged entries ({entries.length})
+                      {t('insights.view_past', { count: entries.length })}
                     </button>
                   )}
 
@@ -186,9 +189,9 @@ const ResponseInsightsTracker: React.FC<ResponseInsightsTrackerProps> = ({ onClo
                   {showEntries && entries.length > 0 && (
                     <div className="space-y-2 animate-scale-in">
                       <div className="flex justify-between items-center">
-                        <p className="text-xs text-muted-foreground uppercase font-medium">Past Entries</p>
+                        <p className="text-xs text-muted-foreground uppercase font-medium">{t('insights.past_entries')}</p>
                         <button onClick={() => setShowEntries(false)} className="text-xs text-accent font-medium">
-                          Hide
+                          {t('insights.hide')}
                         </button>
                       </div>
                       <div className="space-y-2 max-h-64 overflow-y-auto custom-scrollbar">

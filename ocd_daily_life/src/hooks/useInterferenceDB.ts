@@ -1,4 +1,6 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
+import sql from "../lib/db";
+import { toast } from "sonner";
 
 export type WeekWindow = "this_week" | "last_week" | "two_weeks_ago";
 
@@ -16,11 +18,12 @@ export interface WeeklyAverages {
 
 export interface CheckinEntry {
     id: string;
-    workStudy: number | null;
+    user_id: string;
+    work_study: number | null;
     relationships: number | null;
-    sleepRoutine: number | null;
-    selfCare: number | null;
-    createdAt: Date;
+    sleep_routine: number | null;
+    self_care: number | null;
+    created_at: string;
 }
 
 const WEEK_WINDOWS: WeekOption[] = [
@@ -34,10 +37,34 @@ const avg = (values: (number | null)[]): number | null => {
     return valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : null;
 };
 
-export const useInterferenceLocal = () => {
+export const useInterferenceDB = () => {
     const [entries, setEntries] = useState<CheckinEntry[]>([]);
     const [selectedWeek, setSelectedWeek] = useState<WeekWindow>("this_week");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const MOCK_USER_ID = "00000000-0000-0000-0000-000000000000";
+
+    const fetchEntries = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const data = await sql`
+                SELECT * FROM interference_checkins 
+                WHERE user_id = ${MOCK_USER_ID} 
+                ORDER BY created_at DESC
+            `;
+            setEntries(data as CheckinEntry[]);
+        } catch (err) {
+            console.error("Fetch error:", err);
+            toast.error("Failed to load entries from database");
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchEntries();
+    }, [fetchEntries]);
 
     const getWeekRange = useCallback((window: WeekWindow) => {
         const now = new Date();
@@ -58,13 +85,16 @@ export const useInterferenceLocal = () => {
 
     const weeklyAverages = useMemo((): WeeklyAverages | null => {
         const { start, end } = getWeekRange(selectedWeek);
-        const weekEntries = entries.filter((e) => e.createdAt >= start && e.createdAt <= end);
+        const weekEntries = entries.filter((e) => {
+            const d = new Date(e.created_at);
+            return d >= start && d <= end;
+        });
         if (weekEntries.length === 0) return null;
         return {
-            workStudy: avg(weekEntries.map((e) => e.workStudy)),
+            workStudy: avg(weekEntries.map((e) => e.work_study)),
             relationships: avg(weekEntries.map((e) => e.relationships)),
-            sleepRoutine: avg(weekEntries.map((e) => e.sleepRoutine)),
-            selfCare: avg(weekEntries.map((e) => e.selfCare)),
+            sleepRoutine: avg(weekEntries.map((e) => e.sleep_routine)),
+            selfCare: avg(weekEntries.map((e) => e.self_care)),
         };
     }, [entries, selectedWeek, getWeekRange]);
 
@@ -86,23 +116,29 @@ export const useInterferenceLocal = () => {
     const submitCheckin = useCallback(
         async (data: { workStudy: number | null; relationships: number | null; sleepRoutine: number | null; selfCare: number | null }) => {
             setIsSubmitting(true);
-            // Simulate a brief async delay
-            await new Promise((r) => setTimeout(r, 500));
-            const entry: CheckinEntry = {
-                id: `entry-${Date.now()}`,
-                ...data,
-                createdAt: new Date(),
-            };
-            setEntries((prev) => [...prev, entry]);
-            setIsSubmitting(false);
-            return true;
+            try {
+                const [newEntry] = await sql`
+                    INSERT INTO interference_checkins (user_id, work_study, relationships, sleep_routine, self_care)
+                    VALUES (${MOCK_USER_ID}, ${data.workStudy}, ${data.relationships}, ${data.sleepRoutine}, ${data.selfCare})
+                    RETURNING *
+                `;
+                setEntries((prev) => [newEntry as CheckinEntry, ...prev]);
+                toast.success("Daily entry saved to database");
+                return true;
+            } catch (err) {
+                console.error("Submit error:", err);
+                toast.error("Failed to save entry to database");
+                return false;
+            } finally {
+                setIsSubmitting(false);
+            }
         },
         []
     );
 
     const refetchWeekly = useCallback(() => {
-        // No-op for local state — data is always fresh
-    }, []);
+        fetchEntries();
+    }, [fetchEntries]);
 
     return {
         entries,
@@ -110,10 +146,12 @@ export const useInterferenceLocal = () => {
         isSubmitting,
         weeklyAverages,
         weeklySummary,
-        isLoadingWeekly: false,
+        isLoadingWeekly: isLoading,
         refetchWeekly,
         weekWindows: WEEK_WINDOWS,
         selectedWeek,
         setSelectedWeek,
     };
 };
+
+export default useInterferenceDB;

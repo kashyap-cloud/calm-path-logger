@@ -1,0 +1,36 @@
+{
+    "header": {
+        "title": "OCD Log",
+        "subtitle": "Track & Insights",
+        "history": "History",
+        "insights": "See Weekly Insights"
+    },
+    "form": {
+        "location_label": "Where are you?",
+        "custom_location_placeholder": "Enter custom location...",
+        "urge_label": "What urge or thought?",
+        "urge_placeholder": "Describe what's on your mind...",
+        "recent_for": "Recent for {{location}}",
+        "response_label": "How did you respond?",
+        "submit": "Save Entry",
+        "submitting": "Logging Moment...",
+        "success": "Entry Saved!",
+        "success_subtitle": "Your moment has been logged successfully."
+    },
+    "responses": {
+        "acted": "Acting on the urge",
+        "waited": "Waiting",
+        "noticed": "Noticed without acting",
+        "desc_acted": "I noticed myself acting on the urge",
+        "desc_waited": "I noticed myself waiting",
+        "desc_noticed": "I noticed the urge without acting"
+    },
+    "history": {
+        "title": "History",
+        "empty": "No history entries yet.",
+        "all_entries": "All Entries"
+    },
+    "footer": {
+        "tip": "Consistently logging helps identify your progress patterns."
+    }
+}

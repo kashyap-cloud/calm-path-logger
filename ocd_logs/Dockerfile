@@ -1,31 +1,34 @@
-FROM node:20-alpine AS builder
-WORKDIR /app
+# Build stage
+FROM node:20-slim AS build
 
-# Accept build arguments
-ARG VITE_SUPABASE_URL
-ARG VITE_SUPABASE_ANON_KEY
+WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
+
 COPY . .
 
-# Build with environment variables
-ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
-ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
+# Build-time env variables for Vite
+ARG VITE_DATABASE_URL
+ENV VITE_DATABASE_URL=$VITE_DATABASE_URL
 
 RUN npm run build
 
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
+# Production stage
+FROM nginx:stable-alpine
 
-# Copy the static files from the builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html/ocd_logs
-# Remove default nginx config
-RUN rm /etc/nginx/conf.d/default.conf
-COPY vite-nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose the port that Nginx will listen on
+# Custom nginx config to handle SPA routing if needed
+RUN echo 'server { \
+    listen 80; \
+    location / { \
+        root /usr/share/nginx/html; \
+        index index.html index.htm; \
+        try_files $uri $uri/ /index.html; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 
-# Command to start Nginx
 CMD ["nginx", "-g", "daemon off;"]

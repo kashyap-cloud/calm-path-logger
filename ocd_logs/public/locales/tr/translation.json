@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "OKB Günlüğü",
+    "subtitle": "İzleme ve Analizler",
+    "history": "Tarih",
+    "insights": "Haftalık Analizlere Bakın"
+  },
+  "form": {
+    "location_label": "Neredesin?",
+    "custom_location_placeholder": "Özel konum girin...",
+    "urge_label": "Hangi dürtü veya düşünce?",
+    "urge_placeholder": "Aklınızdan geçenleri anlatın...",
+    "recent_for": "{{location}} için son gelişmeler",
+    "response_label": "Nasıl yanıt verdiniz?",
+    "submit": "Girişi Kaydet",
+    "submitting": "Kayıt Anı...",
+    "success": "Giriş kaydedildi!",
+    "success_subtitle": "Anınız başarıyla kaydedildi."
+  },
+  "responses": {
+    "acted": "İçgüdüye göre hareket etmek",
+    "waited": "Beklemek",
+    "noticed": "Harekete geçmeden fark edildi.",
+    "desc_acted": "Kendimi bu dürtüye göre hareket ederken buldum.",
+    "desc_waited": "Beklediğimi fark ettim.",
+    "desc_noticed": "Harekete geçmeden dürtüyü fark ettim."
+  },
+  "history": {
+    "title": "Tarih",
+    "empty": "Henüz hiçbir geçmiş kaydı yok.",
+    "all_entries": "Tüm Girişler"
+  },
+  "footer": {
+    "tip": "Düzenli olarak kayıt tutmak, ilerleme kalıplarınızı belirlemenize yardımcı olur."
+  }
+}

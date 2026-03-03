@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Registro de TOC",
+    "subtitle": "Seguimiento y perspectivas",
+    "history": "Historia",
+    "insights": "Ver información semanal"
+  },
+  "form": {
+    "location_label": "¿Dónde estás?",
+    "custom_location_placeholder": "Introduzca una ubicación personalizada...",
+    "urge_label": "¿Qué impulso o pensamiento?",
+    "urge_placeholder": "Describe lo que tienes en mente...",
+    "recent_for": "Reciente para {{location}}",
+    "response_label": "¿Cómo respondiste?",
+    "submit": "Guardar entrada",
+    "submitting": "Momento de registro...",
+    "success": "¡Entrada guardada!",
+    "success_subtitle": "Su momento ha sido registrado exitosamente."
+  },
+  "responses": {
+    "acted": "Actuar según el impulso",
+    "waited": "Espera",
+    "noticed": "Notado sin actuar",
+    "desc_acted": "Me di cuenta de que actuaba según el impulso",
+    "desc_waited": "Me di cuenta de que estaba esperando",
+    "desc_noticed": "Noté la urgencia sin actuar."
+  },
+  "history": {
+    "title": "Historia",
+    "empty": "Aún no hay entradas de historial",
+    "all_entries": "Todas las entradas"
+  },
+  "footer": {
+    "tip": "Registrar de manera constante ayuda a identificar sus patrones de progreso."
+  }
+}

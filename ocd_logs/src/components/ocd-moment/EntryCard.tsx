@@ -1,7 +1,8 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { OCDMomentEntry, RESPONSE_TYPE_DISPLAY } from "@/hooks/useOCDMomentLocal";
+import { useTranslation } from "react-i18next";
+import { OCDMomentEntry } from "@/hooks/useOCDMomentDB";
 import { LOCATION_CONFIG, Location } from "@/hooks/useTrackerData";
 import { format, isToday, isYesterday, parseISO } from "date-fns";
 
@@ -29,15 +30,15 @@ const getResponseBadgeClass = (responseType: string) => {
 };
 
 // Format date in a friendly way
-const formatEntryDate = (dateString: string): string => {
+const formatEntryDate = (dateString: string, t: any): string => {
   const date = parseISO(dateString);
 
   if (isToday(date)) {
-    return `Today, ${format(date, "h:mm a")}`;
+    return `${t('date.today')}, ${format(date, "h:mm a")} `;
   }
 
   if (isYesterday(date)) {
-    return `Yesterday, ${format(date, "h:mm a")}`;
+    return `${t('date.yesterday')}, ${format(date, "h:mm a")} `;
   }
 
   return format(date, "d MMM yyyy, h:mm a");
@@ -46,7 +47,7 @@ const formatEntryDate = (dateString: string): string => {
 // Get location display text (handles custom_location for "Other")
 const getLocationDisplay = (entry: OCDMomentEntry): string => {
   if (entry.location === "Other" && entry.custom_location) {
-    return `Other • ${entry.custom_location}`;
+    return `Other • ${entry.custom_location} `;
   }
   return entry.location;
 };
@@ -72,14 +73,16 @@ const EntryCard: React.FC<EntryCardProps> = ({
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <div
       onClick={handleClick}
-      className={`bg-white rounded-2xl p-4 shadow-soft hover:shadow-md transition-all ${onSelect ? "cursor-pointer" : ""}`}
+      className={`bg - white rounded - 2xl p - 4 shadow - soft hover: shadow - md transition - all ${onSelect ? "cursor-pointer" : ""} `}
     >
       <div
         className="animate-fade-slide-up"
-        style={{ animationDelay: `${animationDelay}ms` }}
+        style={{ animationDelay: `${animationDelay} ms` }}
       >
         {/* Header: Location emoji + urge + delete button */}
         <div className="flex items-start justify-between gap-3">
@@ -111,7 +114,7 @@ const EntryCard: React.FC<EntryCardProps> = ({
         <div className="mt-3 flex items-center justify-between gap-2 flex-wrap">
           <div className="flex flex-col gap-1">
             <span className="text-xs text-muted-foreground">
-              {formatEntryDate(entry.created_at)}
+              {formatEntryDate(entry.created_at, t)}
             </span>
             {selectedLocation === "other" && entry.custom_location && (
               <span className="text-xs text-primary font-medium">
@@ -122,9 +125,9 @@ const EntryCard: React.FC<EntryCardProps> = ({
 
           <Badge
             variant="outline"
-            className={`text-xs capitalize flex-shrink-0 ${getResponseBadgeClass(entry.response_type)}`}
+            className={`text - xs capitalize flex - shrink - 0 ${getResponseBadgeClass(entry.response_type)} `}
           >
-            {RESPONSE_TYPE_DISPLAY[entry.response_type] || entry.response_type}
+            {t(`responses.${entry.response_type === 'noticed_without_acting' ? 'noticed' : entry.response_type} `)}
           </Badge>
         </div>
       </div>

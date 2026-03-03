@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "Günlük Yaşam",
+    "subtitle": "İzleme ve Analizler",
+    "history": "Tarih",
+    "insights": "Haftalık Analizlere Bakın"
+  },
+  "form": {
+    "title": "Günlük Etki Kontrolü",
+    "description": "Obsesif kompulsif bozukluğun günlük yaşamınızı farklı alanlarda nasıl etkilediğini takip edin.",
+    "submit": "Günlük Girişi Kaydet",
+    "submitting": "Giriş yapma işlemi kaydediliyor...",
+    "success": "Giriş işlemi kaydedildi!",
+    "success_subtitle": "Günlük etkiniz kaydedildi."
+  },
+  "domains": {
+    "workStudy": "Çalışma ve Eğitim",
+    "relationships": "İlişkiler ve Sosyal",
+    "sleepRoutine": "Uyku ve Rutin",
+    "selfCare": "Kendi kendine bakım",
+    "none": "Hiçbiri",
+    "high": "Yüksek"
+  },
+  "insights": {
+    "title": "Haftalık Analizler",
+    "analysis": "Haftalık Etki Analizi",
+    "metrics": "Sağlık Metrikleri",
+    "empty": "Bu dönem için henüz herhangi bir giriş kaydı yapılmadı.",
+    "progress": "İlerleme kaydediyorsunuz!",
+    "tip": "Günlük olarak yaşadığınız dikkat dağıtıcı unsurları düzenli olarak takip etmek, hem sizin hem de terapistinizin genel durumu anlamanıza yardımcı olur."
+  },
+  "footer": {
+    "tip": "Günlük kontroller, iyileşme sürecinizin farkında olmanıza yardımcı olur."
+  }
+}

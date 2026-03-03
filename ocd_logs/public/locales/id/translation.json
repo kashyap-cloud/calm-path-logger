@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Catatan OCD",
+    "subtitle": "Lacak &amp; Wawasan",
+    "history": "Sejarah",
+    "insights": "Lihat Wawasan Mingguan"
+  },
+  "form": {
+    "location_label": "Kamu ada di mana?",
+    "custom_location_placeholder": "Masukkan lokasi khusus...",
+    "urge_label": "Dorongan atau pikiran apa?",
+    "urge_placeholder": "Jelaskan apa yang ada di pikiranmu...",
+    "recent_for": "Terbaru untuk {{location}}",
+    "response_label": "Bagaimana tanggapanmu?",
+    "submit": "Simpan Entri",
+    "submitting": "Momen Pencatatan...",
+    "success": "Entri Tersimpan!",
+    "success_subtitle": "Momen Anda telah berhasil dicatat."
+  },
+  "responses": {
+    "acted": "Bertindak berdasarkan dorongan",
+    "waited": "Menunggu",
+    "noticed": "Memperhatikan tanpa bertindak",
+    "desc_acted": "Aku menyadari diriku bertindak berdasarkan dorongan itu.",
+    "desc_waited": "Aku menyadari diriku sedang menunggu",
+    "desc_noticed": "Aku menyadari dorongan itu tanpa bertindak."
+  },
+  "history": {
+    "title": "Sejarah",
+    "empty": "Belum ada entri riwayat.",
+    "all_entries": "Semua Entri"
+  },
+  "footer": {
+    "tip": "Mencatat secara konsisten membantu mengidentifikasi pola kemajuan Anda."
+  }
+}

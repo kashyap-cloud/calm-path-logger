@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Dziennik OCD",
+    "subtitle": "Śledzenie i spostrzeżenia",
+    "history": "Historia",
+    "insights": "Zobacz cotygodniowe spostrzeżenia"
+  },
+  "form": {
+    "location_label": "Gdzie jesteś?",
+    "custom_location_placeholder": "Wprowadź niestandardową lokalizację...",
+    "urge_label": "Jakie pragnienie lub myśl?",
+    "urge_placeholder": "Opisz, co masz na myśli...",
+    "recent_for": "Ostatnie dla {{location}}",
+    "response_label": "Jak zareagowałeś?",
+    "submit": "Zapisz wpis",
+    "submitting": "Moment rejestrowania...",
+    "success": "Wpis zapisany!",
+    "success_subtitle": "Twój moment został pomyślnie zarejestrowany."
+  },
+  "responses": {
+    "acted": "Działanie pod wpływem impulsu",
+    "waited": "Czekanie",
+    "noticed": "Zauważono bez działania",
+    "desc_acted": "Zauważyłem, że działam pod wpływem impulsu",
+    "desc_waited": "Zauważyłem, że czekam",
+    "desc_noticed": "Zauważyłem potrzebę bez działania"
+  },
+  "history": {
+    "title": "Historia",
+    "empty": "Brak wpisów historycznych.",
+    "all_entries": "Wszystkie wpisy"
+  },
+  "footer": {
+    "tip": "Systematyczne rejestrowanie postępów pomaga zidentyfikować wzorce postępów."
+  }
+}

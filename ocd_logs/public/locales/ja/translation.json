@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "OCDログ",
+    "subtitle": "トラックとインサイト",
+    "history": "歴史",
+    "insights": "ウィークリーインサイトを見る"
+  },
+  "form": {
+    "location_label": "どこにいるの？",
+    "custom_location_placeholder": "カスタムの場所を入力してください...",
+    "urge_label": "何の衝動や考えですか?",
+    "urge_placeholder": "あなたの心にあることを説明してください...",
+    "recent_for": "{{location}} の最近の投稿",
+    "response_label": "どのように反応しましたか?",
+    "submit": "エントリを保存",
+    "submitting": "ログ記録の瞬間...",
+    "success": "エントリーを保存しました!",
+    "success_subtitle": "あなたの瞬間は正常に記録されました。"
+  },
+  "responses": {
+    "acted": "衝動に従って行動する",
+    "waited": "待っている",
+    "noticed": "行動せずに気づかれる",
+    "desc_acted": "私は衝動に従って行動していることに気づいた",
+    "desc_waited": "私は自分が待っていることに気づいた",
+    "desc_noticed": "行動せずに衝動に気づいた"
+  },
+  "history": {
+    "title": "歴史",
+    "empty": "履歴エントリはまだありません。",
+    "all_entries": "すべてのエントリー"
+  },
+  "footer": {
+    "tip": "一貫してログを記録すると、進捗パターンを特定するのに役立ちます。"
+  }
+}

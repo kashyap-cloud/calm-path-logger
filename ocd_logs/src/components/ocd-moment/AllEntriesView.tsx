@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Location, LOCATION_CONFIG } from "@/hooks/useTrackerData";
-import { OCDMomentEntry } from "@/hooks/useOCDMomentLocal";
+import useOCDMomentDB, { OCDMomentEntry } from "@/hooks/useOCDMomentDB";
 import EntryCard from "./EntryCard";
 import ScreenTransition from "../trackers/ScreenTransition";
 
@@ -24,6 +25,7 @@ const AllEntriesView: React.FC<AllEntriesViewProps> = ({
   onDelete,
   onFetchAll,
 }) => {
+  const { t } = useTranslation();
   useEffect(() => {
     onFetchAll(LOCATION_CONFIG[location].label);
   }, [location, onFetchAll]);
@@ -41,11 +43,11 @@ const AllEntriesView: React.FC<AllEntriesViewProps> = ({
             <ArrowLeft className="w-5 h-5 text-white" />
           </button>
           <h1 className="text-lg font-semibold text-white">
-            All Entries • {LOCATION_CONFIG[location].label}
+            {t('history_view.title')} • {t(`locations.${location}`)}
           </h1>
         </div>
         <p className="text-white/80 text-sm">
-          {entries.length} {entries.length === 1 ? "entry" : "entries"} logged
+          {entries.length} {entries.length === 1 ? t('history_view.entry') : t('history_view.entries')} {t('history_view.logged')}
         </p>
       </div>
 
@@ -55,12 +57,12 @@ const AllEntriesView: React.FC<AllEntriesViewProps> = ({
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
               <Loader2 className="w-6 h-6 animate-spin text-primary" />
-              <span className="ml-2 text-sm text-muted-foreground">Loading entries...</span>
+              <span className="ml-2 text-sm text-muted-foreground">{t('history_view.loading')}</span>
             </div>
           ) : entries.length === 0 ? (
             <div className="text-center py-12">
               <span className="text-4xl mb-4 block">{LOCATION_CONFIG[location].emoji}</span>
-              <p className="text-muted-foreground">No entries logged at {LOCATION_CONFIG[location].label} yet.</p>
+              <p className="text-muted-foreground">{t('history_view.empty', { location: t(`locations.${location}`) })}</p>
             </div>
           ) : (
             <div className="space-y-3">

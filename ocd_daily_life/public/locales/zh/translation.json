@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "日常生活",
+    "subtitle": "追踪与洞察",
+    "history": "历史",
+    "insights": "查看每周洞察"
+  },
+  "form": {
+    "title": "每日影响检查",
+    "description": "观察强迫症如何影响你日常生活的各个方面。",
+    "submit": "每日存钱",
+    "submitting": "正在保存入住信息……",
+    "success": "入住已保存！",
+    "success_subtitle": "您的每日贡献已被记录。"
+  },
+  "domains": {
+    "workStudy": "工作与学习",
+    "relationships": "人际关系与社交",
+    "sleepRoutine": "睡眠与作息",
+    "selfCare": "自理",
+    "none": "没有任何",
+    "high": "高的"
+  },
+  "insights": {
+    "title": "每周洞察",
+    "analysis": "每周影响分析",
+    "metrics": "健康指标",
+    "empty": "目前该时段暂无入住记录。",
+    "progress": "你正在取得进步！",
+    "tip": "持续记录你每天的干扰因素，有助于你和你的治疗师了解全局。"
+  },
+  "footer": {
+    "tip": "每日打卡有助于你时刻关注自己的康复历程。"
+  }
+}

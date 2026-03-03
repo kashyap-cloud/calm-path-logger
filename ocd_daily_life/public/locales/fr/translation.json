@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "Vie quotidienne",
+    "subtitle": "Suivi et analyses",
+    "history": "Histoire",
+    "insights": "Consultez les analyses hebdomadaires"
+  },
+  "form": {
+    "title": "Bilan quotidien de l&#39;impact",
+    "description": "Surveillez l&#39;impact des TOC sur votre vie quotidienne dans différents domaines.",
+    "submit": "Entrée quotidienne",
+    "submitting": "Enregistrement en cours...",
+    "success": "Enregistrement enregistré !",
+    "success_subtitle": "Votre impact quotidien a été enregistré."
+  },
+  "domains": {
+    "workStudy": "Travail et études",
+    "relationships": "Relations et social",
+    "sleepRoutine": "Sommeil et routine",
+    "selfCare": "Soins auto-administrés",
+    "none": "Aucun",
+    "high": "Haut"
+  },
+  "insights": {
+    "title": "Perspectives hebdomadaires",
+    "analysis": "Analyse d&#39;impact hebdomadaire",
+    "metrics": "Indicateurs de santé",
+    "empty": "Aucun enregistrement pour cette période pour le moment.",
+    "progress": "Vous progressez !",
+    "tip": "Le suivi régulier de vos interférences quotidiennes vous aide, vous et votre thérapeute, à comprendre la situation dans son ensemble."
+  },
+  "footer": {
+    "tip": "Un bilan quotidien vous aide à rester attentif à votre parcours de rétablissement."
+  }
+}

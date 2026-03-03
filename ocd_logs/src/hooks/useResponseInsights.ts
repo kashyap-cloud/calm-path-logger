@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { OCDMomentEntry } from "@/hooks/useOCDMomentLocal";
+import { OCDMomentEntry } from "@/hooks/useOCDMomentDB";
 
 export type WeekWindow = "this_week" | "last_week" | "two_weeks_ago";
 

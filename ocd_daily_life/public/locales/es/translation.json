@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "Vida diaria",
+    "subtitle": "Seguimiento y perspectivas",
+    "history": "Historia",
+    "insights": "Ver información semanal"
+  },
+  "form": {
+    "title": "Registro de impacto diario",
+    "description": "Monitorea cómo el TOC afecta tu vida diaria en diferentes áreas.",
+    "submit": "Guardar entrada diaria",
+    "submitting": "Guardando el check-in...",
+    "success": "¡Check-in guardado!",
+    "success_subtitle": "Tu impacto diario ha sido registrado."
+  },
+  "domains": {
+    "workStudy": "Trabajar y estudiar",
+    "relationships": "Relaciones y vida social",
+    "sleepRoutine": "Sueño y rutina",
+    "selfCare": "Cuidados personales",
+    "none": "Ninguno",
+    "high": "Alto"
+  },
+  "insights": {
+    "title": "Perspectivas semanales",
+    "analysis": "Análisis de impacto semanal",
+    "metrics": "Métricas de salud",
+    "empty": "Aún no hay check-ins para este periodo.",
+    "progress": "¡Estas progresando!",
+    "tip": "El seguimiento constante de su interferencia diaria le ayudará a usted y a su terapeuta a comprender el panorama general."
+  },
+  "footer": {
+    "tip": "Los registros diarios le ayudan a mantenerse consciente de su proceso de recuperación."
+  }
+}

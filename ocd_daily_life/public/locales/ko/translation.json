@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "기와",
+    "subtitle": "추적 및 분석",
+    "history": "역사",
+    "insights": "주간 분석 보기"
+  },
+  "form": {
+    "title": "일일 성과 점검",
+    "description": "강박장애가 일상생활의 다양한 영역에 어떤 영향을 미치는지 관찰하세요.",
+    "submit": "매일 입력 저장",
+    "submitting": "체크인 저장 중...",
+    "success": "체크인 저장 완료!",
+    "success_subtitle": "당신의 일일 활동 성과가 기록되었습니다."
+  },
+  "domains": {
+    "workStudy": "일과 학업",
+    "relationships": "관계 및 사회",
+    "sleepRoutine": "수면 및 일상",
+    "selfCare": "자가 관리",
+    "none": "없음",
+    "high": "높은"
+  },
+  "insights": {
+    "title": "주간 분석",
+    "analysis": "주간 영향 분석",
+    "metrics": "건강 지표",
+    "empty": "이 기간에 대한 체크인은 아직 없습니다.",
+    "progress": "잘하고 계시네요!",
+    "tip": "매일매일의 방해 요소를 꾸준히 기록하면 당신과 치료사가 전체적인 상황을 이해하는 데 도움이 됩니다."
+  },
+  "footer": {
+    "tip": "매일 점검을 하면 회복 여정을 꾸준히 기억하는 데 도움이 됩니다."
+  }
+}

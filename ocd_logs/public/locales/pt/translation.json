@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Registro de TOC",
+    "subtitle": "Acompanhamento e insights",
+    "history": "História",
+    "insights": "Veja os Insights Semanais"
+  },
+  "form": {
+    "location_label": "Onde você está?",
+    "custom_location_placeholder": "Insira um local personalizado...",
+    "urge_label": "Que impulso ou pensamento?",
+    "urge_placeholder": "Descreva o que está lhe passando pela cabeça...",
+    "recent_for": "Recente para {{location}}",
+    "response_label": "Como você reagiu?",
+    "submit": "Salvar entrada",
+    "submitting": "Momento de registro...",
+    "success": "Entrada salva!",
+    "success_subtitle": "Seu registro foi efetuado com sucesso."
+  },
+  "responses": {
+    "acted": "Agindo por impulso",
+    "waited": "Esperando",
+    "noticed": "Percebido sem agir",
+    "desc_acted": "Percebi que estava agindo por impulso.",
+    "desc_waited": "Percebi que estava esperando.",
+    "desc_noticed": "Percebi a vontade sem fazer nada."
+  },
+  "history": {
+    "title": "História",
+    "empty": "Ainda não há registros no histórico.",
+    "all_entries": "Todas as inscrições"
+  },
+  "footer": {
+    "tip": "Manter um registro consistente das suas atividades ajuda a identificar seus padrões de progresso."
+  }
+}

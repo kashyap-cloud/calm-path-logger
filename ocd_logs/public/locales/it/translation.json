@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Registro DOC",
+    "subtitle": "Traccia e approfondimenti",
+    "history": "Storia",
+    "insights": "Vedi approfondimenti settimanali"
+  },
+  "form": {
+    "location_label": "Dove sei?",
+    "custom_location_placeholder": "Inserisci la posizione personalizzata...",
+    "urge_label": "Quale impulso o pensiero?",
+    "urge_placeholder": "Descrivi cosa ti passa per la mente...",
+    "recent_for": "Recenti per {{location}}",
+    "response_label": "Come hai risposto?",
+    "submit": "Salva voce",
+    "submitting": "Momento di registrazione...",
+    "success": "Voce salvata!",
+    "success_subtitle": "Il tuo momento è stato registrato correttamente."
+  },
+  "responses": {
+    "acted": "Agire d&#39;impulso",
+    "waited": "In attesa",
+    "noticed": "Notato senza agire",
+    "desc_acted": "Mi sono accorto di agire seguendo l&#39;impulso",
+    "desc_waited": "Mi sono accorto di aspettare",
+    "desc_noticed": "Ho notato l&#39;impulso senza agire"
+  },
+  "history": {
+    "title": "Storia",
+    "empty": "Nessuna voce nella cronologia ancora.",
+    "all_entries": "Tutte le voci"
+  },
+  "footer": {
+    "tip": "Registrare costantemente i dati aiuta a identificare i propri modelli di progresso."
+  }
+}

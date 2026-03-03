@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Talaan ng OCD",
+    "subtitle": "Subaybayan at Mga Pananaw",
+    "history": "Kasaysayan",
+    "insights": "Tingnan ang Lingguhang mga Pananaw"
+  },
+  "form": {
+    "location_label": "Nasaan ka?",
+    "custom_location_placeholder": "Maglagay ng pasadyang lokasyon...",
+    "urge_label": "Anong pagnanasa o kaisipan?",
+    "urge_placeholder": "Ilarawan kung ano ang nasa isip mo...",
+    "recent_for": "Kamakailan para sa {{location}}",
+    "response_label": "Paano ka tumugon?",
+    "submit": "I-save ang Entry",
+    "submitting": "Sandali ng Pag-log...",
+    "success": "Na-save na ang Entry!",
+    "success_subtitle": "Matagumpay na naitala ang iyong sandali."
+  },
+  "responses": {
+    "acted": "Kumikilos ayon sa pagnanasa",
+    "waited": "Naghihintay",
+    "noticed": "Napansin nang hindi umaarte",
+    "desc_acted": "Napansin ko ang sarili kong kumikilos dahil sa pagnanasa",
+    "desc_waited": "Napansin ko ang sarili kong naghihintay",
+    "desc_noticed": "Napansin ko ang pagnanasa kahit hindi ako kumikilos"
+  },
+  "history": {
+    "title": "Kasaysayan",
+    "empty": "Wala pang mga entry sa kasaysayan.",
+    "all_entries": "Lahat ng Entry"
+  },
+  "footer": {
+    "tip": "Ang patuloy na pag-log ay nakakatulong na matukoy ang iyong mga pattern ng pag-unlad."
+  }
+}

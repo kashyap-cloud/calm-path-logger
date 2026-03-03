@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "Kehidupan Sehari-hari",
+    "subtitle": "Lacak &amp; Wawasan",
+    "history": "Sejarah",
+    "insights": "Lihat Wawasan Mingguan"
+  },
+  "form": {
+    "title": "Laporan Dampak Harian",
+    "description": "Pantau bagaimana OCD memengaruhi kehidupan sehari-hari Anda di berbagai bidang.",
+    "submit": "Simpan Entri Harian",
+    "submitting": "Menyimpan proses check-in...",
+    "success": "Check-in Tersimpan!",
+    "success_subtitle": "Dampak harian Anda telah tercatat."
+  },
+  "domains": {
+    "workStudy": "Kerja &amp; Belajar",
+    "relationships": "Hubungan &amp; Sosial",
+    "sleepRoutine": "Tidur &amp; Rutinitas",
+    "selfCare": "Perawatan diri",
+    "none": "Tidak ada",
+    "high": "Tinggi"
+  },
+  "insights": {
+    "title": "Wawasan Mingguan",
+    "analysis": "Analisis Dampak Mingguan",
+    "metrics": "Metrik Kesehatan",
+    "empty": "Belum ada data check-in untuk periode ini.",
+    "progress": "Anda mengalami kemajuan!",
+    "tip": "Mencatat gangguan harian Anda secara konsisten membantu Anda dan terapis Anda memahami gambaran yang lebih besar."
+  },
+  "footer": {
+    "tip": "Pengecekan harian membantu Anda tetap sadar akan perjalanan pemulihan Anda."
+  }
+}

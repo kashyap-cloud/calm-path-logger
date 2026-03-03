@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "Zwangsstörungsprotokoll",
+    "subtitle": "Track &amp; Insights",
+    "history": "Geschichte",
+    "insights": "Wöchentliche Einblicke ansehen"
+  },
+  "form": {
+    "location_label": "Wo bist du?",
+    "custom_location_placeholder": "Benutzerdefinierten Standort eingeben...",
+    "urge_label": "Welcher Impuls oder Gedanke?",
+    "urge_placeholder": "Beschreiben Sie, was Sie beschäftigt...",
+    "recent_for": "Aktuell für {{location}}",
+    "response_label": "Wie haben Sie reagiert?",
+    "submit": "Eintrag speichern",
+    "submitting": "Protokollierungsmoment...",
+    "success": "Eintrag gespeichert!",
+    "success_subtitle": "Ihr Moment wurde erfolgreich protokolliert."
+  },
+  "responses": {
+    "acted": "Dem Drang folgen",
+    "waited": "Warten",
+    "noticed": "Bemerkt, ohne zu handeln",
+    "desc_acted": "Ich bemerkte, wie ich dem Drang nachgab.",
+    "desc_waited": "Ich bemerkte mich selbst beim Warten.",
+    "desc_noticed": "Ich bemerkte den Drang, ohne zu handeln."
+  },
+  "history": {
+    "title": "Geschichte",
+    "empty": "Bisher keine Verlaufseinträge.",
+    "all_entries": "Alle Einträge"
+  },
+  "footer": {
+    "tip": "Regelmäßiges Protokollieren hilft dabei, Ihre Fortschrittsmuster zu erkennen."
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Check, Loader2, Brain, MapPin, Zap, Info, CheckCircle2, TrendingUp, History, ChevronDown, ChevronUp, Clock, Shield } from "lucide-react";
 import { format } from "date-fns";
 import ScreenTransition from "../trackers/ScreenTransition";
@@ -8,8 +9,9 @@ import {
   RESPONSE_CONFIG,
   ResponseType as TrackerResponseType
 } from "@/hooks/useTrackerData";
-import useOCDMomentLocal, { ResponseType } from "@/hooks/useOCDMomentLocal";
+import useOCDMomentDB from "@/hooks/useOCDMomentDB";
 import ResponseInsightsTracker from "../response-insights/ResponseInsightsTracker";
+import { LanguageSwitcher } from "../trackers/LanguageSwitcher";
 
 type ViewState = "log" | "insights" | "history" | "confirmation";
 
@@ -18,6 +20,7 @@ interface OCDMomentTrackerProps {
 }
 
 const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
+  const { t } = useTranslation();
   const [viewState, setViewState] = useState<ViewState>("log");
   const [location, setLocation] = useState<Location>("home");
   const [urge, setUrge] = useState("");
@@ -38,14 +41,13 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
     }
   }, [viewState]);
 
-  // Fetch recent entries when location changes
   const {
     isSubmitting,
     allEntries,
     previousEntries,
     fetchRecentEntries,
     submitOCDMoment,
-  } = useOCDMomentLocal();
+  } = useOCDMomentDB();
 
   useEffect(() => {
     if (location) {
@@ -62,7 +64,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
       ? customLocationName.trim()
       : null;
 
-    let mappedResponse: ResponseType = "acted";
+    let mappedResponse: "acted" | "waited" | "noticed_without_acting" = "acted";
     if (responseType === "delayed") mappedResponse = "waited";
     if (responseType === "resisted") mappedResponse = "noticed_without_acting";
 
@@ -86,7 +88,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
           >
             <ChevronDown className="w-5 h-5 rotate-90" />
           </button>
-          <h1 className="text-lg font-bold text-foreground">History</h1>
+          <h1 className="text-lg font-bold text-foreground">{t('history.title')}</h1>
         </header>
 
         <main className="px-5 py-6 max-w-2xl mx-auto space-y-4">
@@ -96,7 +98,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 <div className="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center mx-auto">
                   <History className="w-10 h-10 text-purple-200" />
                 </div>
-                <p className="text-muted-foreground font-medium">No history entries yet.</p>
+                <p className="text-muted-foreground font-medium">{t('history.empty')}</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -156,8 +158,8 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
             <div className="w-24 h-24 rounded-full gradient-purple flex items-center justify-center mb-6 mx-auto animate-bounce-in shadow-glow-lg">
               <Check className="w-12 h-12 text-white" strokeWidth={3} />
             </div>
-            <h2 className="text-2xl font-bold text-foreground mb-2">Entry Saved!</h2>
-            <p className="text-muted-foreground">Your moment has been logged successfully.</p>
+            <h2 className="text-2xl font-bold text-foreground mb-2">{t('form.success')}</h2>
+            <p className="text-muted-foreground">{t('form.success_subtitle')}</p>
           </div>
         </ScreenTransition>
       </div>
@@ -173,18 +175,19 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
             <Brain className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground leading-none">OCD Log</h1>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1 font-semibold">Track & Insights</p>
+            <h1 className="text-lg font-bold text-foreground leading-none">{t('header.title')}</h1>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1 font-semibold">{t('header.subtitle')}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
           {allEntries.length > 0 && (
             <button
               onClick={() => setViewState("history")}
               className="flex items-center gap-2 px-3 py-2 rounded-full text-xs font-bold transition-all active:scale-95 border bg-white text-purple-600 border-purple-100 hover:bg-purple-50"
             >
               <History className="w-4 h-4" />
-              History
+              {t('header.history')}
             </button>
           )}
           <button
@@ -192,7 +195,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
             className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-xs font-bold hover:bg-blue-100 transition-colors shadow-sm active:scale-95 border border-blue-100"
           >
             <TrendingUp className="w-4 h-4" />
-            See Weekly Insights
+            {t('header.insights')}
           </button>
         </div>
       </header>
@@ -208,7 +211,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                   <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
                     <MapPin className="w-4 h-4 text-purple-600" />
                   </div>
-                  <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Where are you?</h2>
+                  <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{t('form.location_label')}</h2>
                 </div>
               </div>
               <div className="grid grid-cols-4 gap-3">
@@ -234,7 +237,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                     type="text"
                     value={customLocationName}
                     onChange={(e) => setCustomLocationName(e.target.value)}
-                    placeholder="Enter custom location..."
+                    placeholder={t('form.custom_location_placeholder')}
                     className="w-full px-4 py-3 bg-white border border-purple-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all shadow-soft"
                   />
                 </div>
@@ -247,12 +250,12 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
                   <Zap className="w-4 h-4 text-purple-600" />
                 </div>
-                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">What urge or thought?</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{t('form.urge_label')}</h2>
               </div>
               <textarea
                 value={urge}
                 onChange={(e) => setUrge(e.target.value)}
-                placeholder="Describe what's on your mind..."
+                placeholder={t('form.urge_placeholder')}
                 rows={3}
                 className="w-full px-4 py-4 bg-white border border-purple-100 rounded-3xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all shadow-soft resize-none"
               />
@@ -263,7 +266,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                   <div className="flex items-center gap-2 px-1">
                     <History className="w-3.5 h-3.5 text-purple-400" />
                     <p className="text-[10px] font-bold text-purple-400 uppercase tracking-widest">
-                      Recent for {LOCATION_CONFIG[location].label}
+                      {t('form.recent_for', { location: LOCATION_CONFIG[location].label })}
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2.5">
@@ -288,7 +291,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
                   <CheckCircle2 className="w-4 h-4 text-purple-600" />
                 </div>
-                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">How did you respond?</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{t('form.response_label')}</h2>
               </div>
               <div className="grid gap-3">
                 {(Object.keys(RESPONSE_CONFIG) as TrackerResponseType[]).map((res) => (
@@ -306,14 +309,12 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                       {res === "resisted" && <Shield className="w-5 h-5" />}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-foreground leading-tight">{RESPONSE_CONFIG[res].label.split("myself ")[1] || RESPONSE_CONFIG[res].label}</p>
+                      <p className="text-xs font-bold text-foreground leading-tight">{t(`responses.${res === 'delayed' ? 'waited' : res === 'resisted' ? 'noticed' : 'acted'}`)}</p>
                       <p className={`text-[10px] font-bold ${res === "delayed" ? "text-yellow-700" :
                         res === "acted" ? "text-red-700" :
                           "text-emerald-700"
                         }`}>
-                        {res === "acted" && "I noticed myself acting on the urge"}
-                        {res === "delayed" && "I noticed myself waiting"}
-                        {res === "resisted" && "I noticed the urge without acting"}
+                        {t(`responses.desc_${res === 'delayed' ? 'waited' : res === 'resisted' ? 'noticed' : 'acted'}`)}
                       </p>
                     </div>
                     <div className={`w-5 h-5 rounded-full border-2 border-purple-200 flex items-center justify-center transition-all ${responseType === res ? "border-purple-600 bg-purple-600 shadow-inner" : ""}`}>
@@ -334,10 +335,10 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Logging Moment...
+                    {t('form.submitting')}
                   </>
                 ) : (
-                  "Save Entry"
+                  t('form.submit')
                 )}
               </button>
             </div>
@@ -350,7 +351,7 @@ const OCDMomentTracker: React.FC<OCDMomentTrackerProps> = ({ onClose }) => {
         <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full shadow-xs border border-purple-50">
           <Info className="w-3 h-3 text-purple-400" />
           <p className="text-[10px] text-muted-foreground font-medium">
-            Consistently logging helps identify your progress patterns.
+            {t('footer.tip')}
           </p>
         </div>
       </footer>

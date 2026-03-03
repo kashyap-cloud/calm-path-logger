@@ -1,0 +1,36 @@
+{
+  "header": {
+    "title": "강박장애 기록",
+    "subtitle": "추적 및 분석",
+    "history": "역사",
+    "insights": "주간 분석 보기"
+  },
+  "form": {
+    "location_label": "어디세요?",
+    "custom_location_placeholder": "사용자 지정 위치를 입력하세요...",
+    "urge_label": "어떤 충동이나 생각이었나요?",
+    "urge_placeholder": "지금 무슨 생각을 하고 있는지 설명해 보세요...",
+    "recent_for": "최근 {{location}}",
+    "response_label": "어떻게 답변하셨나요?",
+    "submit": "항목 저장",
+    "submitting": "기록 중...",
+    "success": "참가 신청이 저장되었습니다!",
+    "success_subtitle": "당신의 순간이 성공적으로 기록되었습니다."
+  },
+  "responses": {
+    "acted": "충동에 따라 행동하다",
+    "waited": "대기 중",
+    "noticed": "행동하지 않고도 알아차렸다.",
+    "desc_acted": "나는 내가 충동에 따라 행동하고 있다는 것을 알아차렸다.",
+    "desc_waited": "나는 내가 기다리고 있다는 것을 알아차렸다.",
+    "desc_noticed": "나는 그 충동을 느꼈지만 행동으로 옮기지는 않았다."
+  },
+  "history": {
+    "title": "역사",
+    "empty": "아직 기록된 내용이 없습니다.",
+    "all_entries": "모든 참가작"
+  },
+  "footer": {
+    "tip": "꾸준히 기록을 남기면 진행 패턴을 파악하는 데 도움이 됩니다."
+  }
+}

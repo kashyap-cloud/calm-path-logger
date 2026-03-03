@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Check, Loader2, Brain, History, TrendingUp, Clock, ChevronDown, Zap, Shield, Info, BarChart3, CheckCircle2 } from "lucide-react";
-import { format } from "date-fns";
+import { format, isToday, isYesterday } from "date-fns";
 import BackButton from "../trackers/BackButton";
 import ScreenTransition from "../trackers/ScreenTransition";
 import GradientCard from "../trackers/GradientCard";
 import { Slider } from "@/components/ui/slider";
-import { useInterferenceLocal, CheckinEntry } from "@/hooks/useInterferenceLocal";
+import { useInterferenceDB, WeekWindow, CheckinEntry } from "@/hooks/useInterferenceDB";
+import { LanguageSwitcher } from "../trackers/LanguageSwitcher";
 
 type ViewState = "log" | "insights" | "history" | "confirmation";
 type Step = "workStudy" | "relationships" | "sleepRoutine" | "selfCare";
@@ -22,6 +24,7 @@ const DOMAINS = [
 ];
 
 const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) => {
+  const { t } = useTranslation();
   const [viewState, setViewState] = useState<ViewState>("log");
   const [values, setValues] = useState<Record<string, number | null>>({
     workStudy: 5,
@@ -31,18 +34,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
   });
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const {
-    submitCheckin,
-    isSubmitting,
-    weeklyAverages,
-    weeklySummary,
-    isLoadingWeekly,
-    refetchWeekly,
-    weekWindows,
-    selectedWeek,
-    setSelectedWeek,
-    entries,
-  } = useInterferenceLocal();
+  const { entries, submitCheckin, isSubmitting, weeklyAverages, weeklySummary, isLoadingWeekly, refetchWeekly, weekWindows, selectedWeek, setSelectedWeek } = useInterferenceDB();
 
   // Reset form after confirmation
   useEffect(() => {
@@ -105,7 +97,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
           >
             <ChevronDown className="w-5 h-5 rotate-90" />
           </button>
-          <h1 className="text-lg font-bold text-foreground">Weekly Insights</h1>
+          <h1 className="text-lg font-bold text-foreground">{t('insights.title')}</h1>
         </header>
 
         <main className="px-5 py-8 max-w-2xl mx-auto">
@@ -130,7 +122,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
               {isLoadingWeekly ? (
                 <div className="flex flex-col items-center py-20">
                   <Loader2 className="w-10 h-10 animate-spin text-teal-500 mb-4" />
-                  <p className="text-sm text-muted-foreground font-medium">Loading insights...</p>
+                  <p className="text-sm text-muted-foreground font-medium">{t('insights.loading', { defaultValue: 'Loading insights...' })}</p>
                 </div>
               ) : weeklyAverages ? (
                 <div className="space-y-6">
@@ -141,8 +133,8 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                           <BarChart3 className="w-7 h-7 text-white" />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-foreground">Weekly Impact Analysis</p>
-                          <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Health Metrics</p>
+                          <p className="text-sm font-bold text-foreground">{t('insights.analysis')}</p>
+                          <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">{t('insights.metrics')}</p>
                         </div>
                       </div>
 
@@ -154,7 +146,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">
                                   <span className="text-lg">{domain.emoji}</span>
-                                  <span className="text-xs font-bold text-foreground">{domain.label}</span>
+                                  <span className="text-xs font-bold text-foreground">{t(`domains.${domain.dbKey}`)}</span>
                                 </div>
                                 <span className={`text-xs font-black ${getSliderColor(avgValue)}`}>
                                   {avgValue !== null ? avgValue.toFixed(1) : "—"}
@@ -183,8 +175,8 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                     <div className="w-12 h-12 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-2">
                       <Zap className="w-6 h-6 text-teal-400" />
                     </div>
-                    <p className="text-sm font-bold text-foreground">You're making progress!</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">Consistently tracking your daily interference helps you and your therapist understand the bigger picture.</p>
+                    <p className="text-sm font-bold text-foreground">{t('insights.progress')}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{t('insights.tip')}</p>
                   </div>
                 </div>
               ) : (
@@ -192,7 +184,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                   <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto">
                     <BarChart3 className="w-10 h-10 text-teal-200" />
                   </div>
-                  <p className="text-muted-foreground font-medium">No check-ins for this period yet.</p>
+                  <p className="text-muted-foreground font-medium">{t('insights.empty')}</p>
                 </div>
               )}
             </div>
@@ -214,7 +206,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
           >
             <ChevronDown className="w-5 h-5 rotate-90" />
           </button>
-          <h1 className="text-lg font-bold text-foreground">History</h1>
+          <h1 className="text-lg font-bold text-foreground">{t('header.history')}</h1>
         </header>
 
         <main className="px-5 py-6 max-w-2xl mx-auto space-y-4">
@@ -224,7 +216,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                 <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto">
                   <History className="w-10 h-10 text-teal-200" />
                 </div>
-                <p className="text-muted-foreground font-medium">No history entries yet.</p>
+                <p className="text-muted-foreground font-medium">{t('history.empty', { defaultValue: 'No history entries yet.' })}</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -233,7 +225,14 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 text-teal-400" />
-                        <span className="text-[10px] font-bold text-teal-400 uppercase tracking-widest">{format(new Date(entry.createdAt), "MMMM d, h:mm a")}</span>
+                        <span className="text-[10px] font-bold text-teal-400 uppercase tracking-widest">
+                          {(() => {
+                            const d = new Date(entry.created_at);
+                            if (isToday(d)) return `${t('date.today')}, ${format(d, "h:mm a")}`;
+                            if (isYesterday(d)) return `${t('date.yesterday')}, ${format(d, "h:mm a")}`;
+                            return format(d, "MMMM d, h:mm a");
+                          })()}
+                        </span>
                       </div>
                     </div>
 
@@ -244,7 +243,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                           <div key={domain.key} className="flex items-center gap-3 bg-teal-50/40 p-3 rounded-2xl border border-teal-100/50 shadow-soft-xs">
                             <span className="text-xl">{domain.emoji}</span>
                             <div className="min-w-0">
-                              <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight leading-none mb-1">{domain.label}</p>
+                              <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight leading-none mb-1">{t(`domains.${domain.dbKey}`)}</p>
                               <p className={`text-sm font-black leading-none ${getSliderColor(val)}`}>{val}</p>
                             </div>
                           </div>
@@ -269,8 +268,8 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
             <div className="w-24 h-24 rounded-full gradient-teal flex items-center justify-center mb-6 mx-auto animate-bounce-in shadow-glow-lg text-white">
               <Check className="w-12 h-12" strokeWidth={3} />
             </div>
-            <h2 className="text-2xl font-bold text-foreground mb-2">Check-in Saved!</h2>
-            <p className="text-muted-foreground">Your daily impact has been recorded.</p>
+            <h2 className="text-2xl font-bold text-foreground mb-2">{t('form.success')}</h2>
+            <p className="text-muted-foreground">{t('form.success_subtitle')}</p>
           </div>
         </ScreenTransition>
       </div>
@@ -286,18 +285,19 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
             <Brain className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground leading-none">Daily Life</h1>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1 font-semibold">Track & Insights</p>
+            <h1 className="text-lg font-bold text-foreground leading-none">{t('header.title')}</h1>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1 font-semibold">{t('header.subtitle')}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
           {entries.length > 0 && (
             <button
               onClick={() => setViewState("history")}
               className="flex items-center gap-2 px-3 py-2 rounded-full text-xs font-bold transition-all active:scale-95 border bg-white text-teal-600 border-teal-100 hover:bg-teal-50 shadow-sm"
             >
               <History className="w-4 h-4" />
-              History
+              {t('header.history')}
             </button>
           )}
           <button
@@ -308,7 +308,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
             className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-xs font-bold hover:bg-blue-100 transition-colors shadow-sm active:scale-95 border border-blue-100"
           >
             <TrendingUp className="w-4 h-4" />
-            See Weekly Insights
+            {t('header.insights')}
           </button>
         </div>
       </header>
@@ -321,10 +321,10 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                 <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center">
                   <BarChart3 className="w-4 h-4 text-teal-600" />
                 </div>
-                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Daily Impact Check-in</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{t('form.title')}</h2>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed max-w-md font-medium">
-                Monitor how OCD affects your daily life across different areas.
+                {t('form.description')}
               </p>
             </div>
 
@@ -336,7 +336,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                       <div className="w-10 h-10 bg-teal-50/50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
                         {domain.emoji}
                       </div>
-                      <h3 className="font-bold text-foreground">{domain.label}</h3>
+                      <h3 className="font-bold text-foreground">{t(`domains.${domain.dbKey}`)}</h3>
                     </div>
                     <div className={`px-3 py-1 bg-teal-50/30 rounded-full border border-teal-100/50 flex flex-col items-center justify-center min-w-[50px]`}>
                       <span className={`text-lg font-black leading-none ${getSliderColor(values[domain.key])}`}>
@@ -347,8 +347,8 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
 
                   <div className="space-y-3">
                     <div className="flex justify-between text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50 px-1">
-                      <span>None</span>
-                      <span>High</span>
+                      <span>{t('domains.none')}</span>
+                      <span>{t('domains.high')}</span>
                     </div>
                     <Slider
                       value={[values[domain.key] ?? 5]}
@@ -372,12 +372,12 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-6 h-6 animate-spin" />
-                    <span className="relative z-10">Saving Check-in...</span>
+                    <span className="relative z-10">{t('form.submitting')}</span>
                   </>
                 ) : (
                   <>
                     <CheckCircle2 className="w-6 h-6 relative z-10" />
-                    <span className="relative z-10 text-lg">Save Daily Entry</span>
+                    <span className="relative z-10 text-lg">{t('form.submit')}</span>
                   </>
                 )}
               </button>
@@ -390,7 +390,7 @@ const InterferenceTracker: React.FC<InterferenceTrackerProps> = ({ onClose }) =>
         <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full shadow-xs border border-teal-50">
           <Info className="w-3 h-3 text-teal-400" />
           <p className="text-[10px] text-muted-foreground font-medium">
-            Daily check-ins help you stay mindful of your recovery journey.
+            {t('footer.tip')}
           </p>
         </div>
       </footer>
