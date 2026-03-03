@@ -1,36 +1,72 @@
 {
   "header": {
     "title": "Registro de TOC",
-    "subtitle": "Seguimiento y perspectivas",
+    "subtitle": "Seguimiento e información",
     "history": "Historia",
-    "insights": "Ver información semanal"
+    "insights": "Ver estadísticas semanales"
   },
   "form": {
     "location_label": "¿Dónde estás?",
-    "custom_location_placeholder": "Introduzca una ubicación personalizada...",
+    "custom_location_placeholder": "Ingrese una ubicación personalizada...",
     "urge_label": "¿Qué impulso o pensamiento?",
     "urge_placeholder": "Describe lo que tienes en mente...",
-    "recent_for": "Reciente para {{location}}",
+    "recent_for": "Reciente para en casa",
     "response_label": "¿Cómo respondiste?",
     "submit": "Guardar entrada",
     "submitting": "Momento de registro...",
-    "success": "¡Entrada guardada!",
-    "success_subtitle": "Su momento ha sido registrado exitosamente."
+    "success": "Entrada guardada!",
+    "success_subtitle": "Tu momento se ha registrado correctamente."
   },
   "responses": {
-    "acted": "Actuar según el impulso",
+    "acted": "Actuando según el impulso",
     "waited": "Espera",
     "noticed": "Notado sin actuar",
-    "desc_acted": "Me di cuenta de que actuaba según el impulso",
-    "desc_waited": "Me di cuenta de que estaba esperando",
-    "desc_noticed": "Noté la urgencia sin actuar."
+    "desc_acted": "Me di cuenta de que actuaba por impulso",
+    "desc_waited": "Me noté esperando",
+    "desc_noticed": "noté las ganas sin actuar"
+  },
+  "locations": {
+    "home": "Hogar",
+    "work": "Trabajar",
+    "school": "Escuela",
+    "public": "Público",
+    "other": "Otro"
+  },
+  "date": {
+    "today": "Hoy",
+    "yesterday": "Ayer"
   },
   "history": {
     "title": "Historia",
-    "empty": "Aún no hay entradas de historial",
-    "all_entries": "Todas las entradas"
+    "empty": "Aún no hay entradas en el historial.",
+    "load_all": "Ver todo el historial",
+    "back": "Atrás"
+  },
+  "history_view": {
+    "title": "Todas las entradas",
+    "logged": "registrado",
+    "entry": "entrada",
+    "entries": "entradas",
+    "loading": "Cargando entradas...",
+    "empty": "Aún no se han registrado entradas en esta ubicación."
+  },
+  "insights": {
+    "title": "Información sobre la respuesta",
+    "subtitle": "Reflexiones sobre sus respuestas registradas",
+    "loading": "Cargando información...",
+    "no_data": "No hay datos para este período",
+    "no_data_desc": "Las entradas del rastreador de momentos de TOC aparecerán aquí para proporcionar información.",
+    "disclaimer": "Descargo de responsabilidad: Insights requiere al menos 1 entrada para mostrar un resumen y 4 entradas para el análisis de patrones.",
+    "need_more": "Nota: agregue más entradas para un análisis de patrones completo.",
+    "patterns_title": "Patrones de respuesta observados",
+    "promo_title": "¿Quieres soporte personalizado?",
+    "promo_desc": "Trabaje con un terapeuta para desarrollar estrategias para controlar los impulsos.",
+    "promo_button": "Reserva una cita con el terapeuta ERP",
+    "view_past": "Ver entradas registradas anteriores",
+    "past_entries": "Entradas pasadas",
+    "hide": "Esconder"
   },
   "footer": {
-    "tip": "Registrar de manera constante ayuda a identificar sus patrones de progreso."
+    "tip": "El registro constante ayuda a identificar sus patrones de progreso."
   }
 }

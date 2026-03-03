@@ -1,36 +1,72 @@
 {
   "header": {
     "title": "Dziennik OCD",
-    "subtitle": "Śledzenie i spostrzeżenia",
+    "subtitle": "Śledzenie i statystyki",
     "history": "Historia",
-    "insights": "Zobacz cotygodniowe spostrzeżenia"
+    "insights": "Zobacz cotygodniowe statystyki"
   },
   "form": {
     "location_label": "Gdzie jesteś?",
-    "custom_location_placeholder": "Wprowadź niestandardową lokalizację...",
-    "urge_label": "Jakie pragnienie lub myśl?",
-    "urge_placeholder": "Opisz, co masz na myśli...",
-    "recent_for": "Ostatnie dla {{location}}",
+    "custom_location_placeholder": "Podaj niestandardową lokalizację...",
+    "urge_label": "Jaka potrzeba lub myśl?",
+    "urge_placeholder": "Opisz co Ci chodzi po głowie...",
+    "recent_for": "Ostatnio w domu",
     "response_label": "Jak zareagowałeś?",
     "submit": "Zapisz wpis",
-    "submitting": "Moment rejestrowania...",
+    "submitting": "Rejestrowanie chwili...",
     "success": "Wpis zapisany!",
     "success_subtitle": "Twój moment został pomyślnie zarejestrowany."
   },
   "responses": {
-    "acted": "Działanie pod wpływem impulsu",
+    "acted": "Działając pod wpływem impulsu",
     "waited": "Czekanie",
-    "noticed": "Zauważono bez działania",
+    "noticed": "Zauważone bez działania",
     "desc_acted": "Zauważyłem, że działam pod wpływem impulsu",
     "desc_waited": "Zauważyłem, że czekam",
-    "desc_noticed": "Zauważyłem potrzebę bez działania"
+    "desc_noticed": "Zauważyłem tę potrzebę bez działania"
+  },
+  "locations": {
+    "home": "Dom",
+    "work": "Praca",
+    "school": "Szkoła",
+    "public": "Publiczny",
+    "other": "Inny"
+  },
+  "date": {
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj"
   },
   "history": {
     "title": "Historia",
-    "empty": "Brak wpisów historycznych.",
-    "all_entries": "Wszystkie wpisy"
+    "empty": "Nie ma jeszcze żadnych wpisów w historii.",
+    "load_all": "Zobacz całą historię",
+    "back": "Z powrotem"
+  },
+  "history_view": {
+    "title": "Wszystkie wpisy",
+    "logged": "zalogowany",
+    "entry": "wejście",
+    "entries": "wpisy",
+    "loading": "Ładowanie wpisów...",
+    "empty": "W tej lokalizacji nie zarejestrowano jeszcze żadnych wpisów."
+  },
+  "insights": {
+    "title": "Informacje o odpowiedziach",
+    "subtitle": "Refleksje na temat zarejestrowanych odpowiedzi",
+    "loading": "Ładowanie statystyk...",
+    "no_data": "Brak danych za ten okres",
+    "no_data_desc": "W tym miejscu pojawią się wpisy z modułu śledzącego momenty OCD, aby zapewnić wgląd.",
+    "disclaimer": "Zastrzeżenie: Statystyki wymagają co najmniej 1 wpisu, aby wyświetlić podsumowanie, i 4 wpisów do analizy wzorców.",
+    "need_more": "Uwaga: Dodaj więcej wpisów, aby uzyskać pełną analizę wzorców.",
+    "patterns_title": "Zaobserwowano wzorce reakcji",
+    "promo_title": "Chcesz spersonalizowanego wsparcia?",
+    "promo_desc": "Współpracuj z terapeutą, aby opracować strategie radzenia sobie z popędami.",
+    "promo_button": "Umów się na spotkanie z terapeutą ERP",
+    "view_past": "Wyświetl poprzednie zarejestrowane wpisy",
+    "past_entries": "Poprzednie wpisy",
+    "hide": "Ukrywać"
   },
   "footer": {
-    "tip": "Systematyczne rejestrowanie postępów pomaga zidentyfikować wzorce postępów."
+    "tip": "Konsekwentne rejestrowanie pomaga zidentyfikować wzorce postępów."
   }
 }

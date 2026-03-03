@@ -1,36 +1,72 @@
 {
   "header": {
     "title": "Nhật ký OCD",
-    "subtitle": "Theo dõi &amp; Thông tin chi tiết",
+    "subtitle": "Theo dõi & Thông tin chi tiết",
     "history": "Lịch sử",
     "insights": "Xem thông tin chi tiết hàng tuần"
   },
   "form": {
     "location_label": "Bạn ở đâu?",
     "custom_location_placeholder": "Nhập vị trí tùy chỉnh...",
-    "urge_label": "Cảm giác thôi thúc hay suy nghĩ đó là gì?",
-    "urge_placeholder": "Hãy mô tả những gì đang ở trong tâm trí bạn...",
-    "recent_for": "Gần đây tại {{location}}",
-    "response_label": "Bạn đã trả lời như thế nào?",
+    "urge_label": "Sự thôi thúc hay suy nghĩ gì?",
+    "urge_placeholder": "Hãy miêu tả những gì bạn đang nghĩ trong đầu...",
+    "recent_for": "Gần đây ở nhà",
+    "response_label": "Bạn đã phản ứng như thế nào?",
     "submit": "Lưu mục nhập",
-    "submitting": "Ghi nhật ký khoảnh khắc...",
-    "success": "Mục nhập đã được lưu!",
-    "success_subtitle": "Khoảnh khắc của bạn đã được ghi nhận thành công."
+    "submitting": "Khoảnh khắc ghi nhật ký...",
+    "success": "Đã lưu mục nhập!",
+    "success_subtitle": "Khoảnh khắc của bạn đã được ghi lại thành công."
   },
   "responses": {
-    "acted": "Hành động theo thôi thúc",
+    "acted": "Hành động theo sự thôi thúc",
     "waited": "Chờ",
-    "noticed": "Được nhận thấy mà không cần hành động",
-    "desc_acted": "Tôi nhận thấy mình đang hành động theo thôi thúc đó.",
+    "noticed": "Được chú ý mà không hành động",
+    "desc_acted": "Tôi nhận thấy mình hành động theo sự thôi thúc",
     "desc_waited": "Tôi nhận thấy mình đang chờ đợi",
-    "desc_noticed": "Tôi nhận thấy sự thôi thúc đó mà không cần hành động."
+    "desc_noticed": "Tôi nhận thấy sự thôi thúc mà không cần hành động"
+  },
+  "locations": {
+    "home": "Trang chủ",
+    "work": "Công việc",
+    "school": "Trường học",
+    "public": "Công cộng",
+    "other": "Khác"
+  },
+  "date": {
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua"
   },
   "history": {
     "title": "Lịch sử",
-    "empty": "Chưa có mục nào trong lịch sử.",
-    "all_entries": "Tất cả các mục"
+    "empty": "Chưa có mục lịch sử nào.",
+    "load_all": "Xem tất cả lịch sử",
+    "back": "Mặt sau"
+  },
+  "history_view": {
+    "title": "Tất cả các mục",
+    "logged": "đã đăng nhập",
+    "entry": "lối vào",
+    "entries": "mục",
+    "loading": "Đang tải các mục...",
+    "empty": "Chưa có mục nào được đăng nhập tại vị trí này."
+  },
+  "insights": {
+    "title": "Thông tin chi tiết về phản hồi",
+    "subtitle": "Phản ánh về phản hồi được ghi lại của bạn",
+    "loading": "Đang tải thông tin chi tiết...",
+    "no_data": "Không có dữ liệu cho giai đoạn này",
+    "no_data_desc": "Các mục từ trình theo dõi Khoảnh khắc OCD sẽ xuất hiện ở đây để cung cấp thông tin chi tiết.",
+    "disclaimer": "Tuyên bố miễn trừ trách nhiệm: Thông tin chi tiết yêu cầu ít nhất 1 mục nhập để hiển thị tóm tắt và 4 mục nhập để phân tích mẫu.",
+    "need_more": "Lưu ý: Thêm nhiều mục để phân tích mẫu đầy đủ.",
+    "patterns_title": "Các mẫu phản ứng được quan sát",
+    "promo_title": "Muốn được hỗ trợ cá nhân?",
+    "promo_desc": "Làm việc với nhà trị liệu để phát triển các chiến lược quản lý sự thôi thúc.",
+    "promo_button": "Đặt lịch hẹn với chuyên gia trị liệu ERP",
+    "view_past": "Xem các mục đã đăng nhập trước đây",
+    "past_entries": "Các mục trước đây",
+    "hide": "Trốn"
   },
   "footer": {
-    "tip": "Việc ghi nhật ký thường xuyên giúp bạn xác định được các mô hình tiến bộ của mình."
+    "tip": "Việc ghi nhật ký liên tục giúp xác định mô hình tiến trình của bạn."
   }
 }

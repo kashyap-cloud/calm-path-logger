@@ -1,22 +1,22 @@
 {
   "header": {
     "title": "Cuộc sống hàng ngày",
-    "subtitle": "Theo dõi &amp; Thông tin chi tiết",
+    "subtitle": "Theo dõi & Thông tin chi tiết",
     "history": "Lịch sử",
     "insights": "Xem thông tin chi tiết hàng tuần"
   },
   "form": {
-    "title": "Báo cáo tác động hàng ngày",
-    "description": "Theo dõi xem chứng rối loạn ám ảnh cưỡng chế (OCD) ảnh hưởng đến cuộc sống hàng ngày của bạn như thế nào ở các lĩnh vực khác nhau.",
+    "title": "Kiểm tra tác động hàng ngày",
+    "description": "Theo dõi mức độ ảnh hưởng của OCD đến cuộc sống hàng ngày của bạn trên các lĩnh vực khác nhau.",
     "submit": "Lưu mục nhập hàng ngày",
-    "submitting": "Lưu thông tin đăng ký...",
-    "success": "Thông tin nhận phòng đã được lưu!",
-    "success_subtitle": "Tác động hàng ngày của bạn đã được ghi nhận."
+    "submitting": "Đang lưu đăng ký...",
+    "success": "Đã lưu đăng ký!",
+    "success_subtitle": "Tác động hàng ngày của bạn đã được ghi lại."
   },
   "domains": {
-    "workStudy": "Công việc &amp; Học tập",
-    "relationships": "Các mối quan hệ &amp; Xã hội",
-    "sleepRoutine": "Giấc ngủ &amp; Thói quen",
+    "workStudy": "Làm việc & Học tập",
+    "relationships": "Mối quan hệ & xã hội",
+    "sleepRoutine": "Giấc ngủ & thói quen",
     "selfCare": "Tự chăm sóc",
     "none": "Không có",
     "high": "Cao"
@@ -24,12 +24,17 @@
   "insights": {
     "title": "Thông tin chi tiết hàng tuần",
     "analysis": "Phân tích tác động hàng tuần",
-    "metrics": "Các chỉ số sức khỏe",
-    "empty": "Hiện chưa có lượt nhận phòng nào trong giai đoạn này.",
+    "metrics": "Số liệu sức khỏe",
+    "loading": "Đang tải thông tin chi tiết...",
+    "empty": "Chưa có đăng ký nào trong khoảng thời gian này.",
     "progress": "Bạn đang tiến bộ!",
-    "tip": "Việc thường xuyên theo dõi những trở ngại hàng ngày giúp bạn và chuyên gia trị liệu hiểu rõ hơn bức tranh toàn cảnh."
+    "tip": "Việc theo dõi nhất quán sự can thiệp hàng ngày của bạn sẽ giúp bạn và nhà trị liệu hiểu được bức tranh toàn cảnh hơn."
+  },
+  "date": {
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua"
   },
   "footer": {
-    "tip": "Việc kiểm tra sức khỏe hàng ngày giúp bạn luôn chú ý đến hành trình hồi phục của mình."
+    "tip": "Việc đăng ký hàng ngày giúp bạn chú ý đến hành trình phục hồi của mình."
   }
 }

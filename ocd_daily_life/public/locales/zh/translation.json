@@ -1,35 +1,40 @@
 {
   "header": {
     "title": "日常生活",
-    "subtitle": "追踪与洞察",
+    "subtitle": "追踪与见解",
     "history": "历史",
-    "insights": "查看每周洞察"
+    "insights": "查看每周见解"
   },
   "form": {
-    "title": "每日影响检查",
-    "description": "观察强迫症如何影响你日常生活的各个方面。",
-    "submit": "每日存钱",
-    "submitting": "正在保存入住信息……",
-    "success": "入住已保存！",
-    "success_subtitle": "您的每日贡献已被记录。"
+    "title": "每日影响签到",
+    "description": "监控强迫症如何影响您在不同领域的日常生活。",
+    "submit": "保存每日条目",
+    "submitting": "正在保存签到...",
+    "success": "登记入住已保存！",
+    "success_subtitle": "您每天的影响已被记录。"
   },
   "domains": {
     "workStudy": "工作与学习",
     "relationships": "人际关系与社交",
-    "sleepRoutine": "睡眠与作息",
+    "sleepRoutine": "睡眠与日常生活",
     "selfCare": "自理",
     "none": "没有任何",
     "high": "高的"
   },
   "insights": {
-    "title": "每周洞察",
+    "title": "每周见解",
     "analysis": "每周影响分析",
     "metrics": "健康指标",
-    "empty": "目前该时段暂无入住记录。",
-    "progress": "你正在取得进步！",
-    "tip": "持续记录你每天的干扰因素，有助于你和你的治疗师了解全局。"
+    "loading": "正在加载见解...",
+    "empty": "此期间尚未办理入住手续。",
+    "progress": "你正在进步！",
+    "tip": "持续跟踪您的日常干扰可以帮助您和您的治疗师了解更大的情况。"
+  },
+  "date": {
+    "today": "今天",
+    "yesterday": "昨天"
   },
   "footer": {
-    "tip": "每日打卡有助于你时刻关注自己的康复历程。"
+    "tip": "每日检查可帮助您关注康复过程。"
   }
 }

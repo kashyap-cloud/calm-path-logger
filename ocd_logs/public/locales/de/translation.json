@@ -1,16 +1,16 @@
 {
   "header": {
-    "title": "Zwangsstörungsprotokoll",
-    "subtitle": "Track &amp; Insights",
+    "title": "OCD-Protokoll",
+    "subtitle": "Track & Einblicke",
     "history": "Geschichte",
-    "insights": "Wöchentliche Einblicke ansehen"
+    "insights": "Siehe Wöchentliche Einblicke"
   },
   "form": {
     "location_label": "Wo bist du?",
-    "custom_location_placeholder": "Benutzerdefinierten Standort eingeben...",
-    "urge_label": "Welcher Impuls oder Gedanke?",
-    "urge_placeholder": "Beschreiben Sie, was Sie beschäftigt...",
-    "recent_for": "Aktuell für {{location}}",
+    "custom_location_placeholder": "Geben Sie den benutzerdefinierten Standort ein...",
+    "urge_label": "Welcher Drang oder Gedanke?",
+    "urge_placeholder": "Beschreiben Sie, was Ihnen durch den Kopf geht...",
+    "recent_for": "Neu für zu Hause",
     "response_label": "Wie haben Sie reagiert?",
     "submit": "Eintrag speichern",
     "submitting": "Protokollierungsmoment...",
@@ -20,17 +20,53 @@
   "responses": {
     "acted": "Dem Drang folgen",
     "waited": "Warten",
-    "noticed": "Bemerkt, ohne zu handeln",
-    "desc_acted": "Ich bemerkte, wie ich dem Drang nachgab.",
-    "desc_waited": "Ich bemerkte mich selbst beim Warten.",
-    "desc_noticed": "Ich bemerkte den Drang, ohne zu handeln."
+    "noticed": "Aufgefallen ohne zu handeln",
+    "desc_acted": "Ich bemerkte, dass ich dem Drang folgte",
+    "desc_waited": "Ich bemerkte, dass ich wartete",
+    "desc_noticed": "Ich bemerkte den Drang, ohne zu handeln"
+  },
+  "locations": {
+    "home": "Heim",
+    "work": "Arbeiten",
+    "school": "Schule",
+    "public": "Öffentlich",
+    "other": "Andere"
+  },
+  "date": {
+    "today": "Heute",
+    "yesterday": "Gestern"
   },
   "history": {
     "title": "Geschichte",
-    "empty": "Bisher keine Verlaufseinträge.",
-    "all_entries": "Alle Einträge"
+    "empty": "Noch keine Verlaufseinträge.",
+    "load_all": "Den gesamten Verlauf anzeigen",
+    "back": "Zurück"
+  },
+  "history_view": {
+    "title": "Alle Einträge",
+    "logged": "protokolliert",
+    "entry": "Eintrag",
+    "entries": "Einträge",
+    "loading": "Einträge werden geladen...",
+    "empty": "An diesem Standort sind noch keine Einträge protokolliert."
+  },
+  "insights": {
+    "title": "Einblicke in die Reaktion",
+    "subtitle": "Überlegungen zu Ihren protokollierten Antworten",
+    "loading": "Einblicke werden geladen...",
+    "no_data": "Keine Daten für diesen Zeitraum",
+    "no_data_desc": "Einträge aus dem OCD-Moment-Tracker werden hier angezeigt, um Einblicke zu geben.",
+    "disclaimer": "Haftungsausschluss: Insights erfordern mindestens 1 Eintrag, um eine Zusammenfassung anzuzeigen, und 4 Einträge für die Musteranalyse.",
+    "need_more": "Hinweis: Fügen Sie weitere Einträge für eine vollständige Musteranalyse hinzu.",
+    "patterns_title": "Beobachtete Reaktionsmuster",
+    "promo_title": "Wünschen Sie persönliche Unterstützung?",
+    "promo_desc": "Arbeiten Sie mit einem Therapeuten zusammen, um Strategien zur Bewältigung von Trieben zu entwickeln.",
+    "promo_button": "Vereinbaren Sie einen Termin beim ERP-Therapeuten",
+    "view_past": "Frühere protokollierte Einträge anzeigen",
+    "past_entries": "Frühere Einträge",
+    "hide": "Verstecken"
   },
   "footer": {
-    "tip": "Regelmäßiges Protokollieren hilft dabei, Ihre Fortschrittsmuster zu erkennen."
+    "tip": "Eine konsistente Protokollierung hilft dabei, Ihre Fortschrittsmuster zu erkennen."
   }
 }

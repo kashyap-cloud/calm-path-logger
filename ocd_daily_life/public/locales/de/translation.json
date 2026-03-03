@@ -1,22 +1,22 @@
 {
   "header": {
     "title": "Alltag",
-    "subtitle": "Track &amp; Insights",
+    "subtitle": "Track & Einblicke",
     "history": "Geschichte",
-    "insights": "Wöchentliche Einblicke ansehen"
+    "insights": "Siehe Wöchentliche Einblicke"
   },
   "form": {
-    "title": "Tägliche Wirkungsanalyse",
-    "description": "Beobachten Sie, wie sich die Zwangsstörung auf Ihr tägliches Leben in verschiedenen Bereichen auswirkt.",
-    "submit": "Tägliche Einträge speichern",
-    "submitting": "Check-in speichern...",
-    "success": "Einchecken gespeichert!",
-    "success_subtitle": "Ihre täglichen Auswirkungen wurden erfasst."
+    "title": "Täglicher Impact-Check-in",
+    "description": "Überwachen Sie, wie sich Zwangsstörungen in verschiedenen Bereichen auf Ihr tägliches Leben auswirken.",
+    "submit": "Täglichen Eintrag speichern",
+    "submitting": "Check-in wird gespeichert...",
+    "success": "Check-in gespeichert!",
+    "success_subtitle": "Ihre tägliche Wirkung wurde aufgezeichnet."
   },
   "domains": {
-    "workStudy": "Arbeit &amp; Studium",
-    "relationships": "Beziehungen &amp; Soziales",
-    "sleepRoutine": "Schlaf &amp; Routine",
+    "workStudy": "Arbeit & Studium",
+    "relationships": "Beziehungen & Soziales",
+    "sleepRoutine": "Schlaf & Routine",
     "selfCare": "Selbstpflege",
     "none": "Keiner",
     "high": "Hoch"
@@ -24,12 +24,17 @@
   "insights": {
     "title": "Wöchentliche Einblicke",
     "analysis": "Wöchentliche Wirkungsanalyse",
-    "metrics": "Gesundheitskennzahlen",
-    "empty": "Für diesen Zeitraum liegen noch keine Check-ins vor.",
+    "metrics": "Gesundheitsmetriken",
+    "loading": "Einblicke werden geladen...",
+    "empty": "Für diesen Zeitraum sind noch keine Check-ins möglich.",
     "progress": "Du machst Fortschritte!",
-    "tip": "Die konsequente Erfassung Ihrer täglichen Störungen hilft Ihnen und Ihrem Therapeuten, das Gesamtbild zu verstehen."
+    "tip": "Die konsequente Verfolgung Ihrer täglichen Eingriffe hilft Ihnen und Ihrem Therapeuten, das Gesamtbild zu verstehen."
+  },
+  "date": {
+    "today": "Heute",
+    "yesterday": "Gestern"
   },
   "footer": {
-    "tip": "Tägliche Check-ins helfen Ihnen, Ihren Genesungsprozess bewusst wahrzunehmen."
+    "tip": "Tägliche Check-ins helfen Ihnen, den Überblick über Ihre Genesungsreise zu behalten."
   }
 }

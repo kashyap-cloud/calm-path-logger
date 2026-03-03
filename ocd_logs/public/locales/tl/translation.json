@@ -1,34 +1,70 @@
 {
   "header": {
-    "title": "Talaan ng OCD",
-    "subtitle": "Subaybayan at Mga Pananaw",
+    "title": "Log ng OCD",
+    "subtitle": "Subaybayan at Mga Insight",
     "history": "Kasaysayan",
-    "insights": "Tingnan ang Lingguhang mga Pananaw"
+    "insights": "Tingnan ang Mga Lingguhang Insight"
   },
   "form": {
-    "location_label": "Nasaan ka?",
-    "custom_location_placeholder": "Maglagay ng pasadyang lokasyon...",
-    "urge_label": "Anong pagnanasa o kaisipan?",
+    "location_label": "nasaan ka",
+    "custom_location_placeholder": "Ilagay ang custom na lokasyon...",
+    "urge_label": "Anong udyok o iniisip?",
     "urge_placeholder": "Ilarawan kung ano ang nasa isip mo...",
-    "recent_for": "Kamakailan para sa {{location}}",
+    "recent_for": "Kamakailan para sa bahay",
     "response_label": "Paano ka tumugon?",
     "submit": "I-save ang Entry",
     "submitting": "Sandali ng Pag-log...",
-    "success": "Na-save na ang Entry!",
-    "success_subtitle": "Matagumpay na naitala ang iyong sandali."
+    "success": "Nai-save ang Entry!",
+    "success_subtitle": "Matagumpay na na-log ang iyong sandali."
   },
   "responses": {
-    "acted": "Kumikilos ayon sa pagnanasa",
+    "acted": "Kumilos ayon sa pagnanasa",
     "waited": "Naghihintay",
-    "noticed": "Napansin nang hindi umaarte",
-    "desc_acted": "Napansin ko ang sarili kong kumikilos dahil sa pagnanasa",
-    "desc_waited": "Napansin ko ang sarili kong naghihintay",
-    "desc_noticed": "Napansin ko ang pagnanasa kahit hindi ako kumikilos"
+    "noticed": "Napansin nang hindi kumikilos",
+    "desc_acted": "Napansin ko ang sarili kong kumikilos sa udyok",
+    "desc_waited": "Napansin kong naghihintay ako",
+    "desc_noticed": "Napansin ko ang udyok nang hindi kumikilos"
+  },
+  "locations": {
+    "home": "Bahay",
+    "work": "Trabaho",
+    "school": "Paaralan",
+    "public": "Pampubliko",
+    "other": "Iba pa"
+  },
+  "date": {
+    "today": "Ngayong araw",
+    "yesterday": "Kahapon"
   },
   "history": {
     "title": "Kasaysayan",
-    "empty": "Wala pang mga entry sa kasaysayan.",
-    "all_entries": "Lahat ng Entry"
+    "empty": "Wala pang history entry.",
+    "load_all": "Tingnan ang lahat ng kasaysayan",
+    "back": "Bumalik"
+  },
+  "history_view": {
+    "title": "Lahat ng Entry",
+    "logged": "naka-log",
+    "entry": "pagpasok",
+    "entries": "mga entry",
+    "loading": "Naglo-load ng mga entry...",
+    "empty": "Wala pang mga entry na naka-log sa lokasyong ito."
+  },
+  "insights": {
+    "title": "Mga Pananaw sa Tugon",
+    "subtitle": "Mga pagninilay sa iyong mga naka-log na tugon",
+    "loading": "Naglo-load ng mga insight...",
+    "no_data": "Walang Data para sa Panahong ito",
+    "no_data_desc": "Lalabas dito ang mga entry mula sa OCD Moment tracker upang magbigay ng mga insight.",
+    "disclaimer": "Disclaimer: Ang mga Insight ay nangangailangan ng kahit 1 entry para ipakita ang buod, at 4 na entry para sa pattern analysis.",
+    "need_more": "Tandaan: Magdagdag ng higit pang mga entry para sa buong pagsusuri ng pattern.",
+    "patterns_title": "Naobserbahan ang mga Pattern ng Pagtugon",
+    "promo_title": "Gusto ng personalized na suporta?",
+    "promo_desc": "Makipagtulungan sa isang therapist upang bumuo ng mga estratehiya para sa pamamahala ng mga paghihimok.",
+    "promo_button": "Mag-book ng appointment sa ERP therapist",
+    "view_past": "Tingnan ang mga nakaraang naka-log na entry",
+    "past_entries": "Mga nakaraang Entri",
+    "hide": "Magtago"
   },
   "footer": {
     "tip": "Ang patuloy na pag-log ay nakakatulong na matukoy ang iyong mga pattern ng pag-unlad."

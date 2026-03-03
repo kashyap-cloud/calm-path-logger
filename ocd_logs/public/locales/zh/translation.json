@@ -1,36 +1,72 @@
 {
   "header": {
     "title": "强迫症日志",
-    "subtitle": "追踪与洞察",
+    "subtitle": "追踪与见解",
     "history": "历史",
-    "insights": "查看每周洞察"
+    "insights": "查看每周见解"
   },
   "form": {
     "location_label": "你在哪里？",
     "custom_location_placeholder": "输入自定义位置...",
-    "urge_label": "是什么冲动或想法？",
-    "urge_placeholder": "描述一下你脑子里在想什么……",
-    "recent_for": "{{location}} 的最新信息",
-    "response_label": "你是如何回应的？",
+    "urge_label": "有什么冲动或想法？",
+    "urge_placeholder": "描述一下你的想法...",
+    "recent_for": "最近在家",
+    "response_label": "你怎么回应的？",
     "submit": "保存条目",
-    "submitting": "记录时刻……",
-    "success": "输入已保存！",
-    "success_subtitle": "您的精彩瞬间已成功记录。"
+    "submitting": "记录时刻...",
+    "success": "条目已保存！",
+    "success_subtitle": "您的时刻已成功记录。"
   },
   "responses": {
-    "acted": "顺从冲动",
+    "acted": "按冲动行事",
     "waited": "等待",
-    "noticed": "未采取行动即被察觉",
-    "desc_acted": "我发现自己屈服于这种冲动。",
+    "noticed": "被注意到却没有行动",
+    "desc_acted": "我注意到自己在冲动下行事",
     "desc_waited": "我注意到自己在等待",
-    "desc_noticed": "我察觉到了这种冲动，但没有采取行动。"
+    "desc_noticed": "我注意到了这种冲动，但没有采取行动"
+  },
+  "locations": {
+    "home": "家",
+    "work": "工作",
+    "school": "学校",
+    "public": "民众",
+    "other": "其他"
+  },
+  "date": {
+    "today": "今天",
+    "yesterday": "昨天"
   },
   "history": {
     "title": "历史",
-    "empty": "暂无历史记录。",
-    "all_entries": "所有参赛作品"
+    "empty": "还没有历史记录。",
+    "load_all": "查看所有历史记录",
+    "back": "后退"
+  },
+  "history_view": {
+    "title": "所有参赛作品",
+    "logged": "已记录",
+    "entry": "入口",
+    "entries": "条目",
+    "loading": "正在加载条目...",
+    "empty": "该位置尚未记录任何条目。"
+  },
+  "insights": {
+    "title": "回应见解",
+    "subtitle": "对您记录的回复的思考",
+    "loading": "正在加载见解...",
+    "no_data": "此期间没有数据",
+    "no_data_desc": "来自 OCD Moment 跟踪器的条目将出现在此处以提供见解。",
+    "disclaimer": "免责声明：见解需要至少 1 个条目来显示摘要，并需要 4 个条目来进行模式分析。",
+    "need_more": "注意：添加更多条目以进行完整模式分析。",
+    "patterns_title": "观察到的反应模式",
+    "promo_title": "想要个性化支持吗？",
+    "promo_desc": "与治疗师合作制定管理冲动的策略。",
+    "promo_button": "与 ERP 治疗师预约",
+    "view_past": "查看过去记录的条目",
+    "past_entries": "过去的条目",
+    "hide": "隐藏"
   },
   "footer": {
-    "tip": "持续记录有助于发现你的进步规律。"
+    "tip": "持续记录有助于识别您的进度模式。"
   }
 }

@@ -1,20 +1,20 @@
 {
   "header": {
     "title": "Günlük Yaşam",
-    "subtitle": "İzleme ve Analizler",
+    "subtitle": "Takip ve Analizler",
     "history": "Tarih",
-    "insights": "Haftalık Analizlere Bakın"
+    "insights": "Haftalık Analizleri Görün"
   },
   "form": {
     "title": "Günlük Etki Kontrolü",
-    "description": "Obsesif kompulsif bozukluğun günlük yaşamınızı farklı alanlarda nasıl etkilediğini takip edin.",
+    "description": "OKB'nin farklı alanlarda günlük yaşamınızı nasıl etkilediğini izleyin.",
     "submit": "Günlük Girişi Kaydet",
-    "submitting": "Giriş yapma işlemi kaydediliyor...",
-    "success": "Giriş işlemi kaydedildi!",
+    "submitting": "Giriş kaydediliyor...",
+    "success": "Giriş Kaydedildi!",
     "success_subtitle": "Günlük etkiniz kaydedildi."
   },
   "domains": {
-    "workStudy": "Çalışma ve Eğitim",
+    "workStudy": "Çalışma ve Çalışma",
     "relationships": "İlişkiler ve Sosyal",
     "sleepRoutine": "Uyku ve Rutin",
     "selfCare": "Kendi kendine bakım",
@@ -25,11 +25,16 @@
     "title": "Haftalık Analizler",
     "analysis": "Haftalık Etki Analizi",
     "metrics": "Sağlık Metrikleri",
-    "empty": "Bu dönem için henüz herhangi bir giriş kaydı yapılmadı.",
-    "progress": "İlerleme kaydediyorsunuz!",
-    "tip": "Günlük olarak yaşadığınız dikkat dağıtıcı unsurları düzenli olarak takip etmek, hem sizin hem de terapistinizin genel durumu anlamanıza yardımcı olur."
+    "loading": "Analizler yükleniyor...",
+    "empty": "Bu dönem için henüz check-in yapılmadı.",
+    "progress": "İlerleme kaydediyorsun!",
+    "tip": "Günlük müdahalenizi tutarlı bir şekilde takip etmek sizin ve terapistinizin büyük resmi anlamanıza yardımcı olur."
+  },
+  "date": {
+    "today": "Bugün",
+    "yesterday": "Dün"
   },
   "footer": {
-    "tip": "Günlük kontroller, iyileşme sürecinizin farkında olmanıza yardımcı olur."
+    "tip": "Günlük check-in'ler, iyileşme yolculuğunuz konusunda dikkatli olmanıza yardımcı olur."
   }
 }

@@ -1,35 +1,40 @@
 {
   "header": {
-    "title": "Vida diária",
+    "title": "Vida Diária",
     "subtitle": "Acompanhamento e insights",
     "history": "História",
-    "insights": "Veja os Insights Semanais"
+    "insights": "Veja insights semanais"
   },
   "form": {
-    "title": "Verificação diária de impacto",
+    "title": "Check-in diário de impacto",
     "description": "Monitore como o TOC afeta sua vida diária em diferentes áreas.",
-    "submit": "Economize na entrada diária",
-    "submitting": "Salvar check-in...",
+    "submit": "Salvar entrada diária",
+    "submitting": "Salvando check-in...",
     "success": "Check-in salvo!",
     "success_subtitle": "Seu impacto diário foi registrado."
   },
   "domains": {
-    "workStudy": "Trabalho e estudo",
-    "relationships": "Relacionamentos e Vida Social",
+    "workStudy": "Trabalho e Estudo",
+    "relationships": "Relacionamentos e redes sociais",
     "sleepRoutine": "Sono e rotina",
     "selfCare": "Autocuidados",
     "none": "Nenhum",
     "high": "Alto"
   },
   "insights": {
-    "title": "Análises Semanais",
-    "analysis": "Análise de impacto semanal",
+    "title": "Informações semanais",
+    "analysis": "Análise de Impacto Semanal",
     "metrics": "Métricas de saúde",
-    "empty": "Ainda não há registros de entrada para este período.",
+    "loading": "Carregando informações...",
+    "empty": "Ainda não há check-ins para este período.",
     "progress": "Você está progredindo!",
-    "tip": "Acompanhar consistentemente suas interferências diárias ajuda você e seu terapeuta a entender o panorama geral."
+    "tip": "Acompanhar consistentemente sua interferência diária ajuda você e seu terapeuta a compreender o panorama geral."
+  },
+  "date": {
+    "today": "Hoje",
+    "yesterday": "Ontem"
   },
   "footer": {
-    "tip": "Fazer um acompanhamento diário ajuda você a manter o foco no seu processo de recuperação."
+    "tip": "Os check-ins diários ajudam você a ficar atento à sua jornada de recuperação."
   }
 }

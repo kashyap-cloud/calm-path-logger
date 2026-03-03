@@ -1,35 +1,40 @@
 {
   "header": {
     "title": "Pang-araw-araw na Buhay",
-    "subtitle": "Subaybayan at Mga Pananaw",
+    "subtitle": "Subaybayan at Mga Insight",
     "history": "Kasaysayan",
-    "insights": "Tingnan ang Lingguhang mga Pananaw"
+    "insights": "Tingnan ang Mga Lingguhang Insight"
   },
   "form": {
-    "title": "Pang-araw-araw na Pag-check-in para sa Epekto",
-    "description": "Subaybayan kung paano nakakaapekto ang OCD sa iyong pang-araw-araw na buhay sa iba&#39;t ibang aspeto.",
-    "submit": "I-save ang Pang-araw-araw na Pagpasok",
+    "title": "Pang-araw-araw na Pag-check-in sa Epekto",
+    "description": "Subaybayan kung paano naaapektuhan ng OCD ang iyong pang-araw-araw na buhay sa iba't ibang lugar.",
+    "submit": "I-save ang Pang-araw-araw na Entry",
     "submitting": "Sine-save ang Check-in...",
-    "success": "Na-save na ang pag-check-in!",
-    "success_subtitle": "Naitala na ang iyong pang-araw-araw na epekto."
+    "success": "Na-save ang Check-in!",
+    "success_subtitle": "Ang iyong pang-araw-araw na epekto ay naitala."
   },
   "domains": {
     "workStudy": "Trabaho at Pag-aaral",
     "relationships": "Mga Relasyon at Panlipunan",
-    "sleepRoutine": "Tulog at Rutina",
+    "sleepRoutine": "Tulog at Routine",
     "selfCare": "Pangangalaga sa sarili",
-    "none": "Wala",
+    "none": "wala",
     "high": "Mataas"
   },
   "insights": {
-    "title": "Mga Lingguhang Pananaw",
+    "title": "Mga Lingguhang Insight",
     "analysis": "Lingguhang Pagsusuri ng Epekto",
-    "metrics": "Mga Sukatan ng Kalusugan",
-    "empty": "Wala pang mga check-in para sa panahong ito.",
-    "progress": "May progreso ka!",
-    "tip": "Ang patuloy na pagsubaybay sa iyong pang-araw-araw na panghihimasok ay makakatulong sa iyo at sa iyong therapist na maunawaan ang mas malaking larawan."
+    "metrics": "Mga Sukatan sa Kalusugan",
+    "loading": "Naglo-load ng mga insight...",
+    "empty": "Wala pang check-in para sa panahong ito.",
+    "progress": "Gumagawa ka ng pag-unlad!",
+    "tip": "Ang patuloy na pagsubaybay sa iyong pang-araw-araw na panghihimasok ay nakakatulong sa iyo at sa iyong therapist na maunawaan ang mas malaking larawan."
+  },
+  "date": {
+    "today": "Ngayong araw",
+    "yesterday": "Kahapon"
   },
   "footer": {
-    "tip": "Ang pang-araw-araw na pag-check-in ay makakatulong sa iyong manatiling maingat sa iyong paglalakbay sa paggaling."
+    "tip": "Ang pang-araw-araw na pag-check-in ay nakakatulong sa iyong manatiling maingat sa iyong paglalakbay sa pagbawi."
   }
 }

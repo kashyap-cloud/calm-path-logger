@@ -1,36 +1,72 @@
 {
   "header": {
     "title": "OCDログ",
-    "subtitle": "トラックとインサイト",
+    "subtitle": "追跡と分析情報",
     "history": "歴史",
-    "insights": "ウィークリーインサイトを見る"
+    "insights": "毎週のインサイトを参照"
   },
   "form": {
     "location_label": "どこにいるの？",
     "custom_location_placeholder": "カスタムの場所を入力してください...",
-    "urge_label": "何の衝動や考えですか?",
-    "urge_placeholder": "あなたの心にあることを説明してください...",
-    "recent_for": "{{location}} の最近の投稿",
-    "response_label": "どのように反応しましたか?",
+    "urge_label": "どのような衝動や考えでしょうか？",
+    "urge_placeholder": "あなたの考えていることを説明してください...",
+    "recent_for": "最近の自宅用",
+    "response_label": "どのように答えましたか?",
     "submit": "エントリを保存",
-    "submitting": "ログ記録の瞬間...",
-    "success": "エントリーを保存しました!",
+    "submitting": "瞬間をログに記録しています...",
+    "success": "エントリーが保存されました!",
     "success_subtitle": "あなたの瞬間は正常に記録されました。"
   },
   "responses": {
     "acted": "衝動に従って行動する",
     "waited": "待っている",
-    "noticed": "行動せずに気づかれる",
-    "desc_acted": "私は衝動に従って行動していることに気づいた",
-    "desc_waited": "私は自分が待っていることに気づいた",
-    "desc_noticed": "行動せずに衝動に気づいた"
+    "noticed": "行動しなくても気づいた",
+    "desc_acted": "衝動に従って行動している自分に気づいた",
+    "desc_waited": "待っている自分に気づいた",
+    "desc_noticed": "行動しなくても衝動に気づいた"
+  },
+  "locations": {
+    "home": "家",
+    "work": "仕事",
+    "school": "学校",
+    "public": "公共",
+    "other": "他の"
+  },
+  "date": {
+    "today": "今日",
+    "yesterday": "昨日"
   },
   "history": {
     "title": "歴史",
-    "empty": "履歴エントリはまだありません。",
-    "all_entries": "すべてのエントリー"
+    "empty": "まだ履歴エントリがありません。",
+    "load_all": "すべての履歴を表示",
+    "back": "戻る"
+  },
+  "history_view": {
+    "title": "すべてのエントリー",
+    "logged": "記録された",
+    "entry": "エントリ",
+    "entries": "エントリ",
+    "loading": "エントリを読み込んでいます...",
+    "empty": "この場所にはまだエントリが記録されていません。"
+  },
+  "insights": {
+    "title": "応答に関する洞察",
+    "subtitle": "ログに記録された応答についての反省",
+    "loading": "分析情報を読み込んでいます...",
+    "no_data": "この期間のデータはありません",
+    "no_data_desc": "OCD モーメント トラッカーからのエントリがここに表示され、洞察が提供されます。",
+    "disclaimer": "免責事項: インサイトには、概要を表示するには少なくとも 1 つのエントリが必要で、パターン分析には少なくとも 4 つのエントリが必要です。",
+    "need_more": "注: 完全なパターン分析を行うには、さらにエントリを追加します。",
+    "patterns_title": "観察された応答パターン",
+    "promo_title": "個別のサポートが必要ですか?",
+    "promo_desc": "セラピストと協力して、衝動を管理するための戦略を開発します。",
+    "promo_button": "ERP セラピストとの予約をする",
+    "view_past": "過去に記録されたエントリを表示する",
+    "past_entries": "過去のエントリー",
+    "hide": "隠れる"
   },
   "footer": {
-    "tip": "一貫してログを記録すると、進捗パターンを特定するのに役立ちます。"
+    "tip": "継続的にログを記録することは、進行パターンを特定するのに役立ちます。"
   }
 }

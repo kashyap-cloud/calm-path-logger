@@ -1,22 +1,22 @@
 {
   "header": {
     "title": "Kehidupan Sehari-hari",
-    "subtitle": "Lacak &amp; Wawasan",
+    "subtitle": "Lacak & Wawasan",
     "history": "Sejarah",
     "insights": "Lihat Wawasan Mingguan"
   },
   "form": {
-    "title": "Laporan Dampak Harian",
+    "title": "Check-in Dampak Harian",
     "description": "Pantau bagaimana OCD memengaruhi kehidupan sehari-hari Anda di berbagai bidang.",
     "submit": "Simpan Entri Harian",
-    "submitting": "Menyimpan proses check-in...",
+    "submitting": "Menyimpan Check-in...",
     "success": "Check-in Tersimpan!",
-    "success_subtitle": "Dampak harian Anda telah tercatat."
+    "success_subtitle": "Dampak harian Anda telah dicatat."
   },
   "domains": {
-    "workStudy": "Kerja &amp; Belajar",
-    "relationships": "Hubungan &amp; Sosial",
-    "sleepRoutine": "Tidur &amp; Rutinitas",
+    "workStudy": "Bekerja & Belajar",
+    "relationships": "Hubungan & Sosial",
+    "sleepRoutine": "Tidur & Rutin",
     "selfCare": "Perawatan diri",
     "none": "Tidak ada",
     "high": "Tinggi"
@@ -25,11 +25,16 @@
     "title": "Wawasan Mingguan",
     "analysis": "Analisis Dampak Mingguan",
     "metrics": "Metrik Kesehatan",
-    "empty": "Belum ada data check-in untuk periode ini.",
-    "progress": "Anda mengalami kemajuan!",
-    "tip": "Mencatat gangguan harian Anda secara konsisten membantu Anda dan terapis Anda memahami gambaran yang lebih besar."
+    "loading": "Memuat wawasan...",
+    "empty": "Belum ada check-in untuk periode ini.",
+    "progress": "Anda membuat kemajuan!",
+    "tip": "Melacak gangguan harian Anda secara konsisten membantu Anda dan terapis Anda memahami gambaran yang lebih besar."
+  },
+  "date": {
+    "today": "Hari ini",
+    "yesterday": "Kemarin"
   },
   "footer": {
-    "tip": "Pengecekan harian membantu Anda tetap sadar akan perjalanan pemulihan Anda."
+    "tip": "Check-in harian membantu Anda tetap memperhatikan perjalanan pemulihan Anda."
   }
 }

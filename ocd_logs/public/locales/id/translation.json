@@ -1,36 +1,72 @@
 {
   "header": {
     "title": "Catatan OCD",
-    "subtitle": "Lacak &amp; Wawasan",
+    "subtitle": "Lacak & Wawasan",
     "history": "Sejarah",
     "insights": "Lihat Wawasan Mingguan"
   },
   "form": {
     "location_label": "Kamu ada di mana?",
     "custom_location_placeholder": "Masukkan lokasi khusus...",
-    "urge_label": "Dorongan atau pikiran apa?",
-    "urge_placeholder": "Jelaskan apa yang ada di pikiranmu...",
-    "recent_for": "Terbaru untuk {{location}}",
-    "response_label": "Bagaimana tanggapanmu?",
+    "urge_label": "Dorongan atau pemikiran apa?",
+    "urge_placeholder": "Jelaskan apa yang ada di pikiran anda...",
+    "recent_for": "Terbaru untuk di rumah",
+    "response_label": "Bagaimana tanggapan Anda?",
     "submit": "Simpan Entri",
-    "submitting": "Momen Pencatatan...",
-    "success": "Entri Tersimpan!",
+    "submitting": "Pencatatan Momen...",
+    "success": "Entri Disimpan!",
     "success_subtitle": "Momen Anda telah berhasil dicatat."
   },
   "responses": {
-    "acted": "Bertindak berdasarkan dorongan",
+    "acted": "Bertindak berdasarkan desakan",
     "waited": "Menunggu",
-    "noticed": "Memperhatikan tanpa bertindak",
-    "desc_acted": "Aku menyadari diriku bertindak berdasarkan dorongan itu.",
-    "desc_waited": "Aku menyadari diriku sedang menunggu",
-    "desc_noticed": "Aku menyadari dorongan itu tanpa bertindak."
+    "noticed": "Diperhatikan tanpa bertindak",
+    "desc_acted": "Saya memperhatikan diri saya bertindak berdasarkan dorongan itu",
+    "desc_waited": "Saya perhatikan diri saya sedang menunggu",
+    "desc_noticed": "Saya memperhatikan dorongan itu tanpa bertindak"
+  },
+  "locations": {
+    "home": "Rumah",
+    "work": "Bekerja",
+    "school": "Sekolah",
+    "public": "Publik",
+    "other": "Lainnya"
+  },
+  "date": {
+    "today": "Hari ini",
+    "yesterday": "Kemarin"
   },
   "history": {
     "title": "Sejarah",
     "empty": "Belum ada entri riwayat.",
-    "all_entries": "Semua Entri"
+    "load_all": "Lihat semua riwayat",
+    "back": "Kembali"
+  },
+  "history_view": {
+    "title": "Semua Entri",
+    "logged": "dicatat",
+    "entry": "pintu masuk",
+    "entries": "entri",
+    "loading": "Memuat entri...",
+    "empty": "Belum ada entri yang dicatat di lokasi ini."
+  },
+  "insights": {
+    "title": "Wawasan Respons",
+    "subtitle": "Refleksi atas tanggapan Anda yang dicatat",
+    "loading": "Memuat wawasan...",
+    "no_data": "Tidak Ada Data untuk Periode ini",
+    "no_data_desc": "Entri dari pelacak Momen OCD akan muncul di sini untuk memberikan wawasan.",
+    "disclaimer": "Penafian: Wawasan memerlukan setidaknya 1 entri untuk menampilkan ringkasan, dan 4 entri untuk analisis pola.",
+    "need_more": "Catatan: Tambahkan lebih banyak entri untuk analisis pola lengkap.",
+    "patterns_title": "Pola Respons yang Diamati",
+    "promo_title": "Ingin dukungan yang dipersonalisasi?",
+    "promo_desc": "Bekerjalah dengan terapis untuk mengembangkan strategi untuk mengelola dorongan.",
+    "promo_button": "Buatlah janji temu dengan terapis ERP",
+    "view_past": "Lihat entri yang dicatat sebelumnya",
+    "past_entries": "Entri Sebelumnya",
+    "hide": "Bersembunyi"
   },
   "footer": {
-    "tip": "Mencatat secara konsisten membantu mengidentifikasi pola kemajuan Anda."
+    "tip": "Pencatatan log secara konsisten membantu mengidentifikasi pola kemajuan Anda."
   }
 }

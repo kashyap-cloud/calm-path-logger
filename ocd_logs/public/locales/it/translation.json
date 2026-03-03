@@ -1,36 +1,72 @@
 {
   "header": {
-    "title": "Registro DOC",
+    "title": "Registro del disturbo ossessivo compulsivo",
     "subtitle": "Traccia e approfondimenti",
     "history": "Storia",
-    "insights": "Vedi approfondimenti settimanali"
+    "insights": "Vedi gli approfondimenti settimanali"
   },
   "form": {
     "location_label": "Dove sei?",
-    "custom_location_placeholder": "Inserisci la posizione personalizzata...",
+    "custom_location_placeholder": "Inserisci una posizione personalizzata...",
     "urge_label": "Quale impulso o pensiero?",
-    "urge_placeholder": "Descrivi cosa ti passa per la mente...",
-    "recent_for": "Recenti per {{location}}",
+    "urge_placeholder": "Descrivi cosa hai in mente...",
+    "recent_for": "Recente per casa",
     "response_label": "Come hai risposto?",
     "submit": "Salva voce",
-    "submitting": "Momento di registrazione...",
+    "submitting": "Registrazione del momento...",
     "success": "Voce salvata!",
-    "success_subtitle": "Il tuo momento è stato registrato correttamente."
+    "success_subtitle": "Il tuo momento è stato registrato con successo."
   },
   "responses": {
-    "acted": "Agire d&#39;impulso",
+    "acted": "Agire in base all'impulso",
     "waited": "In attesa",
     "noticed": "Notato senza agire",
-    "desc_acted": "Mi sono accorto di agire seguendo l&#39;impulso",
-    "desc_waited": "Mi sono accorto di aspettare",
-    "desc_noticed": "Ho notato l&#39;impulso senza agire"
+    "desc_acted": "Ho notato che agivo in base all'impulso",
+    "desc_waited": "Mi sono accorto che aspettavo",
+    "desc_noticed": "Ho notato l'impulso senza agire"
+  },
+  "locations": {
+    "home": "Casa",
+    "work": "Lavoro",
+    "school": "Scuola",
+    "public": "Pubblico",
+    "other": "Altro"
+  },
+  "date": {
+    "today": "Oggi",
+    "yesterday": "Ieri"
   },
   "history": {
     "title": "Storia",
     "empty": "Nessuna voce nella cronologia ancora.",
-    "all_entries": "Tutte le voci"
+    "load_all": "Visualizza tutta la cronologia",
+    "back": "Indietro"
+  },
+  "history_view": {
+    "title": "Tutte le voci",
+    "logged": "registrato",
+    "entry": "iscrizione",
+    "entries": "voci",
+    "loading": "Caricamento voci...",
+    "empty": "Nessuna voce ancora registrata in questa posizione."
+  },
+  "insights": {
+    "title": "Approfondimenti sulla risposta",
+    "subtitle": "Riflessioni sulle risposte registrate",
+    "loading": "Caricamento approfondimenti...",
+    "no_data": "Nessun dato per questo periodo",
+    "no_data_desc": "Le voci del tracker dei Momenti OCD appariranno qui per fornire approfondimenti.",
+    "disclaimer": "Dichiarazione di non responsabilità: gli approfondimenti richiedono almeno 1 voce per mostrare il riepilogo e 4 voci per l'analisi del modello.",
+    "need_more": "Nota: aggiungere più voci per l'analisi completa del modello.",
+    "patterns_title": "Modelli di risposta osservati",
+    "promo_title": "Desideri un supporto personalizzato?",
+    "promo_desc": "Collabora con un terapista per sviluppare strategie per gestire gli impulsi.",
+    "promo_button": "Prenota un appuntamento con il terapista ERP",
+    "view_past": "Visualizza le voci registrate in passato",
+    "past_entries": "Voci precedenti",
+    "hide": "Nascondere"
   },
   "footer": {
-    "tip": "Registrare costantemente i dati aiuta a identificare i propri modelli di progresso."
+    "tip": "La registrazione coerente aiuta a identificare i modelli di progresso."
   }
 }

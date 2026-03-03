@@ -3,11 +3,11 @@
     "title": "Vita quotidiana",
     "subtitle": "Traccia e approfondimenti",
     "history": "Storia",
-    "insights": "Vedi approfondimenti settimanali"
+    "insights": "Vedi gli approfondimenti settimanali"
   },
   "form": {
-    "title": "Check-in giornaliero dell&#39;impatto",
-    "description": "Monitora come il DOC influisce sulla tua vita quotidiana in diversi ambiti.",
+    "title": "Check-in giornaliero dell'impatto",
+    "description": "Monitora come il disturbo ossessivo compulsivo influenza la tua vita quotidiana in diverse aree.",
     "submit": "Salva la voce giornaliera",
     "submitting": "Salvataggio del check-in...",
     "success": "Check-in salvato!",
@@ -23,13 +23,18 @@
   },
   "insights": {
     "title": "Approfondimenti settimanali",
-    "analysis": "Analisi dell&#39;impatto settimanale",
+    "analysis": "Analisi dell'impatto settimanale",
     "metrics": "Metriche sulla salute",
-    "empty": "Per questo periodo non sono ancora previsti check-in.",
+    "loading": "Caricamento approfondimenti...",
+    "empty": "Nessun check-in per questo periodo ancora.",
     "progress": "Stai facendo progressi!",
-    "tip": "Monitorare costantemente le tue interferenze quotidiane aiuta te e il tuo terapeuta a comprendere il quadro generale."
+    "tip": "Monitorare costantemente le tue interferenze quotidiane aiuta te e il tuo terapista a comprendere il quadro più ampio."
+  },
+  "date": {
+    "today": "Oggi",
+    "yesterday": "Ieri"
   },
   "footer": {
-    "tip": "I controlli quotidiani ti aiutano a rimanere consapevole del tuo percorso di recupero."
+    "tip": "I check-in giornalieri ti aiutano a rimanere consapevole del tuo percorso di recupero."
   }
 }

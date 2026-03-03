@@ -1,35 +1,40 @@
 {
   "header": {
     "title": "Życie codzienne",
-    "subtitle": "Śledzenie i spostrzeżenia",
+    "subtitle": "Śledzenie i statystyki",
     "history": "Historia",
-    "insights": "Zobacz cotygodniowe spostrzeżenia"
+    "insights": "Zobacz cotygodniowe statystyki"
   },
   "form": {
-    "title": "Codzienne odprawy wpływu",
+    "title": "Codzienna rejestracja wpływu",
     "description": "Monitoruj, jak OCD wpływa na Twoje codzienne życie w różnych obszarach.",
-    "submit": "Zapisz wpis dzienny",
-    "submitting": "Zapisywanie odprawy...",
+    "submit": "Zapisz codzienny wpis",
+    "submitting": "Zapisywanie meldowania...",
     "success": "Zameldowanie zapisane!",
-    "success_subtitle": "Twój dzienny wpływ został zarejestrowany."
+    "success_subtitle": "Twój codzienny wpływ został zarejestrowany."
   },
   "domains": {
     "workStudy": "Praca i nauka",
-    "relationships": "Relacje i relacje społeczne",
+    "relationships": "Relacje i społeczności",
     "sleepRoutine": "Sen i rutyna",
     "selfCare": "Dbanie o zdrowie : samoopieka",
     "none": "Nic",
     "high": "Wysoki"
   },
   "insights": {
-    "title": "Tygodniowe spostrzeżenia",
-    "analysis": "Tygodniowa analiza wpływu",
+    "title": "Cotygodniowe spostrzeżenia",
+    "analysis": "Cotygodniowa analiza wpływu",
     "metrics": "Wskaźniki zdrowia",
-    "empty": "Na ten okres nie ma jeszcze żadnych odpraw.",
+    "loading": "Ładowanie statystyk...",
+    "empty": "Nie ma jeszcze żadnych meldowań w tym okresie.",
     "progress": "Robisz postępy!",
-    "tip": "Systematyczne śledzenie codziennych zakłóceń pomaga Tobie i Twojemu terapeucie zrozumieć szerszy obraz."
+    "tip": "Konsekwentne śledzenie codziennych zakłóceń pomaga Tobie i Twojemu terapeucie zrozumieć szerszą perspektywę."
+  },
+  "date": {
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj"
   },
   "footer": {
-    "tip": "Codzienne kontrole pomogą Ci zachować świadomość na drodze do powrotu do zdrowia."
+    "tip": "Codzienne wizyty kontrolne pomogą Ci zachować świadomość procesu rekonwalescencji."
   }
 }

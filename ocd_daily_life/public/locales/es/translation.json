@@ -1,21 +1,21 @@
 {
   "header": {
     "title": "Vida diaria",
-    "subtitle": "Seguimiento y perspectivas",
+    "subtitle": "Seguimiento e información",
     "history": "Historia",
-    "insights": "Ver información semanal"
+    "insights": "Ver estadísticas semanales"
   },
   "form": {
     "title": "Registro de impacto diario",
-    "description": "Monitorea cómo el TOC afecta tu vida diaria en diferentes áreas.",
+    "description": "Supervise cómo el TOC afecta su vida diaria en diferentes áreas.",
     "submit": "Guardar entrada diaria",
-    "submitting": "Guardando el check-in...",
-    "success": "¡Check-in guardado!",
-    "success_subtitle": "Tu impacto diario ha sido registrado."
+    "submitting": "Guardando registro...",
+    "success": "¡Registro guardado!",
+    "success_subtitle": "Su impacto diario ha sido registrado."
   },
   "domains": {
     "workStudy": "Trabajar y estudiar",
-    "relationships": "Relaciones y vida social",
+    "relationships": "Relaciones y redes sociales",
     "sleepRoutine": "Sueño y rutina",
     "selfCare": "Cuidados personales",
     "none": "Ninguno",
@@ -25,11 +25,16 @@
     "title": "Perspectivas semanales",
     "analysis": "Análisis de impacto semanal",
     "metrics": "Métricas de salud",
-    "empty": "Aún no hay check-ins para este periodo.",
-    "progress": "¡Estas progresando!",
-    "tip": "El seguimiento constante de su interferencia diaria le ayudará a usted y a su terapeuta a comprender el panorama general."
+    "loading": "Cargando información...",
+    "empty": "Aún no hay registros para este período.",
+    "progress": "¡Estás progresando!",
+    "tip": "El seguimiento constante de su interferencia diaria le ayuda a usted y a su terapeuta a comprender el panorama más amplio."
+  },
+  "date": {
+    "today": "Hoy",
+    "yesterday": "Ayer"
   },
   "footer": {
-    "tip": "Los registros diarios le ayudan a mantenerse consciente de su proceso de recuperación."
+    "tip": "Los controles diarios lo ayudan a mantenerse consciente de su viaje de recuperación."
   }
 }

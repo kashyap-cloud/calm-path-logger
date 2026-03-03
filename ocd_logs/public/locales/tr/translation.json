@@ -1,36 +1,72 @@
 {
   "header": {
     "title": "OKB Günlüğü",
-    "subtitle": "İzleme ve Analizler",
+    "subtitle": "Takip ve Analizler",
     "history": "Tarih",
-    "insights": "Haftalık Analizlere Bakın"
+    "insights": "Haftalık Analizleri Görün"
   },
   "form": {
     "location_label": "Neredesin?",
     "custom_location_placeholder": "Özel konum girin...",
-    "urge_label": "Hangi dürtü veya düşünce?",
+    "urge_label": "Hangi dürtü ya da düşünce?",
     "urge_placeholder": "Aklınızdan geçenleri anlatın...",
-    "recent_for": "{{location}} için son gelişmeler",
+    "recent_for": "Evde için en son",
     "response_label": "Nasıl yanıt verdiniz?",
     "submit": "Girişi Kaydet",
-    "submitting": "Kayıt Anı...",
-    "success": "Giriş kaydedildi!",
-    "success_subtitle": "Anınız başarıyla kaydedildi."
+    "submitting": "Anı Kaydediliyor...",
+    "success": "Giriş Kaydedildi!",
+    "success_subtitle": "Anınız başarıyla günlüğe kaydedildi."
   },
   "responses": {
-    "acted": "İçgüdüye göre hareket etmek",
+    "acted": "Dürtüye göre hareket etmek",
     "waited": "Beklemek",
-    "noticed": "Harekete geçmeden fark edildi.",
-    "desc_acted": "Kendimi bu dürtüye göre hareket ederken buldum.",
-    "desc_waited": "Beklediğimi fark ettim.",
-    "desc_noticed": "Harekete geçmeden dürtüyü fark ettim."
+    "noticed": "Harekete geçmeden fark edildi",
+    "desc_acted": "Dürtüye göre hareket ettiğimi fark ettim",
+    "desc_waited": "beklediğimi farkettim",
+    "desc_noticed": "Harekete geçmeden dürtüyü fark ettim"
+  },
+  "locations": {
+    "home": "Ev",
+    "work": "İş",
+    "school": "Okul",
+    "public": "Halk",
+    "other": "Diğer"
+  },
+  "date": {
+    "today": "Bugün",
+    "yesterday": "Dün"
   },
   "history": {
     "title": "Tarih",
-    "empty": "Henüz hiçbir geçmiş kaydı yok.",
-    "all_entries": "Tüm Girişler"
+    "empty": "Henüz geçmiş girişi yok.",
+    "load_all": "Tüm geçmişi görüntüle",
+    "back": "Geri"
+  },
+  "history_view": {
+    "title": "Tüm Girişler",
+    "logged": "oturum açıldı",
+    "entry": "giriş",
+    "entries": "girişler",
+    "loading": "Girişler yükleniyor...",
+    "empty": "Bu konuma henüz giriş yapılmadı."
+  },
+  "insights": {
+    "title": "Yanıt Analizleri",
+    "subtitle": "Kaydedilen yanıtlarınıza ilişkin düşünceler",
+    "loading": "Analizler yükleniyor...",
+    "no_data": "Bu Döneme Ait Veri Yok",
+    "no_data_desc": "OKB Anı izleyicisinden gelen girişler, içgörü sağlamak için burada görünecek.",
+    "disclaimer": "Yasal Uyarı: Analizler, özeti göstermek için en az 1 giriş ve model analizi için en az 4 giriş gerektirir.",
+    "need_more": "Not: Tam model analizi için daha fazla giriş ekleyin.",
+    "patterns_title": "Gözlemlenen Tepki Modelleri",
+    "promo_title": "Kişiselleştirilmiş destek mi istiyorsunuz?",
+    "promo_desc": "Dürtüleri yönetmeye yönelik stratejiler geliştirmek için bir terapistle birlikte çalışın.",
+    "promo_button": "ERP terapistinden randevu alın",
+    "view_past": "Geçmiş girişleri görüntüle",
+    "past_entries": "Geçmiş Girişler",
+    "hide": "Saklamak"
   },
   "footer": {
-    "tip": "Düzenli olarak kayıt tutmak, ilerleme kalıplarınızı belirlemenize yardımcı olur."
+    "tip": "Tutarlı bir şekilde kayıt tutmak, ilerleme modellerinizi tanımlamanıza yardımcı olur."
   }
 }

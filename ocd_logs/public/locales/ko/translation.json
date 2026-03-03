@@ -1,36 +1,72 @@
 {
   "header": {
-    "title": "강박장애 기록",
-    "subtitle": "추적 및 분석",
+    "title": "OCD 로그",
+    "subtitle": "추적 및 통찰력",
     "history": "역사",
-    "insights": "주간 분석 보기"
+    "insights": "주간 인사이트 보기"
   },
   "form": {
     "location_label": "어디세요?",
-    "custom_location_placeholder": "사용자 지정 위치를 입력하세요...",
-    "urge_label": "어떤 충동이나 생각이었나요?",
-    "urge_placeholder": "지금 무슨 생각을 하고 있는지 설명해 보세요...",
-    "recent_for": "최근 {{location}}",
-    "response_label": "어떻게 답변하셨나요?",
+    "custom_location_placeholder": "맞춤 위치 입력...",
+    "urge_label": "어떤 충동이나 생각이 있나요?",
+    "urge_placeholder": "무슨 생각인지 설명해보세요...",
+    "recent_for": "최근 집에서",
+    "response_label": "어떻게 반응하셨나요?",
     "submit": "항목 저장",
-    "submitting": "기록 중...",
-    "success": "참가 신청이 저장되었습니다!",
-    "success_subtitle": "당신의 순간이 성공적으로 기록되었습니다."
+    "submitting": "순간을 기록하는 중...",
+    "success": "항목이 저장되었습니다!",
+    "success_subtitle": "귀하의 순간이 성공적으로 기록되었습니다."
   },
   "responses": {
-    "acted": "충동에 따라 행동하다",
+    "acted": "충동에 따라 행동",
     "waited": "대기 중",
-    "noticed": "행동하지 않고도 알아차렸다.",
-    "desc_acted": "나는 내가 충동에 따라 행동하고 있다는 것을 알아차렸다.",
-    "desc_waited": "나는 내가 기다리고 있다는 것을 알아차렸다.",
-    "desc_noticed": "나는 그 충동을 느꼈지만 행동으로 옮기지는 않았다."
+    "noticed": "행동하지 않고도 눈치챌 수 있다",
+    "desc_acted": "나는 내가 충동에 따라 행동한다는 것을 알아차렸다.",
+    "desc_waited": "나는 기다리고 있는 나를 알아차렸다",
+    "desc_noticed": "행동하지 않고도 충동을 알아차렸어"
+  },
+  "locations": {
+    "home": "집",
+    "work": "일하다",
+    "school": "학교",
+    "public": "공공의",
+    "other": "다른"
+  },
+  "date": {
+    "today": "오늘",
+    "yesterday": "어제"
   },
   "history": {
     "title": "역사",
-    "empty": "아직 기록된 내용이 없습니다.",
-    "all_entries": "모든 참가작"
+    "empty": "아직 기록 항목이 없습니다.",
+    "load_all": "모든 기록 보기",
+    "back": "뒤쪽에"
+  },
+  "history_view": {
+    "title": "모든 항목",
+    "logged": "기록됨",
+    "entry": "기입",
+    "entries": "항목",
+    "loading": "항목 로드 중...",
+    "empty": "이 위치에는 아직 기록된 항목이 없습니다."
+  },
+  "insights": {
+    "title": "응답 통찰력",
+    "subtitle": "기록된 응답에 대한 반성",
+    "loading": "통계 로드 중...",
+    "no_data": "이 기간에 대한 데이터가 없습니다",
+    "no_data_desc": "통찰력을 제공하기 위해 OCD 순간 추적기의 항목이 여기에 표시됩니다.",
+    "disclaimer": "면책 조항: 통찰력에는 요약을 표시하기 위해 최소 1개의 항목이 필요하고 패턴 분석을 위해 4개의 항목이 필요합니다.",
+    "need_more": "참고: 전체 패턴 분석을 위해 항목을 더 추가하세요.",
+    "patterns_title": "관찰된 반응 패턴",
+    "promo_title": "맞춤형 지원을 원하시나요?",
+    "promo_desc": "치료사와 협력하여 충동 관리 전략을 개발하십시오.",
+    "promo_button": "ERP 치료사와 약속을 예약하세요",
+    "view_past": "과거에 기록된 항목 보기",
+    "past_entries": "과거 출품작",
+    "hide": "숨다"
   },
   "footer": {
-    "tip": "꾸준히 기록을 남기면 진행 패턴을 파악하는 데 도움이 됩니다."
+    "tip": "지속적으로 기록하면 진행 패턴을 식별하는 데 도움이 됩니다."
   }
 }

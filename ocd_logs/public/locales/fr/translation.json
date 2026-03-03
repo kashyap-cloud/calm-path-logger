@@ -1,36 +1,72 @@
 {
   "header": {
-    "title": "Journal de bord du TOC",
-    "subtitle": "Suivi et analyses",
+    "title": "Journal de TOC",
+    "subtitle": "Suivi et informations",
     "history": "Histoire",
-    "insights": "Consultez les analyses hebdomadaires"
+    "insights": "Voir les informations hebdomadaires"
   },
   "form": {
     "location_label": "Où es-tu?",
-    "custom_location_placeholder": "Saisissez un emplacement personnalisé...",
+    "custom_location_placeholder": "Entrez un emplacement personnalisé...",
     "urge_label": "Quelle envie ou pensée ?",
-    "urge_placeholder": "Décrivez ce qui vous préoccupe...",
-    "recent_for": "Récent pour {{location}}",
-    "response_label": "Comment avez-vous réagi ?",
-    "submit": "Enregistrer l&#39;entrée",
-    "submitting": "Enregistrement du moment...",
-    "success": "Entrée enregistrée !",
+    "urge_placeholder": "Décrivez ce que vous pensez...",
+    "recent_for": "Récent pour la maison",
+    "response_label": "Comment avez-vous répondu ?",
+    "submit": "Enregistrer l'entrée",
+    "submitting": "Moment d'enregistrement...",
+    "success": "Entrée enregistrée !",
     "success_subtitle": "Votre moment a été enregistré avec succès."
   },
   "responses": {
-    "acted": "céder à l&#39;envie",
+    "acted": "Agir selon l'envie",
     "waited": "En attendant",
     "noticed": "Remarqué sans agir",
-    "desc_acted": "Je me suis surprise à céder à cette envie.",
-    "desc_waited": "Je me suis surprise à attendre",
-    "desc_noticed": "J&#39;ai ressenti cette envie sans agir."
+    "desc_acted": "Je me suis remarqué agir sous l'envie",
+    "desc_waited": "Je me suis aperçu que j'attendais",
+    "desc_noticed": "J'ai remarqué l'envie sans agir"
+  },
+  "locations": {
+    "home": "Maison",
+    "work": "Travail",
+    "school": "École",
+    "public": "Publique",
+    "other": "Autre"
+  },
+  "date": {
+    "today": "Aujourd'hui",
+    "yesterday": "Hier"
   },
   "history": {
     "title": "Histoire",
-    "empty": "Aucune entrée dans l&#39;historique pour le moment.",
-    "all_entries": "Toutes les entrées"
+    "empty": "Aucune entrée d'historique pour l'instant.",
+    "load_all": "Afficher tout l'historique",
+    "back": "Dos"
+  },
+  "history_view": {
+    "title": "Toutes les entrées",
+    "logged": "connecté",
+    "entry": "entrée",
+    "entries": "entrées",
+    "loading": "Chargement des entrées...",
+    "empty": "Aucune entrée enregistrée à cet emplacement pour le moment."
+  },
+  "insights": {
+    "title": "Informations sur les réponses",
+    "subtitle": "Réflexions sur vos réponses enregistrées",
+    "loading": "Chargement des informations...",
+    "no_data": "Aucune donnée pour cette période",
+    "no_data_desc": "Les entrées du tracker OCD Moment apparaîtront ici pour fournir des informations.",
+    "disclaimer": "Avertissement : Insights nécessite au moins 1 entrée pour afficher le résumé et 4 entrées pour l'analyse des modèles.",
+    "need_more": "Remarque : ajoutez plus d'entrées pour une analyse complète des modèles.",
+    "patterns_title": "Modèles de réponse observés",
+    "promo_title": "Envie d'un accompagnement personnalisé ?",
+    "promo_desc": "Travaillez avec un thérapeute pour développer des stratégies de gestion des pulsions.",
+    "promo_button": "Prendre rendez-vous avec le thérapeute ERP",
+    "view_past": "Afficher les entrées enregistrées passées",
+    "past_entries": "Entrées passées",
+    "hide": "Cacher"
   },
   "footer": {
-    "tip": "Un enregistrement régulier permet d&#39;identifier vos tendances de progression."
+    "tip": "Une journalisation cohérente aide à identifier vos modèles de progression."
   }
 }
